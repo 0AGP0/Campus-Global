@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { HomeLanding } from "@/components/home/HomeLanding";
+import { buildFaqPageJsonLd } from "@/data/home-ia";
+
+const faqJsonLd = JSON.stringify(buildFaqPageJsonLd());
+---
+
+<Layout
+  title="En İyi Yurtdışı Eğitim Danışmanlığı | Campus Global"
+  description="26 yıllık deneyimle dil okulları, üniversite, yüksek lisans ve sınav hazırlık — şeffaf süreç ve güncel ülke rehberleri."
+>
+  <div
+    class="relative flex min-h-0 flex-1 flex-col overflow-x-hidden bg-gradient-to-br from-[#4ee8d8] from-[-5%] via-brand-aqua to-[#0fb8aa] font-sans selection:bg-zap-burst selection:text-zap-night"
+  >
+    <div
+      class="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.45),transparent_50%)]"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_88%_75%,rgba(0,100,90,0.12),transparent_48%)]"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none fixed inset-0 z-0 bg-[linear-gradient(to_right,#ffffff18_1px,transparent_1px),linear-gradient(to_bottom,#ffffff18_1px,transparent_1px)] bg-[size:4rem_4rem]"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none absolute -right-32 top-1/4 z-0 h-96 w-96 rounded-full bg-brand-flame/25 blur-3xl"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none absolute -left-24 bottom-1/4 z-0 h-80 w-80 rounded-full bg-zap-burst/28 blur-3xl"
+      aria-hidden="true"
+    />
+
+    <main class="relative z-10 flex-1">
+      <HomeLanding client:load />
+    </main>
+
+    <script type="application/ld+json" set:html={faqJsonLd} />
+  </div>
+</Layout>
