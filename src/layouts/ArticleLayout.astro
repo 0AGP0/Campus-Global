@@ -1,0 +1,614 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getSiteOrigin } from "@/data/site-origin";
+import { footerIletisim } from "@/data/home-ia";
+import { ArticleHeaderDitherPanel } from "@/components/article/ArticleHeaderDitherPanel";
+import { titleLight } from "@/styles/typography";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+/** İçindekiler — gövdedeki `id` ile eşleşmeli */
+interface TocItem {
+  id: string;
+  label: string;
+  depth?: 2 | 3;
+}
+
+interface SidebarLink {
+  label: string;
+  href: string;
+}
+
+/** Sidebar CTA görselleri — verilmezse stok fotoğraflar kullanılır */
+interface SidebarCtaImages {
+  dilHub?: string;
+  universiteHub?: string;
+  consult?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  keywords?: string;
+  ogImage?: string;
+  publishedISO: string;
+  modifiedISO?: string;
+  section?: string;
+  eyebrow?: string;
+  /** Yaklaşık okuma süresi (dakika) */
+  readingMinutes?: number;
+  breadcrumb: BreadcrumbItem[];
+  faq?: FaqItem[];
+  toc?: TocItem[];
+  /** Sol sidebar “Yararlı linkler” — verilmezse varsayılan hub linkleri */
+  sidebarLinks?: SidebarLink[];
+  /** CTA şeritlerindeki arka plan görselleri (kendi görselleriniz veya CDN) */
+  sidebarCtaImages?: SidebarCtaImages;
+}
+
+const props = Astro.props as Props;
+const origin = getSiteOrigin();
+
+const pathNorm = props.canonicalPath.startsWith("/") ? props.canonicalPath : `/${props.canonicalPath}`;
+const canonicalUrl = `${origin}${pathNorm}`;
+
+let ogImageFull: string | undefined = props.ogImage;
+if (ogImageFull?.startsWith("/")) ogImageFull = `${origin}${ogImageFull}`;
+else if (!ogImageFull) ogImageFull = `${origin}/Campus%20Global%20Logo%20Tek.png`;
+
+const logoUrl = `${origin}/Campus%20Global%20Logo%20Tek.png`;
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: props.title,
+  description: props.description,
+  inLanguage: "tr-TR",
+  datePublished: props.publishedISO,
+  dateModified: props.modifiedISO ?? props.publishedISO,
+  author: {
+    "@type": "Organization",
+    name: "Campus Global",
+    url: origin,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Campus Global",
+    logo: {
+      "@type": "ImageObject",
+      url: logoUrl,
+    },
+  },
+  image: [ogImageFull],
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalUrl,
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: props.breadcrumb.map((b, i) => {
+    const isLast = i === props.breadcrumb.length - 1;
+    const itemUrl = b.href
+      ? `${origin}${b.href.startsWith("/") ? b.href : `/${b.href}`}`
+      : isLast
+        ? canonicalUrl
+        : origin;
+    return {
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.label,
+      item: itemUrl,
+    };
+  }),
+};
+
+const faqJsonLd =
+  props.faq && props.faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: props.faq.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.answer,
+          },
+        })),
+      }
+    : null;
+
+const publishedLabel = new Date(props.publishedISO).toLocaleDateString("tr-TR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const modifiedLabel = props.modifiedISO
+  ? new Date(props.modifiedISO).toLocaleDateString("tr-TR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : null;
+
+const tocList = props.toc ?? [];
+const hasToc = tocList.length > 0;
+
+const defaultSidebar: SidebarLink[] = [
+  { label: "Dil okulları hub", href: "/dil-okullari/hub" },
+  { label: "Üniversite hub", href: "/universite/hub" },
+  { label: "Yüksek lisans hub", href: "/yuksek-lisans/hub" },
+];
+const sidebarNav = props.sidebarLinks ?? defaultSidebar;
+const mailHref = `mailto:${footerIletisim.email}`;
+const telDigits = footerIletisim.tel.replace(/\D/g, "");
+/** Yer tutucu numara için tel: üretme */
+const telHref =
+  telDigits.length >= 10
+    ? `tel:+${telDigits.startsWith("90") ? telDigits : `90${telDigits}`}`
+    : null;
+
+let tocNum = 0;
+const tocRows = tocList.map((item) => ({
+  ...item,
+  tocNumber: item.depth === 3 ? null : ++tocNum,
+}));
+
+const defaultSidebarCtaImages: Required<SidebarCtaImages> = {
+  dilHub:
+    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=720&h=450&q=82",
+  universiteHub:
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=720&h=450&q=82",
+  consult:
+    "https://images.unsplash.com/photo-1556761175-b413dcbf3526?auto=format&fit=crop&w=720&h=450&q=82",
+};
+const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}) };
+---
+
+<Layout
+  title={`${props.title} | Campus Global`}
+  description={props.description}
+  canonicalUrl={canonicalUrl}
+  ogTitle={props.title}
+  ogDescription={props.description}
+  ogImage={ogImageFull}
+  ogType="article"
+  keywords={props.keywords}
+  articlePublishedTime={props.publishedISO}
+  articleModifiedTime={props.modifiedISO ?? props.publishedISO}
+>
+  <script slot="head-extra" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+  <script slot="head-extra" type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  {faqJsonLd ? <script slot="head-extra" type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} /> : null}
+
+  <div class="relative flex min-h-0 flex-1 flex-col overflow-x-hidden bg-[#e8f4fc]">
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_95%_55%_at_12%_-8%,rgba(255,183,3,0.35),transparent_52%),radial-gradient(ellipse_70%_55%_at_92%_8%,rgba(3,214,186,0.42),transparent_50%),radial-gradient(ellipse_80%_65%_at_50%_105%,rgba(124,58,237,0.14),transparent_55%),radial-gradient(circle_at_40%_55%,rgba(255,255,255,0.65),transparent_45%)]"
+      aria-hidden
+    />
+    <div
+      class="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(255,250,240,0.55)_0%,transparent_42%,rgba(240,253,250,0.5)_78%,rgba(224,242,254,0.35)_100%)]"
+      aria-hidden
+    />
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.55] [background-image:radial-gradient(circle_at_center,rgba(6,50,66,0.045)_1px,transparent_1px)] [background-size:22px_22px]"
+      aria-hidden
+    />
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.2] [background-image:repeating-linear-gradient(-18deg,transparent,transparent_56px,rgba(6,50,66,0.04)_56px,rgba(6,50,66,0.04)_57px)]"
+      aria-hidden
+    />
+
+    <!-- Tam genişlik makale bandı: açık zemin, kenarlarda boşluk yok -->
+    <header class="relative z-[2] w-full border-b-4 border-zap-ink bg-gradient-to-b from-white via-[#f6fdfb] to-[#eefaf7] text-zap-ink shadow-none">
+      <div class="h-2 w-full bg-gradient-to-r from-zap-burst via-brand-aqua to-brand-teal" aria-hidden />
+
+      <nav
+        class="border-b border-zap-ink/10 bg-white/40 px-3 py-2.5 backdrop-blur-sm sm:px-4 md:px-5 lg:pl-[60px] lg:pr-8"
+        aria-label="İçerik konumu"
+      >
+        <ol class="flex flex-wrap items-center gap-x-1.5 gap-y-1.5 text-[12px] font-semibold text-zap-ink/70 sm:text-[13px]">
+          {
+            props.breadcrumb.map((item, i) => (
+              <li class="flex items-center gap-1.5 sm:gap-2">
+                {i > 0 ? <span class="text-zap-ink/25 select-none" aria-hidden>/</span> : null}
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    class="rounded-md px-1 py-0.5 text-brand-teal underline-offset-2 transition hover:bg-brand-aqua/15 hover:text-zap-night hover:underline"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <span class="rounded-md bg-zap-ink/[0.06] px-2 py-0.5 font-bold text-zap-night">{item.label}</span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </nav>
+
+      <div class="relative overflow-hidden">
+        <div
+          class="grid w-full grid-cols-1 items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(300px,min(46vw,520px))] lg:gap-0 lg:pl-[60px] xl:grid-cols-[minmax(0,1fr)_minmax(320px,min(44vw,560px))]"
+        >
+          <!-- Sol: metin — hücre içinde blok ortalanır (poster başlık ile aynı dil) -->
+          <div class="relative z-10 px-3 pb-8 pt-6 sm:px-4 md:px-5 md:pb-10 md:pt-8 lg:mx-auto lg:w-full lg:max-w-[42rem] lg:px-5 lg:pb-12 lg:pt-10 xl:max-w-[44rem]">
+            <div class="pointer-events-none absolute -left-4 top-0 h-56 w-56 rounded-full bg-brand-aqua/30 blur-3xl lg:-left-2" aria-hidden />
+            <div class="pointer-events-none absolute bottom-0 left-0 h-36 w-48 rounded-full bg-zap-burst/18 blur-3xl" aria-hidden />
+
+            <div class="relative text-left">
+              <div class="flex flex-wrap items-center gap-2">
+                {
+                  props.eyebrow ? (
+                    <span class="inline-flex items-center rounded-full border-2 border-zap-ink bg-zap-burst px-3 py-1 text-[11px] font-black uppercase tracking-wide text-zap-night shadow-[3px_3px_0_#063242]">
+                      {props.eyebrow}
+                    </span>
+                  ) : null
+                }
+                {
+                  props.section ? (
+                    <span class="inline-flex items-center rounded-full border-2 border-brand-teal/25 bg-brand-aqua/25 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-teal">
+                      {props.section}
+                    </span>
+                  ) : null
+                }
+              </div>
+
+              <h1
+                class="mt-5 max-w-4xl text-balance text-[clamp(1.75rem,4.2vw,2.85rem)] uppercase leading-[1.05] tracking-tighter md:mt-6"
+                style={titleLight}
+              >
+                {props.title}
+              </h1>
+
+              <p class="mt-4 max-w-3xl text-pretty font-sans text-[17px] font-medium leading-[1.62] text-zap-ink md:mt-5 md:text-[18px] md:leading-[1.68]">
+                {props.description}
+              </p>
+
+              <div class="mt-7 flex flex-wrap items-center gap-2 border-t border-dashed border-zap-ink/15 pt-6 md:mt-8 md:gap-3">
+                <time
+                  class="inline-flex items-center gap-2 rounded-lg border-2 border-zap-ink/12 bg-white px-3 py-2 text-[12px] font-bold text-zap-ink shadow-sm sm:px-4 sm:text-[13px]"
+                  datetime={props.publishedISO}
+                >
+                  <span class="text-brand-teal">Yayın</span>
+                  {publishedLabel}
+                </time>
+                {
+                  modifiedLabel && props.modifiedISO !== props.publishedISO ? (
+                    <time
+                      class="inline-flex items-center gap-2 rounded-lg border-2 border-zap-ink/10 bg-white/80 px-3 py-2 text-[12px] font-semibold text-zap-ink/85 sm:px-4 sm:text-[13px]"
+                      datetime={props.modifiedISO}
+                    >
+                      Güncelleme: {modifiedLabel}
+                    </time>
+                  ) : null
+                }
+                {
+                  props.readingMinutes != null ? (
+                    <span class="inline-flex items-center gap-2 rounded-lg border-2 border-zap-ink bg-zap-night px-3 py-2 text-[11px] font-black uppercase tracking-wide text-white sm:px-4 sm:text-[12px]">
+                      ~{props.readingMinutes} dk okuma
+                    </span>
+                  ) : null
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Sağ: ana sayfa hero ile aynı dither + dalgalı sınır (yalnız lg+) -->
+          <div
+            class="relative hidden min-h-[300px] w-full lg:flex lg:min-h-[min(20rem,38vh)] lg:flex-col lg:self-stretch"
+            aria-hidden="true"
+          >
+            <div class="h-full min-h-[300px] w-full flex-1 lg:min-h-0">
+              <ArticleHeaderDitherPanel client:media="(min-width: 1024px)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="relative z-[1] mx-auto w-full max-w-[88rem] px-2 pb-12 pt-5 sm:px-3 md:pb-16 md:pt-6 lg:px-4">
+
+      <!-- Mobil içindekiler -->
+      {
+        hasToc ? (
+          <details class="group mb-6 overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal lg:hidden">
+            <summary class="cursor-pointer list-none px-3 py-3.5 text-[14px] font-black uppercase tracking-wide text-zap-night sm:px-4 [&::-webkit-details-marker]:hidden">
+              <span class="flex items-center justify-between gap-3">
+                İçindekiler
+                <span class="rounded-lg border-2 border-zap-ink bg-brand-aqua/20 px-2 py-1 text-[11px] font-bold text-brand-teal transition group-open:rotate-180">▼</span>
+              </span>
+            </summary>
+            <nav class="border-t-2 border-dashed border-zap-ink/10 px-3 pb-4 pt-2 sm:px-4" aria-label="Sayfa bölümleri">
+              <ol class="space-y-2">
+                {tocList.map((item) => (
+                  <li class:list={{ "pl-4": item.depth === 3 }}>
+                    <a href={`#${item.id}`} class="block rounded-lg py-2 text-[15px] font-semibold leading-snug text-zap-ink transition hover:bg-brand-aqua/10 hover:text-brand-teal">
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </details>
+        ) : null
+      }
+
+      <div class="flex flex-col lg:grid lg:grid-cols-[minmax(0,17.5rem)_minmax(0,1fr)] lg:items-start lg:gap-6 xl:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] xl:gap-8">
+        <!-- Sol sidebar (masaüstünde solda; mobilde içerikten sonra) -->
+        <aside class="order-2 mt-12 min-w-0 space-y-5 lg:sticky lg:order-1 lg:top-24 lg:mt-0 lg:self-start">
+          {
+            hasToc ? (
+              <nav
+                class="hidden overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal lg:block"
+                aria-label="İçindekiler"
+              >
+                <div class="border-b-4 border-zap-ink bg-gradient-to-r from-zap-night to-zap-ink px-5 py-4">
+                  <p class="text-[11px] font-black uppercase tracking-[0.2em] text-zap-burstLight">Bu yazıda</p>
+                  <p class="mt-1 text-[15px] font-black uppercase tracking-wide text-white">İçindekiler</p>
+                </div>
+                <ol class="max-h-[min(70vh,28rem)] space-y-0.5 overflow-y-auto overscroll-contain p-4">
+                  {tocRows.map((item) => (
+                    <li class:list={{ "ml-2 border-l-2 border-brand-aqua/35 pl-3": item.depth === 3 }}>
+                      <a
+                        href={`#${item.id}`}
+                        class:list={[
+                          "flex items-start gap-2 rounded-lg py-2 pl-1 text-[14px] font-semibold leading-snug transition hover:bg-brand-aqua/12 hover:text-brand-teal",
+                          item.depth === 3 ? "text-[13px] text-zap-ink/85" : "text-zap-ink",
+                        ]}
+                      >
+                        {item.tocNumber != null ? (
+                          <span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 border-zap-ink/10 bg-brand-aqua/10 text-[11px] font-black text-brand-teal">
+                            {item.tocNumber}
+                          </span>
+                        ) : (
+                          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-teal" aria-hidden />
+                        )}
+                        <span>{item.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            ) : null
+          }
+
+          <!-- CTA bannerlar (fotoğraf + gradient + brutal çerçeve) -->
+          <div class="space-y-4">
+            <a
+              href="/dil-okullari/hub"
+              class="group relative block overflow-hidden rounded-2xl border-4 border-zap-ink shadow-brutal transition hover:-translate-y-1 hover:shadow-brutalLg focus:outline-none focus-visible:ring-4 focus-visible:ring-brand-teal focus-visible:ring-offset-2"
+            >
+              <div class="relative aspect-[16/11] min-h-[148px] w-full overflow-hidden bg-zap-night">
+                <img
+                  src={ctaImages.dilHub}
+                  alt=""
+                  width={720}
+                  height={450}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-brand-teal/85 via-zap-night/45 to-zap-night/90 mix-blend-multiply"
+                  aria-hidden
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-zap-night via-transparent to-brand-aqua/25 opacity-90"
+                  aria-hidden
+                />
+                <div class="relative flex h-full min-h-[148px] flex-col justify-end p-4">
+                  <span class="inline-flex w-fit items-center rounded-full border-2 border-white/80 bg-white/95 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-brand-teal shadow-sm">
+                    Dil okulları
+                  </span>
+                  <p class="mt-2 text-[15px] font-black uppercase leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]">
+                    Ülke ve programları keşfet
+                  </p>
+                  <p class="mt-1 flex items-center gap-1 text-[12px] font-bold text-zap-burstLight">
+                    Hub’a git
+                    <span class="inline-block transition group-hover:translate-x-1" aria-hidden>→</span>
+                  </p>
+                </div>
+              </div>
+              <span class="sr-only">Dil okulları hub — ülke ve programları keşfet</span>
+            </a>
+
+            <a
+              href="/universite/hub"
+              class="group relative block overflow-hidden rounded-2xl border-4 border-zap-ink shadow-brutal transition hover:-translate-y-1 hover:shadow-brutalLg focus:outline-none focus-visible:ring-4 focus-visible:ring-zap-burst focus-visible:ring-offset-2"
+            >
+              <div class="relative aspect-[16/11] min-h-[148px] w-full overflow-hidden bg-zap-night">
+                <img
+                  src={ctaImages.universiteHub}
+                  alt=""
+                  width={720}
+                  height={450}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-tr from-amber-500/75 via-orange-600/50 to-zap-night/88 mix-blend-multiply"
+                  aria-hidden
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-zap-night/95 via-zap-night/20 to-zap-burst/30"
+                  aria-hidden
+                />
+                <div class="relative flex h-full min-h-[148px] flex-col justify-end p-4">
+                  <span class="inline-flex w-fit items-center rounded-full border-2 border-zap-night bg-zap-burst px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-zap-night shadow-[2px_2px_0_rgba(6,50,66,0.35)]">
+                    Üniversite
+                  </span>
+                  <p class="mt-2 text-[15px] font-black uppercase leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                    Yurt dışında lisans
+                  </p>
+                  <p class="mt-1 flex items-center gap-1 text-[12px] font-bold text-zap-burstLight">
+                    Rehber ve hub
+                    <span class="inline-block transition group-hover:translate-x-1" aria-hidden>→</span>
+                  </p>
+                </div>
+              </div>
+              <span class="sr-only">Üniversite hub — yurt dışında lisans rehberi</span>
+            </a>
+
+            <a
+              href={mailHref}
+              class="group relative block overflow-hidden rounded-2xl border-4 border-zap-ink shadow-brutal transition hover:-translate-y-1 hover:shadow-brutalLg focus:outline-none focus-visible:ring-4 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2"
+            >
+              <div class="relative aspect-[16/11] min-h-[148px] w-full overflow-hidden bg-violet-950">
+                <img
+                  src={ctaImages.consult}
+                  alt=""
+                  width={720}
+                  height={450}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-fuchsia-600/80 via-violet-700/65 to-zap-night/90 mix-blend-multiply"
+                  aria-hidden
+                />
+                <div
+                  class="absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,rgba(253,224,71,0.25),transparent_50%)] opacity-90"
+                  aria-hidden
+                />
+                <div class="relative flex h-full min-h-[148px] flex-col justify-end p-4">
+                  <span class="inline-flex w-fit items-center rounded-full border-2 border-white/50 bg-white/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-white backdrop-blur-sm">
+                    Ücretsiz danışmanlık
+                  </span>
+                  <p class="mt-2 text-[15px] font-black uppercase leading-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]">
+                    Planını birlikte çizelim
+                  </p>
+                  <p class="mt-1 flex items-center gap-1 text-[12px] font-bold text-fuchsia-100">
+                    E-posta yaz
+                    <span class="inline-block transition group-hover:translate-x-1" aria-hidden>→</span>
+                  </p>
+                </div>
+              </div>
+              <span class="sr-only">Ücretsiz danışmanlık — e-posta ile iletişim</span>
+            </a>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal">
+            <div class="border-b-2 border-dashed border-zap-ink/10 bg-gradient-to-br from-brand-aqua/25 to-transparent px-5 py-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.18em] text-brand-teal">Yararlı linkler</p>
+              <p class="mt-1 text-[14px] font-bold text-zap-night">Program hub’ları</p>
+            </div>
+            <ul class="divide-y-2 divide-dashed divide-zap-ink/8 p-2">
+              {
+                sidebarNav.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-[14px] font-semibold text-zap-ink transition hover:bg-zap-burst/15 hover:text-zap-night"
+                    >
+                      {link.label}
+                      <span class="text-brand-teal" aria-hidden>
+                        →
+                      </span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border-4 border-zap-ink bg-zap-night text-white shadow-brutalLg">
+            <div class="bg-[linear-gradient(135deg,rgba(3,214,186,0.2),transparent)] px-5 py-5">
+              <p class="text-[11px] font-black uppercase tracking-[0.2em] text-zap-burstLight">İletişim</p>
+              <p class="mt-2 text-[15px] font-bold leading-snug text-white/95">Sorularınız için tek mesaj yeterli.</p>
+              {
+                telHref ? (
+                  <p class="mt-2 text-[13px] font-semibold text-brand-aqua">
+                    <a href={telHref} class="underline decoration-brand-aqua/50 underline-offset-2 hover:text-white">
+                      {footerIletisim.tel}
+                    </a>
+                  </p>
+                ) : (
+                  <p class="mt-2 text-[12px] text-white/70">{footerIletisim.tel}</p>
+                )
+              }
+              <p class="mt-1 text-[11px] text-white/55">{footerIletisim.mesai}</p>
+            </div>
+            <div class="border-t-2 border-white/10 px-5 pb-5 pt-4">
+              <a
+                href={mailHref}
+                class="flex min-h-12 w-full items-center justify-center rounded-xl border-4 border-zap-burst bg-zap-burst px-4 py-3 text-center text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_rgba(255,255,255,0.15)] transition hover:brightness-105"
+              >
+                E-posta gönder
+              </a>
+              <a
+                href="/iletisim"
+                class="mt-3 flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-white/25 px-4 py-2.5 text-[12px] font-bold text-white/90 transition hover:bg-white/10"
+              >
+                Tüm iletişim
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Ana metin -->
+        <article class="order-1 min-w-0 lg:order-2">
+          <div
+            class="article-prose rounded-2xl border-4 border-zap-ink bg-white px-4 py-8 shadow-brutal sm:px-6 md:rounded-[1.75rem] md:px-8 md:py-10 lg:px-9 lg:py-12"
+          >
+            <div
+              class="max-w-none [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-brand-teal [&_blockquote]:bg-brand-aqua/[0.07] [&_blockquote]:py-4 [&_blockquote]:pl-6 [&_blockquote]:pr-4 [&_blockquote]:text-[17px] [&_blockquote]:italic [&_blockquote]:leading-relaxed [&_blockquote]:text-zap-ink/90 [&_code]:rounded-md [&_code]:border [&_code]:border-zap-ink/10 [&_code]:bg-zap-night/[0.04] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.9em] [&_code]:text-zap-ink [&_h2]:mt-12 [&_h2]:scroll-mt-28 [&_h2]:border-l-4 [&_h2]:border-zap-burst [&_h2]:pl-5 [&_h2]:text-[1.35rem] [&_h2]:font-black [&_h2]:uppercase [&_h2]:leading-snug [&_h2]:tracking-tight [&_h2]:text-zap-night [&_h2:first-of-type]:mt-0 md:[&_h2]:text-[1.5rem] [&_h2+p]:mt-4 [&_h3]:mt-10 [&_h3]:scroll-mt-28 [&_h3]:text-[1.15rem] [&_h3]:font-bold [&_h3]:leading-snug [&_h3]:text-zap-ink [&_li]:pl-1 [&_li]:marker:text-brand-teal [&_li]:marker:text-lg [&_ol>li]:mt-3 [&_ol]:my-6 [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-7 [&_ol]:text-[17px] [&_ol]:leading-[1.75] [&_ol]:text-zap-ink [&_p]:my-6 [&_p]:text-[17px] [&_p]:font-normal [&_p]:leading-[1.85] [&_p]:text-zap-ink [&_p:first-child]:mt-0 [&_strong]:font-bold [&_strong]:text-zap-night [&_table]:my-8 [&_table]:w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-xl [&_table]:border-2 [&_table]:border-zap-ink [&_td]:border [&_td]:border-zap-ink/15 [&_td]:px-4 [&_td]:py-3 [&_td]:text-left [&_td]:text-[15px] [&_th]:border [&_th]:border-zap-ink/15 [&_th]:bg-brand-aqua/15 [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:text-[13px] [&_th]:font-black [&_th]:uppercase [&_th]:tracking-wide [&_ul>li]:mt-3 [&_ul]:my-6 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-7 [&_ul]:text-[17px] [&_ul]:leading-[1.75] [&_ul]:text-zap-ink [&_a]:font-semibold [&_a]:text-brand-teal [&_a]:underline [&_a]:decoration-brand-teal/40 [&_a]:underline-offset-[3px] [&_a]:transition [&_a]:hover:decoration-brand-teal"
+            >
+              <slot />
+            </div>
+          </div>
+
+          {
+            props.faq && props.faq.length > 0 ? (
+              <section class="mt-8 overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-br from-white via-[#f7fdfc] to-brand-aqua/20 px-4 py-8 shadow-brutal md:mt-10 md:rounded-[1.75rem] md:px-8 md:py-10 lg:px-9" aria-labelledby="faq-heading">
+                <div class="mb-8 flex items-center gap-3 border-b-2 border-dashed border-zap-ink/12 pb-6">
+                  <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-zap-ink bg-zap-burst text-lg font-black text-zap-night shadow-[4px_4px_0_#063242]">
+                    ?
+                  </span>
+                  <h2 id="faq-heading" class="text-[1.35rem] font-black uppercase leading-tight tracking-tight text-zap-night md:text-[1.5rem]">
+                    Sık sorulan sorular
+                  </h2>
+                </div>
+                <div class="space-y-3">
+                  {props.faq.map((item, fi) => (
+                    <details class="group overflow-hidden rounded-2xl border-2 border-zap-ink/15 bg-white/95 shadow-sm open:border-brand-teal/40 open:shadow-md">
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-left transition hover:bg-brand-aqua/[0.06] md:px-6 [&::-webkit-details-marker]:hidden">
+                        <span class="text-[15px] font-bold leading-snug text-zap-night md:text-[16px]">{item.question}</span>
+                        <span
+                          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-zap-ink/12 bg-brand-aqua/10 text-brand-teal transition group-open:rotate-180"
+                          aria-hidden
+                        >
+                          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <div class="border-t border-dashed border-zap-ink/10 px-5 pb-5 pt-4 md:px-6">
+                        <p class="text-[17px] font-normal leading-[1.8] text-zap-ink">{item.answer}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            ) : null
+          }
+        </article>
+      </div>
+    </div>
+  </div>
+</Layout>

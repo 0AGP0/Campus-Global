@@ -1,0 +1,106 @@
+---
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+
+const canonicalPath = "/rehber/seo-icerik-sablonu-ornek";
+const publishedISO = "2026-04-30T09:00:00+03:00";
+const modifiedISO = "2026-04-30T09:00:00+03:00";
+
+const toc = [
+  { id: "hedef-kitle", label: "Hedef kitle ve arama niyeti", depth: 2 as const },
+  { id: "plan-adimlari", label: "Örnek plan: dört adım", depth: 2 as const },
+  { id: "ic-baglantilar", label: "İç bağlantı (site mimarisi)", depth: 2 as const },
+  { id: "baslik-okunabilirlik", label: "Okunabilirlik ipuçları", depth: 2 as const },
+  { id: "alt-baslik-ornek", label: "İsteğe bağlı alt başlık (h3)", depth: 3 as const },
+  { id: "sso", label: "Özet", depth: 2 as const },
+];
+
+const faq = [
+  {
+    question: "Bu şablon hangi sayfalar için kullanılacak?",
+    answer:
+      "Menüdeki metin ağırlıklı tüm alt sayfalar (ülke rehberleri, program açıklamaları, SSS, hukuki bilgilendirme vb.) için ortak iskelet olarak kullanılabilir. Her sayfa kendi başlık, açıklama, kanonik yol ve yayın tarihi ile ArticleLayout’a bağlanır.",
+  },
+  {
+    question: "Kanonik URL ve Open Graph nasıl ayarlanıyor?",
+    answer:
+      "Kanonik adres PUBLIC_SITE_URL ortam değişkeni ile birleştirilir; Layout og:title, og:description, og:image ve article meta etiketlerini üretir. Görseller için tercihen 1200×630 px önerilir.",
+  },
+  {
+    question: "JSON-LD zorunlu mu?",
+    answer:
+      "Zorunlu değildir; ancak Article, BreadcrumbList ve FAQPage işaretlemeleri arama motorlarının içeriği anlamasına yardım eder. Şablonda üçü de örneklenmiştir.",
+  },
+];
+---
+
+<ArticleLayout
+  title="Yurtdışında dil eğitimi planı: SEO uyumlu içerik şablonu örneği"
+  description="Bu sayfa Campus Global için metin sayfalarında kullanılacak ArticleLayout bileşeninin tam örneğidir: semantik HTML, başlık hiyerarşisi, iç bağlantılar, SSS ve yapılandırılmış veri."
+  canonicalPath={canonicalPath}
+  keywords="yurtdışı dil okulu, danışmanlık, öğrenci vizesi, Campus Global, SEO şablonu, eğitim rehberi"
+  ogImage="https://picsum.photos/seed/campus-global-seo-template/1200/630"
+  publishedISO={publishedISO}
+  modifiedISO={modifiedISO}
+  eyebrow="Şablon · örnek yayın"
+  section="Rehber · içerik üretimi"
+  readingMinutes={8}
+  breadcrumb={[
+    { label: "Ana sayfa", href: "/" },
+    { label: "Dil okulları hub", href: "/dil-okullari/hub" },
+    { label: "SEO içerik şablonu (örnek)" },
+  ]}
+  toc={toc}
+  faq={faq}
+>
+  <p>
+    Bu gövde metni geniş satır aralığı ve 17–18 px gövde punto ile okunur; satır uzunluğu yaklaşık 68 karakterde tutulur. Üretimde HTML veya Markdown çıktısı aynı gövde alanına yerleştirilir. Tek bir <code>h1</code> başlık şablonda; içerikte <code>h2</code> ve <code>h3</code> kullanın ve içindekiler için <code>id</code> ile <code>toc</code> prop’unu eşleyin.
+  </p>
+
+  <blockquote>
+    Canlı bir şablon: üstte kahraman başlık, sağda yapışkan içindekiler ve mobilde katlanır menü. Okuma akışı için paragraflar ve listeler gevşek aralıklı; bağlantılar altı çizili ve teal vurgulu.
+  </blockquote>
+
+  <h2 id="hedef-kitle">Hedef kitle ve arama niyeti</h2>
+  <p>
+    Sayfayı yazmadan önce kullanıcının sorusunu netleştirin: örneğin “hangi ülkede dil okulu”, “vize evrakları neler”, “yoğun mu genel kurs mu”. Bu şablonda örnek olarak yurtdışında dil eğitimi planlaması ele alınıyor;
+    gerçek içeriklerde ana anahtar kelimeyi ilk 100 kelimede ve en az bir alt başlıkta doğal biçimde kullanın.
+  </p>
+
+  <h2 id="plan-adimlari">Örnek plan: dört adım</h2>
+  <ol>
+    <li><strong>Hedef ve tarih:</strong> Süre, bütçe ve varsa sınav hedefi (IELTS vb.) netleştirilir.</li>
+    <li><strong>Okul ve şehir:</strong> Akreditasyon, kampüs ortamı ve konaklama seçenekleri kıyaslanır.</li>
+    <li><strong>Kayıt ve ödeme:</strong> Kabul mektubu, depozito ve iptal koşulları yazılı özetlenir.</li>
+    <li><strong>Vize:</strong> Güncel konsolosluk gerekliliklerine göre kişisel dosya hazırlanır.</li>
+  </ol>
+
+  <h2 id="ic-baglantilar">İç bağlantı (site mimarisi)</h2>
+  <p>
+    SEO ve kullanılabilirlik için ilgili hub ve ülke sayfalarına bağlanın. Örnek: ana dil okulları vitrinine
+    <a href="/dil-okullari/hub">dil okulları hub</a> üzerinden ulaşılabilir; üniversite yolculuğu için
+    <a href="/universite/hub">üniversite hub</a> ve yüksek lisans için <a href="/yuksek-lisans/hub">yüksek lisans hub</a> bağlantıları aynı mantıkla kullanılabilir.
+  </p>
+
+  <h2 id="baslik-okunabilirlik">Okunabilirlik ipuçları</h2>
+  <ul>
+    <li>Paragrafları mobilde 3–5 cümleyle sınırlayın.</li>
+    <li>Listeler ve ara başlıklar tarama (scan) kolaylığı sağlar.</li>
+    <li>Jargon kullanıyorsanız kısa bir tanım ekleyin.</li>
+    <li>Güncelleme gerektiren tarih ve ücret bilgisinde yayın / güncelleme tarihini güncel tutun.</li>
+  </ul>
+
+  <h3 id="alt-baslik-ornek">İsteğe bağlı alt başlık</h3>
+  <p>
+    Daha derin teknik konuları <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">h3</code> ile bölmek, uzun metinlerde hem kullanıcıya hem arama motorlarına yapı verir.
+  </p>
+
+  <h2 id="sso">Özet</h2>
+  <p>
+    Bu örnek sayfa; başlık, meta açıklama, kanonik URL, Open Graph, Twitter Cards, makale tarihleri, Article + BreadcrumbList + FAQPage JSON-LD ve erişilebilir breadcrumb içerir. Yeni içeriklerde yalnızca frontmatter benzeri prop’ları ve gövde HTML’ini kopyalayarak ilerleyebilirsiniz.
+  </p>
+
+  <p class="mt-10 rounded-xl border-2 border-dashed border-zap-ink/15 bg-zap-ink/[0.03] px-4 py-3 text-center text-[12px] font-medium text-zap-ink/50">
+    Demo şablon — canlıda <span class="font-mono text-[11px]">ArticleLayout.astro</span> kullanın. Kanonik adres için
+    <span class="font-mono text-[11px]">PUBLIC_SITE_URL</span> ortam değişkenini ayarlayın.
+  </p>
+</ArticleLayout>

@@ -1,54 +1,93 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { megaNav } from "@/data/site-nav";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import { megaNav, RESERVED_NON_ARTICLE_SLUGS, getMegaNavSegmentMeta } from "@/data/site-nav";
 
 export function getStaticPaths() {
   const paths = new Set<string>();
+  const push = (href: string) => {
+    if (href.startsWith("/") && !href.startsWith("/#") && !href.startsWith("http")) {
+      const rest = href.replace(/^\//, "");
+      if (rest.length > 0) paths.add(rest);
+    }
+  };
   for (const m of megaNav) {
+    push(m.href);
     for (const c of m.columns) {
       for (const l of c.links) {
-        const h = l.href;
-        if (h.startsWith("/") && !h.startsWith("/#") && !h.startsWith("http")) {
-          const rest = h.replace(/^\//, "");
-          if (rest.length > 0) paths.add(rest);
-        }
+        push(l.href);
       }
     }
   }
-  return [...paths].map((slug) => ({ params: { slug } }));
+  return [...paths]
+    .filter((slug) => !RESERVED_NON_ARTICLE_SLUGS.has(slug))
+    .map((slug) => ({ params: { slug } }));
+}
+
+function humanizeSegment(segment: string): string {
+  return segment
+    .split("-")
+    .map((w) => w.charAt(0).toLocaleUpperCase("tr-TR") + w.slice(1).toLocaleLowerCase("tr-TR"))
+    .join(" ");
+}
+
+function titleFromSlug(slug: string): string {
+  return slug
+    .split("/")
+    .filter(Boolean)
+    .map(humanizeSegment)
+    .join(" · ");
+}
+
+function buildBreadcrumb(slug: string): { label: string; href?: string }[] {
+  const parts = slug.split("/").filter(Boolean);
+  const items: { label: string; href?: string }[] = [{ label: "Ana sayfa", href: "/" }];
+  const root = parts[0];
+  const meta = getMegaNavSegmentMeta(root);
+  if (meta && parts.length > 1) {
+    items.push({ label: meta.label, href: meta.hubHref });
+  }
+  items.push({ label: humanizeSegment(parts[parts.length - 1] ?? "") });
+  return items;
 }
 
 const { slug } = Astro.params;
-const label = slug
-  ? slug
-      .split("/")
-      .map((s) => s.replace(/-/g, " "))
-      .join(" · ")
-  : "Sayfa";
+const pathSlug = slug ?? "";
+const displayTitle = titleFromSlug(pathSlug);
+const canonicalPath = `/${pathSlug}`;
+const publishedISO = "2026-04-01T10:00:00+03:00";
 ---
 
-<Layout
-  title={`${label} | Campus Global`}
-  description="Campus Global — yurtdışı eğitim danışmanlığı. Sayfa içeriği çok yakında."
+<ArticleLayout
+  title={displayTitle}
+  description={`${displayTitle} — Campus Global yurtdışı eğitim rehberi. Detay içerik hazırlanıyor; danışmanlık için iletişime geçebilirsiniz.`}
+  canonicalPath={canonicalPath}
+  keywords="yurtdışı eğitim, Campus Global, danışmanlık, dil okulu, üniversite"
+  publishedISO={publishedISO}
+  modifiedISO={publishedISO}
+  eyebrow="Rehber"
+  breadcrumb={buildBreadcrumb(pathSlug)}
 >
-  <div
-    class="min-h-dvh bg-gradient-to-br from-white via-[#e6faf8] to-brand-aqua/20 px-5 py-16 text-zap-ink"
-  >
-    <div class="mx-auto max-w-2xl">
-      <p class="text-[11px] font-black uppercase tracking-[0.28em] text-brand-teal">Campus Global</p>
-      <h1 class="mt-3 text-[clamp(1.5rem,4vw,2rem)] font-black uppercase leading-tight tracking-tight">
-        Bu sayfa yakında
-      </h1>
-      <p class="mt-4 text-base font-medium leading-relaxed text-zap-ink/88">
-        <span class="font-semibold text-zap-ink">{label}</span> için detay içerik hazırlanıyor. Ana sayfada
-        ilgili bölümlere inebilir veya iletişimden bize ulaşabilirsiniz.
-      </p>
-      <a
-        href="/"
-        class="mt-10 inline-flex min-h-12 items-center justify-center rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-sm font-black uppercase text-zap-night shadow-brutal transition hover:brightness-105"
-      >
-        Ana sayfaya dön
-      </a>
-    </div>
-  </div>
-</Layout>
+  <p class="text-[17px] font-medium leading-relaxed text-zap-ink/90">
+    <span class="font-semibold text-zap-night">{displayTitle}</span> sayfası için detaylı içerik hazırlanıyor. Benzer
+    konularda <a class="font-semibold text-brand-teal underline-offset-2 hover:underline" href="/dil-okullari/hub"
+      >dil okulları</a
+    >, <a class="font-semibold text-brand-teal underline-offset-2 hover:underline" href="/universite/hub"
+      >üniversite</a
+    > ve
+    <a class="font-semibold text-brand-teal underline-offset-2 hover:underline" href="/yuksek-lisans/hub"
+      >yüksek lisans</a
+    > hub sayfalarından devam edebilir veya doğrudan
+    <a class="font-semibold text-brand-teal underline-offset-2 hover:underline" href="/iletisim">iletişim</a> kanallarımızdan
+    yazılı özet talep edebilirsiniz.
+  </p>
+
+  <h2 id="ozet">Özet</h2>
+  <p>
+    Bu sayfa menüdeki tüm metin ağırlıklı alt rotalar için ortak <strong>ArticleLayout</strong> şablonunu kullanır. İçerik
+    metinleri eklendikçe başlıklar, içindekiler ve SSS alanları sayfa bazında genişletilebilir.
+  </p>
+
+  <p class="mt-10 rounded-xl border-2 border-dashed border-zap-ink/15 bg-zap-ink/[0.03] px-4 py-3 text-center text-[12px] font-medium text-zap-ink/55">
+    Yer tutucu yayın — içerik üretiminde bu gövdeyi kendi HTML / Markdown çıktınızla değiştirin.
+  </p>
+</ArticleLayout>

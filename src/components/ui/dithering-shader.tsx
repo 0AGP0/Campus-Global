@@ -163,6 +163,12 @@ void main() {
     float wave = cos(.5 * shape_uv.x - 2. * t) * sin(1.5 * shape_uv.x + t) * (.75 + .25 * cos(3. * t));
     shape = 1. - smoothstep(-1., 1., shape_uv.y + wave);
 
+  } else if (u_shape < 4.75) {
+    /* Yatay dalga; -x ile ayna: açık zemin sağda, desen sola kayar */
+    shape_uv *= 4.;
+    float wave = cos(.5 * shape_uv.y - 2. * t) * sin(1.5 * shape_uv.y + t) * (.75 + .25 * cos(3. * t));
+    shape = 1. - smoothstep(-1., 1., -shape_uv.x + wave);
+
   } else if (u_shape < 5.5) {
     float dist = length(shape_uv);
     float waves = sin(pow(dist, 1.7) * 7. - 3. * t) * .5 + .5;
@@ -226,6 +232,8 @@ export const DitheringShapes = {
   warp: 2,
   dots: 3,
   wave: 4,
+  /** Dikey dalganın 90° dönüşü: sol–sağ yönde yükselip alçalır (makale header vb.) */
+  waveSide: 4.6,
   ripple: 5,
   swirl: 6,
   sphere: 7,

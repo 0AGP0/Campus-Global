@@ -2,13 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import { HomeLanding } from "@/components/home/HomeLanding";
 import { buildFaqPageJsonLd } from "@/data/home-ia";
+import { SITE_CANONICAL_URL } from "@/config/site";
 
-const faqJsonLd = JSON.stringify(buildFaqPageJsonLd());
+const faqJsonLd = JSON.stringify(buildFaqPageJsonLd(`${SITE_CANONICAL_URL}/`));
 ---
 
 <Layout
-  title="En İyi Yurtdışı Eğitim Danışmanlığı | Campus Global"
-  description="26 yıllık deneyimle dil okulları, üniversite, yüksek lisans ve sınav hazırlık — şeffaf süreç ve güncel ülke rehberleri."
+  title="Yurtdışı Eğitim Danışmanlığı | Dil Okulu, Üniversite ve Yüksek Lisans | Campus Global"
+  description="Campus Global ile yurtdışında dil okulu, üniversite ve yüksek lisans danışmanlığı: IELTS, TOEFL, SAT ve GRE/GMAT planı, ülke rehberleri ve şeffaf başvuru süreci. 26 yıllık deneyim."
 >
   <div
     class="relative flex min-h-0 flex-1 flex-col overflow-x-hidden bg-gradient-to-br from-[#4ee8d8] from-[-5%] via-brand-aqua to-[#0fb8aa] font-sans selection:bg-zap-burst selection:text-zap-night"

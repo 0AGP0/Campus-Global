@@ -1,8 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { DitheringShader } from "@/components/ui/dithering-shader";
+import { DitheringShader, type DitheringShape } from "@/components/ui/dithering-shader";
+
+export interface HeroDitherBackdropProps {
+  /** Arkaplan (dither koyu tonu) */
+  colorBack?: string;
+  /** Ön / vurgu rengi (ana sayfada turuncu-kırmızı wave) */
+  colorFront?: string;
+  /** Dalga ekseni: `wave` dikey, `waveSide` yatay (sol–sağ) */
+  shape?: DitheringShape;
+  /** Makale header gibi dar panellerde IO yanlışlıkla durdurmasın diye kapatılabilir */
+  pauseWhenOffscreen?: boolean;
+}
 
 /** Hero yüksekliği sabit kalır; shader üst üste ölçülür (ResizeObserver, debounce). */
-export function HeroDitherBackdrop() {
+export function HeroDitherBackdrop({
+  colorBack = "#0b4246",
+  colorFront = "#f51d00",
+  shape = "wave",
+  pauseWhenOffscreen = true,
+}: HeroDitherBackdropProps = {}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 1200, h: 520 });
   const frameRef = useRef<number>(undefined);
@@ -38,16 +54,16 @@ export function HeroDitherBackdrop() {
         className="h-full w-full [&>div]:!h-full [&>div]:!w-full"
         width={dims.w}
         height={dims.h}
-        shape="wave"
+        shape={shape}
         type="8x8"
-        colorBack="#0b4246"
-        colorFront="#f51d00"
+        colorBack={colorBack}
+        colorFront={colorFront}
         pxSize={4}
         speed={0.4}
         maxFps={22}
         renderScale={0.62}
         pauseWhenTabHidden
-        pauseWhenOffscreen
+        pauseWhenOffscreen={pauseWhenOffscreen}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
     </div>

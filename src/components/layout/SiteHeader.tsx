@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, ExternalLink, Menu, Phone, Sparkles, X } from "lucide-react";
-import { megaNav } from "@/data/site-nav";
+import { megaNav, megaNavRowLeft, megaNavRowRight } from "@/data/site-nav";
 import { footerIletisim } from "@/data/home-ia";
 import { navPanelHeading } from "@/styles/typography";
 
-const navLeft = megaNav.slice(0, Math.ceil(megaNav.length / 2));
-const navRight = megaNav.slice(Math.ceil(megaNav.length / 2));
-
+/** ELT tarzı düzen: sol 4 ana başlık, sağ 5 (logo ortada) */
 /** Aktif `hero.tsx` nav düğmesi — DM Sans 14–15px medium; açıkken lime pill (`border-[#0b1f3f] bg-[#CCFF00]` ↔ zap-ink / zap-burst) */
 function navLinkClass(active: boolean) {
   return [
@@ -33,7 +31,7 @@ function TopBarActions({ className = "" }: { className?: string }) {
         <span className="truncate">{footerIletisim.tel}</span>
       </a>
       <a
-        href="/#site-footer"
+        href="/iletisim"
         className="inline-flex items-center gap-1.5 rounded-md border-2 border-zap-ink bg-zap-burst px-3 py-1.5 text-xs font-bold uppercase leading-none tracking-wide text-zap-ink shadow-[1px_2px_0_rgba(0,0,0,0.35)] transition hover:bg-[#ffd166] sm:text-sm"
         style={{ textShadow: "0 1px 0 rgba(255,255,255,0.35)" }}
       >
@@ -145,23 +143,8 @@ export function SiteHeader() {
                 className="hidden text-xs text-white/85 sm:text-sm md:inline md:text-[15px] md:leading-snug"
                 style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
               >
-                Yurtdışı eğitim danışmanlığı
+                Dil okulu · üniversite · yüksek lisans danışmanlığı
               </span>
-              <span className="hidden h-3.5 w-px bg-white/25 lg:block" aria-hidden />
-              <a
-                href="/#sinavlar"
-                className="hidden text-xs font-semibold text-white/90 underline-offset-4 transition hover:text-zap-burstLight sm:text-sm md:text-[15px] lg:inline"
-                style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
-              >
-                IELTS · TOEFL · SAT
-              </a>
-              <a
-                href="/#program-kategorileri"
-                className="hidden text-xs font-semibold text-white/90 underline-offset-4 transition hover:text-zap-burstLight sm:text-sm md:text-[15px] xl:inline"
-                style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
-              >
-                Programlar
-              </a>
             </div>
             <TopBarActions />
           </div>
@@ -170,7 +153,7 @@ export function SiteHeader() {
         {/* Desktop: tek satır grid — nav asla logonun altına düşmez */}
         <div className="mx-auto hidden w-full max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 px-2 py-1.5 sm:px-3 md:gap-x-3 md:px-4 lg:grid lg:min-h-[3.5rem]">
           <div className="flex min-h-0 min-w-0 items-center justify-end gap-1 overflow-x-auto overflow-y-visible rounded-xl border-2 border-zap-ink bg-[#f8fafc] px-1.5 py-1 shadow-[3px_3px_0_rgba(6,50,66,0.12)] [scrollbar-width:thin] sm:gap-1.5 sm:px-2">
-            <NavButtons items={navLeft} />
+            <NavButtons items={megaNavRowLeft} />
           </div>
           <a
             href="/"
@@ -200,7 +183,7 @@ export function SiteHeader() {
             </span>
           </a>
           <div className="flex min-h-0 min-w-0 items-center justify-start gap-1 overflow-x-auto overflow-y-visible rounded-xl border-2 border-zap-ink bg-[#f8fafc] px-1.5 py-1 shadow-[3px_3px_0_rgba(6,50,66,0.12)] [scrollbar-width:thin] sm:gap-1.5 sm:px-2">
-            <NavButtons items={navRight} />
+            <NavButtons items={megaNavRowRight} />
           </div>
         </div>
 
@@ -358,12 +341,12 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
               aria-label={current?.heading ?? "Sayfalar"}
             >
               {current ? (
-                <ul className="space-y-0.5">
+                <ul className="grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-4">
                   {current.links.map((l) => (
-                    <li key={l.label + l.href}>
+                    <li key={l.label + l.href} className="min-w-0">
                       <a
                         href={l.href}
-                        className="group flex items-start gap-2 rounded-xl border-2 border-transparent px-2 py-2.5 text-[15px] font-semibold leading-snug text-white transition hover:border-white/25 hover:bg-white/8 hover:text-zap-burstLight"
+                        className="group flex items-start gap-1.5 rounded-lg border-2 border-transparent px-1.5 py-2 text-[14px] font-semibold leading-snug text-white transition hover:border-white/25 hover:bg-white/8 hover:text-zap-burstLight md:text-[15px]"
                         onClick={onClose}
                       >
                         <span className="min-w-0 flex-1">{l.label}</span>
@@ -372,7 +355,7 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
                         ) : null}
                       </a>
                       {l.desc ? (
-                        <p className="mb-1.5 pl-2 text-[13px] font-medium leading-relaxed text-white/55 line-clamp-2">
+                        <p className="mt-0.5 text-[12px] font-medium leading-snug text-white/50 line-clamp-2 md:text-[13px]">
                           {l.desc}
                         </p>
                       ) : null}
@@ -471,12 +454,12 @@ function MobileNav({
                           </button>
                         ))}
                       </div>
-                      <ul className="min-w-0 flex-1 space-y-0.5 border-t border-zap-ink/10 pt-3 sm:border-l sm:border-t-0 sm:pl-3 sm:pt-0">
+                      <ul className="min-w-0 flex-1 grid grid-cols-1 gap-1 border-t border-zap-ink/10 pt-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:border-l sm:border-t-0 sm:pl-3 sm:pt-0">
                         {col?.links.map((l) => (
-                          <li key={l.label + l.href}>
+                          <li key={l.label + l.href} className="min-w-0">
                             <a
                               href={l.href}
-                              className="block rounded-lg px-2 py-2 text-[15px] font-semibold text-zap-ink hover:bg-white/80 hover:text-brand-flame"
+                              className="block rounded-lg px-2 py-1.5 text-[14px] font-semibold leading-snug text-zap-ink hover:bg-white/80 hover:text-brand-flame"
                               onClick={onClose}
                             >
                               {l.label}

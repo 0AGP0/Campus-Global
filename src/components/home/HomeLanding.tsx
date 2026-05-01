@@ -15,9 +15,7 @@ import {
   Languages,
   ListChecks,
   MapPin,
-  Mail,
   Phone,
-  ArrowUp,
   Plane,
   School,
   ScrollText,
@@ -38,7 +36,6 @@ import {
   dilOkuluUlke,
   faqItems,
   fiyatKampanya,
-  footerIletisim,
   haberSpotlight,
   preFooterPopuler,
   preFooterPrograms,
@@ -186,7 +183,7 @@ export function HomeLanding() {
               className="relative z-[2] inline-flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-[0.28em] text-zap-burstLight md:text-[12px]"
             >
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-zap-burst md:h-4 md:w-4" aria-hidden />
-              Campus Global · 26 yıl
+              Campus Global · 26 yıl yurtdışı eğitim danışmanlığı
             </motion.p>
 
             <motion.div variants={heroItemVariants} className="relative z-[2] mx-auto mt-4 h-1 w-44 overflow-hidden rounded-full bg-white/20 md:w-52">
@@ -206,10 +203,10 @@ export function HomeLanding() {
               className="relative z-[2] mx-auto mt-7 max-w-[20ch] text-[clamp(2rem,7vw,3.35rem)] font-black uppercase leading-[0.92] tracking-tighter md:mt-8 md:max-w-4xl"
             >
               <span className="block text-white" style={titleHero}>
-                Yurtdışı eğitimde
+                Yurtdışında eğitim
               </span>
               <span className="mt-1 block text-zap-burst" style={titleHeroBrand}>
-                Campus Global
+                profesyonel danışmanlık
               </span>
             </motion.h1>
 
@@ -217,14 +214,15 @@ export function HomeLanding() {
               variants={heroItemVariants}
               className="relative z-[2] mx-auto mt-7 max-w-xl text-[15px] font-semibold leading-snug text-white/95 md:mt-8 md:text-[17px]"
             >
-              Program seçiminden başvuruya, vizeden konaklamaya — Campus Global ile tek elden, şeffaf ve güncel rehberlik.
+              Dil okulu ve yurtdışı üniversite başvurusundan yüksek lisans ve sınav planına (IELTS, TOEFL, SAT, GRE/GMAT)
+              kadar tek merkezden, şeffaf süreç ve güncel ülke rehberleriyle Campus Global yanınızda.
             </motion.p>
 
             <motion.p
               variants={heroItemVariants}
               className="relative z-[2] mx-auto mt-5 text-[11px] font-black uppercase tracking-[0.2em] text-white/85 md:text-[12px]"
             >
-              IELTS · TOEFL · SAT · GRE
+              Dil okulu · Lisans · Yüksek lisans · Kabul sınavları
             </motion.p>
 
             <motion.div
@@ -237,7 +235,7 @@ export function HomeLanding() {
                 whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
               >
-                Devamını gör
+                Programları keşfet
                 <ArrowRight className="h-4 w-4 shrink-0 opacity-95" aria-hidden />
               </motion.a>
               <motion.a
@@ -274,18 +272,19 @@ export function HomeLanding() {
               <div className="max-w-2xl">
                 <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/15 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-teal shadow-sm">
                   <Sparkles className="h-3.5 w-3.5 text-zap-burst" aria-hidden />
-                  26 yıldır · Program kategorileri
+                  Programlar · Campus Global
                 </p>
                 <h2 className="mt-5 text-[clamp(1.85rem,5vw,3rem)] font-black uppercase leading-[0.9] tracking-tighter">
                   <span className="block" style={titleLight}>
-                    Hangi yol
+                    Yurtdışı eğitimde
                   </span>
                   <span className="mt-1 block bg-gradient-to-r from-brand-teal via-brand-aqua to-brand-flame bg-clip-text text-transparent" style={{ fontFamily: '"Arial Black", Impact, sans-serif' }}>
-                    senin için?
+                    hangi kulvar size uygun?
                   </span>
                 </h2>
                 <p className="mt-5 max-w-xl text-[16px] font-medium leading-relaxed text-zap-ink/90 md:text-[17px]">
-                  İkonlu kartlarla tek tıkla ilgili bölüme in: dil, üniversite, yüksek lisans ve diğer segmentler — hızlı yönlen, sonra detaylara geç.
+                  Dil okulları, üniversite ve yüksek lisans seçeneklerini kartlardan seçin; her segment ana sayfadaki detaylı
+                  bölüme ve sınav ile fiyat rehberine bağlanır — yurtdışı eğitim planınız tek akışta ilerler.
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap gap-2 md:justify-end">
@@ -302,8 +301,12 @@ export function HomeLanding() {
 
             <div className="relative mt-10 md:mt-12">
               <div className="mb-5 flex items-end justify-between gap-4">
-                <p className="text-[11px] font-black uppercase tracking-[0.28em] text-zap-ink/55">Kategori bento</p>
-                <span className="hidden text-[12px] font-bold text-zap-ink/50 lg:inline">Geniş ekranda sol + sağ üst blok aynı yükseklikte kapanır</span>
+                <p className="text-[11px] font-black uppercase tracking-[0.28em] text-zap-ink/55">
+                  Dil · üniversite · diğer programlar
+                </p>
+                <span className="hidden text-[12px] font-bold text-zap-ink/50 lg:inline">
+                  Kartlardan ilgili bölüme atlayın
+                </span>
               </div>
 
               <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-12 xl:auto-rows-auto xl:gap-5">
@@ -392,7 +395,9 @@ export function HomeLanding() {
                 </div>
                 <div>
                   <p className="text-[11px] font-black uppercase tracking-[0.2em] text-zap-burstLight">Sonraki adım</p>
-                  <p className="mt-1 text-[15px] font-bold leading-snug md:text-[16px]">Danışmanla netleştirmek için iletişim — form çok yakında.</p>
+                  <p className="mt-1 text-[15px] font-bold leading-snug md:text-[16px]">
+                    Ücretsiz ön görüşme ve bütçe netleştirme için bizi arayın veya e-posta gönderin; danışmanınız aynı gün döner.
+                  </p>
                 </div>
               </div>
               <a
@@ -443,7 +448,7 @@ export function HomeLanding() {
                 <div className="absolute bottom-5 left-5 right-5 z-[2] sm:bottom-6 sm:left-6 sm:right-6">
                   <p className="text-[11px] font-black uppercase tracking-[0.22em] text-zap-burstLight">Öne çıkan segment</p>
                   <p className="mt-2 text-[clamp(1.25rem,3.5vw,1.65rem)] font-black uppercase leading-tight tracking-tight text-white">
-                    Dil okulları · yoğun & sınav modülleri
+                    Yurtdışında dil okulu · yoğun kurs ve sınav modülleri
                   </p>
                 </div>
               </div>
@@ -469,8 +474,9 @@ export function HomeLanding() {
               </h2>
 
               <p className="mt-6 max-w-2xl text-[16px] font-medium leading-relaxed text-white/90 md:text-[17px]">
-                Genel İngilizce, akademik hazırlık veya sınav odaklı programlar — konaklama ve kampüs seçenekleriyle birlikte planlanır.
-                Ülke profiline göre bütçe, süre ve vize adımlarını birlikte netleştiriyoruz.
+                Genel İngilizce, akademik İngilizce veya IELTS ve TOEFL odaklı kursları; aile yan konaklama, yurt veya stüdyo
+                seçenekleriyle uyumlu planlıyoruz. Hedef ülkeye göre bütçe, süre ve öğrenci vizesi adımlarını danışmanlık dosyanızda
+                birlikte netleştiririz.
               </p>
 
               <ul className="mt-8 space-y-3">
@@ -592,8 +598,8 @@ export function HomeLanding() {
                     Toplu görüş
                   </p>
                   <p className="mt-2.5 text-[13.5px] font-medium leading-[1.55] text-zap-ink/85 sm:text-sm">
-                    İlk toplantıda bütçe, sınav, ülke ve süre beklentisini birlikte yazıyoruz. Ücretsiz ön görüşme formu
-                    kısa süre içinde sitede.
+                    İlk toplantıda bütçe, sınav, hedef ülke ve akademik süre çizelgesini birlikte yazıyoruz; yüz yüze veya
+                    çevrimiçi randevuyle başlayabilirsiniz.
                   </p>
                   <a
                     href="#site-footer"
@@ -721,11 +727,12 @@ export function HomeLanding() {
                   Lisans · Üniversite
                 </p>
                 <h2 className="mt-6 text-[clamp(1.85rem,4.8vw,3.1rem)] font-black uppercase leading-[0.88] tracking-tighter drop-shadow-[0_2px_12px_rgba(0,0,0,0.2)]" style={titleDarkOnBand}>
-                  Ülkeye göre <span className="text-zap-burst">giriş kapıları</span>
+                  Yurtdışında üniversite: <span className="text-zap-burst">ülkeye göre giriş</span>
                 </h2>
                 <p className="mt-6 max-w-xl text-[16px] font-semibold leading-relaxed text-white/92 md:max-w-2xl md:text-[17px]">
-                  Her ülke farklı başvuru penceresi, dil kanıtı ve finansal ispat ister. Kartlar öne çıkan destinasyonlar
-                  için hızlı profil; shortlist ve evrak hattı görüşmede tek tek açılır.
+                  Her ülkenin başvuru takvimi, dil yeterliliği ve finansal ispat kuralları farklıdır. Aşağıdaki kartlar popüler
+                  yurtdışı üniversite destinasyonları için özet giriş rehberi sunar; detaylı program ve evrak takibi ilk görüşmede
+                  planlanır.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {[
@@ -759,8 +766,8 @@ export function HomeLanding() {
                 {(
                   [
                     {
-                      t: "Ülke sayfaları",
-                      d: "Aşağıdaki grid: ülke bazlı özet. Sitede her ülke için ayrı rehber sayfası açılır.",
+                      t: "Ülkeye özel rehber",
+                      d: "Kartları izleyerek Almanya’dan İngiltere’ye giriş koşulları, sınavlar ve belgeler için özet ve alt sayfa yollarına geçebilirsiniz.",
                       Icon: Globe2,
                     },
                     {
@@ -900,9 +907,10 @@ export function HomeLanding() {
                   </span>
                 </h2>
                 <p className="mt-6 max-w-2xl text-[15px] font-semibold leading-relaxed text-zap-ink/90 md:text-[16px]">
-                  IELTS, TOEFL, SAT, GRE/GMAT: ders değil; <span className="font-black text-zap-night">hedef puan</span>,{" "}
-                  <span className="font-black text-zap-night">okul eşiği</span> ve <span className="font-black text-zap-night">tekrar tarihleri</span>{" "}
-                  danışmanlık akışıyla aynı takvimde. Aşağıda her sınav için özet; görüşmede seans ve prova aralıkları somutlaşır.
+                  IELTS, TOEFL, SAT ve GRE/GMAT hazırlığında tek başına “ders saati” değil; <span className="font-black text-zap-night">hedef band veya skor</span>,{" "}
+                  <span className="font-black text-zap-night">üniversitenin dil veya test eşiği</span> ve{" "}
+                  <span className="font-black text-zap-night">yeniden sınav tarihleri</span> başvuru takviminize bağlanır. Özet kartların
+                  altında ilk görüşmede seans ve prova planı netleşir.
                 </p>
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
@@ -1065,7 +1073,7 @@ export function HomeLanding() {
                   className="mt-2.5 text-[clamp(1.4rem,3.4vw,2.15rem)] font-black uppercase leading-[0.98] tracking-tight"
                   style={titleDarkOnBand}
                 >
-                  Örnek fiyat <span className="text-zap-burst">bantları</span>
+                  Yurtdışı dil okulu için örnek fiyat <span className="text-zap-burst">bantları</span>
                 </h2>
               </div>
               <div className="flex flex-wrap items-center justify-end gap-2.5 sm:shrink-0">
@@ -1102,8 +1110,8 @@ export function HomeLanding() {
             />
             <div className="grid gap-5 border-t-0 bg-gradient-to-br from-white to-[#eef8f4] p-5 sm:grid-cols-12 sm:p-6 sm:items-center lg:gap-6 lg:px-9 lg:py-7">
               <p className="text-[15px] font-bold leading-relaxed text-zap-ink sm:col-span-7 sm:text-[15px]">
-                Aşağıda <span className="font-black text-zap-night">ülke biletleri</span> — her kutu kendi
-                bant rengiyle; rakam, kampanya ve kur o turda buna yazılır, altında hangi faktörlerin oynadığını söylüyoruz.
+                Gördüğünüz <span className="font-black text-zap-night">₺ ile gösterilen aralıklar örnektir</span>; güncel kampanya ve kur görüşmede yazılır.
+                Her kutuda şehir, konaklama ve yoğunluk gibi fiyatı etkileyen başlıkları açıklıyoruz — yurtdışında dil eğitimi bütçenizi böyle kuruyoruz.
               </p>
               <a
                 href="#site-footer"
@@ -1294,17 +1302,18 @@ export function HomeLanding() {
                         className="absolute -left-0.5 top-1.5 h-[calc(100%-0.4rem)] w-1.5 -translate-x-full bg-gradient-to-b from-zap-burst via-amber-300 to-brand-coral/90"
                         aria-hidden
                       />
-                      <span className="block pl-0">Kariyer · Network</span>
+                      <span className="block pl-0">MSc · MBA · doktora</span>
                     </span>
                     <span
                       className="mt-2.5 block bg-gradient-to-r from-zap-burst via-amber-200 to-zap-burstLight bg-clip-text text-[1.1em] text-transparent [text-shadow:none] sm:mt-3"
                     >
-                      premium kulvar
+                      yurtdışı yüksek lisans planı
                     </span>
                   </h2>
                   <p className="mt-4 max-w-xl text-[15px] font-medium leading-relaxed text-white/78 sm:text-base">
-                    Araştırma yoğunluğu, burs/GA senaryoları ve mezuniyet sonrası kalış — aynı dosyada. Okul
-                    shortlist’i puanlama değil; sizin kariyer omurgasına ve oturum senaryonuza göre inşa edilir.
+                    Yurtdışında yüksek lisans ve MBA başvurularında araştırma çıkarımından essay turlarına, burs ve asistanlık
+                    senaryolarından mezuniyet sonrası çalışma izni özetlerine kadar tek danışmanlık dosyasında ilerliyoruz. Okul
+                    listesi; akademik uyum ve kariyer hedefinize göre, tek taraflı yönlendirme olmadan oluşturulur.
                   </p>
 
                   <div className="mt-8 space-y-4 sm:mt-9">
@@ -1528,11 +1537,11 @@ export function HomeLanding() {
                       className="mt-3 text-[clamp(1.5rem,3.5vw,2.25rem)] font-black uppercase leading-[0.95] sm:text-[clamp(1.55rem,4vw,2.4rem)]"
                       style={titleLight}
                     >
-                      Campus Global&apos;den <span className="text-brand-flame">haberler</span>
+                      Yurtdışı eğitim <span className="text-brand-flame">rehberleri</span>
                     </h2>
                     <p className="mt-2.5 max-w-2xl text-[14px] font-medium leading-relaxed text-zap-ink/80">
-                      Şehir, kampüs, burs ve rehber — aşağıdaki spotlar ana sayfadan okunur; ileride tam yazı
-                      sayfalarına açılacak.
+                      Dil okulu, üniversite başvurusu ve sınav planına dair blog ve rehber özetleri; yakında tam makale sayfalarıyla
+                      arama motorlarında daha zengin indeks oluşturacağız.
                     </p>
                   </div>
                   <span className="inline-flex w-fit shrink-0 items-center justify-center gap-1.5 rounded-2xl border-4 border-zap-ink bg-white px-4 py-2.5 text-center text-[10px] font-black uppercase leading-tight text-zap-ink shadow-brutal sm:px-5 sm:text-[11px] sm:leading-none">
@@ -1709,7 +1718,7 @@ export function HomeLanding() {
                 Sık sorulan <span className="text-zap-burst">sorular</span>
               </h2>
               <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/85">
-                Fiyat, başvuru ve sürece dair kısa yanıtlar; detay her zaman görüşmede netleşir.
+                Yurtdışı eğitim ücretleri, ülke seçimi ve denklik sorularına hızlı cevaplar; kişisel planınız ilk görüşmede detaylanır.
               </p>
             </div>
 
@@ -1913,122 +1922,6 @@ export function HomeLanding() {
           </div>
         </div>
       </section>
-
-      {/* — Footer */}
-      <footer id="site-footer" className="relative scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-zap-night text-white">
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_90%_at_10%_0%,rgba(3,214,186,0.16),transparent_52%)]"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -right-32 top-0 h-[22rem] w-[22rem] rounded-full bg-brand-flame/18 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute bottom-0 left-0 h-52 w-52 rounded-full bg-brand-aqua/14 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:2.25rem_2.25rem] opacity-50"
-          aria-hidden
-        />
-        <div
-          className="relative h-2.5 w-full bg-gradient-to-r from-zap-burst via-brand-aqua to-brand-flame shadow-[0_0_28px_rgba(3,214,186,0.32)]"
-          aria-hidden
-        />
-        <div className="relative z-[1]">
-          <div className={`${inner} pb-12 pt-10 md:pb-16 md:pt-12`}>
-            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-5">
-                <div className="inline-flex items-center gap-2 rounded-2xl border-4 border-zap-burst/45 bg-zap-burst/18 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zap-burst">
-                  <Sparkles className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden />
-                  Campus Global
-                </div>
-                <h2
-                  className="mt-5 text-[clamp(1.5rem,3.2vw,1.95rem)] font-black uppercase leading-[0.95]"
-                  style={titleDarkOnBand}
-                >
-                  Yurtdışında eğitim, <span className="text-zap-burst">aynı ekip</span>
-                </h2>
-                <p className="mt-4 max-w-md text-[15px] font-semibold leading-relaxed text-white/76">
-                  Yurtdışı eğitim danışmanlığı · başvuru · vize sürecinde şeffaf koordinasyon.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {preFooterPrograms.slice(0, 4).map((l) => (
-                    <a
-                      key={l.label}
-                      href={l.href}
-                      className="inline-flex min-h-10 items-center justify-center rounded-xl border-2 border-white/24 bg-white/[0.07] px-3 py-1.5 text-[10px] font-black uppercase tracking-wide text-white/92 transition hover:border-zap-burst/75 hover:bg-zap-burst/12"
-                    >
-                      {l.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="lg:col-span-4">
-                <div className="h-full min-h-0 rounded-2xl border-4 border-zap-ink/90 bg-gradient-to-b from-zap-night/95 to-[#0a313a] p-5 shadow-brutal sm:p-6">
-                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-zap-burstLight">İletişim</p>
-                  <a
-                    className="mt-4 flex min-h-14 items-center gap-3.5 text-[1rem] font-black leading-snug text-white transition hover:text-zap-burst"
-                    href={
-                      footerIletisim.tel.includes("_")
-                        ? "#site-footer"
-                        : `tel:${footerIletisim.tel.replace(/[^\d+]/g, "")}`
-                    }
-                  >
-                    <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-4 border-zap-ink bg-zap-burst text-zap-night shadow-sm">
-                      <Phone className="h-5 w-5" strokeWidth={2.1} aria-hidden />
-                    </span>
-                    {footerIletisim.tel}
-                  </a>
-                  <a
-                    className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border-4 border-zap-ink bg-zap-burst/95 px-4 py-2.5 text-center text-[12px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-110"
-                    href={`mailto:${footerIletisim.email}`}
-                  >
-                    <Mail className="h-4 w-4" strokeWidth={2.1} aria-hidden />
-                    {footerIletisim.email}
-                  </a>
-                  <p className="mt-4 flex items-center gap-2.5 text-[12px] font-medium text-white/50">
-                    <span className="h-1.5 w-1.5 rounded-full bg-zap-burst ring-2 ring-zap-burst/40" aria-hidden />
-                    {footerIletisim.mesai}
-                  </p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-3">
-                <p className="text-[11px] font-black uppercase tracking-[0.24em] text-zap-burstLight">Şubeler</p>
-                <ul className="mt-5 space-y-2.5">
-                  {preFooterSubeler.slice(0, 5).map((s) => (
-                    <li key={`ft-${s.sehir}`}>
-                      <div className="flex items-center gap-2.5 rounded-xl border-2 border-white/12 bg-white/[0.04] px-3 py-2.5 text-[12px] font-bold leading-snug text-white/80">
-                        <MapPin className="h-4 w-4 shrink-0 text-zap-burst" strokeWidth={2.1} aria-hidden />
-                        <span>
-                          <span className="text-white/95">{s.sehir}</span> · {s.ad}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t-2 border-dashed border-white/14 pt-8 sm:flex-row sm:pt-10">
-              <p className="order-2 text-center text-[12px] font-semibold text-white/45 sm:order-1 sm:text-left">
-                © {new Date().getFullYear()} Campus Global · Tüm hakları saklıdır.
-              </p>
-              <a
-                className="order-1 inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border-2 border-white/28 bg-white/5 px-4 text-[10px] font-black uppercase tracking-[0.2em] text-white/90 transition hover:border-zap-burst/55 sm:order-2"
-                href="#"
-                aria-label="Sayfanın başına dön"
-              >
-                <ArrowUp className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden />
-                Başa dön
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

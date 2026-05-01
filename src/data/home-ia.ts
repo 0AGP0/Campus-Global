@@ -17,46 +17,47 @@ export const programCategories: ProgramCategory[] = [
     id: "dil-okullari",
     title: "Dil okulları",
     href: "#dil-okullari",
-    blurb: "Yoğun kurs, sınav hazırlığı ve konaklamalı paketler",
+    blurb: "Yurtdışında dil okulu: yoğun İngilizce, IELTS/TOEFL ve konaklamalı paketler",
     image: img("cg-dil-kurs-2024"),
   },
   {
     id: "universite",
     title: "Üniversite",
     href: "#universite",
-    blurb: "Lisans başvuru takvimi ve uygun programa yönlendirme",
+    blurb: "Yurtdışında üniversite danışmanlığı, lisans başvuru takvimi ve program eşlemesi",
     image: img("cg-universite-kampus-2024"),
   },
   {
     id: "yuksek-lisans",
     title: "Yüksek lisans",
     href: "#yuksek-lisans",
-    blurb: "MSc / MBA seçimi ve akademik uyum planı",
+    blurb: "MSc, MA ve MBA için hedef ülke, essay ve sınav planı tek dosyada",
     image: img("cg-msc-mba-2024"),
   },
   {
     id: "diploma",
     title: "Diploma & sertifika",
-    href: "#program-kategorileri",
-    blurb: "Kısa süreli meslek ve uzmanlık programları",
+    href: "/sertifika/hub",
+    blurb: "Mesleki diploma ve kısa sertifika programlarıyla kariyerinizi güçlendirin",
     image: img("cg-diploma-sertifika-2024"),
   },
   {
     id: "lise",
     title: "Lise",
     href: "#program-kategorileri",
-    blurb: "IB, A-Level ve yatılı okul seçenekleri",
+    blurb: "IB, A-Level ve yurtdışında yatılı lise seçenekleri danışmanlığı",
     image: img("cg-lise-okul-2024"),
   },
   {
     id: "teach-usa",
     title: "Teach in USA",
     href: "#program-kategorileri",
-    blurb: "Kültürel değişim ve öğretim odaklı programlar",
+    blurb: "Amerika Birleşik Devletleri’nde öğretim ve kültürel değişim programları",
     image: img("cg-teach-usa-2024"),
   },
 ];
 
+/** Ana sayfa “Popüler destinasyonlar” çipleri */
 export const dilOkuluUlke = [
   "Amerika",
   "İngiltere",
@@ -70,6 +71,32 @@ export const dilOkuluUlke = [
   "Fransa",
   "İtalya",
   "İspanya",
+];
+
+/** Mega menü dil okulu “Ülkeler” — daha geniş destinasyon listesi */
+export const dilOkuluUlkeMegaNav = [
+  "İngiltere",
+  "İskoçya",
+  "İrlanda",
+  "Malta",
+  "Kanada",
+  "Amerika",
+  "Avustralya",
+  "Yeni Zelanda",
+  "Almanya",
+  "Hollanda",
+  "Fransa",
+  "İspanya",
+  "İtalya",
+  "İsviçre",
+  "Polonya",
+  "Çekya",
+  "Avusturya",
+  "Belçika",
+  "Macaristan",
+  "Dubai",
+  "Güney Afrika",
+  "Güney Kore",
 ];
 
 export type UniversiteUlkeItem = {
@@ -183,63 +210,86 @@ export type FiyatBanti = {
 export const fiyatKampanya: FiyatBanti[] = [
   {
     ulke: "İngiltere",
-    bolgeNot: "LON · Manchester · dil merkezleri, öğrenci odaklı şehirler",
+    bolgeNot: "Londra, Manchester ve öğrenci şehirlerinde akredite dil okulları",
     aralik: "₺ — ₺ / hafta",
     birim: "hafta",
-    not: "Kurs (saat / hafta) ve konaklama tipi ayrı kalem: aile, yurt veya stüdyo. Başvuru, materyal ve seyahat kalemleri tabloda satır satır açık.",
-    maddeler: ["Şehir seçimi aynı kursu farklı fiyatlar", "Sezon: yaz / dönem içi ayrı band"],
+    not: "Yurtdışında dil eğitimi bütçesinde kurs saati ve konaklama (aile, yurt, stüdyo) ayrı satırlardadır. Başvuru, materyal ve uçuş kalemleri görüşmede güncel kur ve kampanyayla yazılır; aşağıdaki aralık örnektir.",
+    maddeler: ["Şehir ve okul aynı kursu farklı fiyatlar", "Yaz yoğunluğu / dönem içi fiyat ayrımı"],
   },
   {
     ulke: "Malta",
-    bolgeNot: "Sliema · St Julian’s — paket + konaklama pratikte sık tercih",
+    bolgeNot: "Sliema ve St Julian’s çevresi; dil + konaklama paketleri yaygın",
     aralik: "₺ — ₺ / hafta",
     birim: "hafta",
-    not: "Dil + konaklama birlikte fiyatlandırılan paketler; yoğunluk ve bina mesafesine göre fark. Toplu açılış tarihlerinde dönem fiyatı oynayabilir.",
-    maddeler: ["Havayolu ayrı kaleme yazılır", "Mini grup / standart sınıf farkı"],
+    not: "Konaklama ve okul mesafesi haftalık bandı değiştirir. Grup açılışları ve erken kayıt dönemleri fiyatı etkiler; kesin teklif seçilen okul ve tarihle netleşir.",
+    maddeler: ["Uçuş ve sigorta ayrı kalem", "Mini grup / standart sınıf farkı"],
   },
   {
     ulke: "Dubai",
-    bolgeNot: "Premium okullar, erken kapanan kontenjan dönemleri",
+    bolgeNot: "Premium segment; kontenjan ve dönem erken dolabilir",
     aralik: "₺ — ₺ / hafta",
     birim: "hafta",
-    not: "Segment ve kampüs türüne göre bant kırar; aile, tek veya oda tipi, okul sözleşmesi birlikte okunur. Avantaj dönemleri sınırlı koltukla gelir.",
-    maddeler: ["Yaz açlığı vs dönem ortası fiyat ayrımı", "Eğitim vizesi paketle ilişkili hizmetler ayrı"],
+    not: "Kampüs tipi ve oda seçimi maliyeti belirler. Eğitim vizesi ve okul sözleşmesiyle bağlı hizmetler kalem kalem ayrılır; kampanyalı dönemler sınırlı kontenjanlıdır.",
+    maddeler: ["Sezonluk talep fiyatı etkiler", "Vize ve sağlık sigortası plana dahil edilir"],
   },
   {
     ulke: "Almanya",
-    bolgeNot: "Büyük şehirler: Berlin · Munich · bölgeye göre yurt/ayrık ev",
+    bolgeNot: "Berlin, Münih ve diğer şehirler — dil / pathway sonrası lisans hazırlığı",
     aralik: "₺ — ₺ / ay",
     birim: "ay",
-    not: "Aylık ifade: dil / pathway veya lisansa hazırlık. Bloke, depozit ve aylık canlı gider tablosu; harç 0’e yakın hatlar için ayrı satırlar.",
-    maddeler: ["Bloke tutarı okul+ eyalete göre fark", "Aylık: konak, ulaşım, yemek bandı"],
+    not: "Aylık maliyet dil kursu veya pathway programına göre hesaplanır. Blokaj hesabı, depozito ve yaşam gideri (konak, ulaşım, yemek) ayrı bantlarda; kamu üniversitesi harç avantajı profilinize göre ayrıca değerlendirilir.",
+    maddeler: ["Bloke tutarı eyalet ve okula göre değişir", "Lisansa geçiş senaryosu için ayrı tablo"],
   },
 ];
 
+/** Ana sayfa YL kart bandı için kısaltılmış liste */
 export const yuksekLisansUlke = ["ABD", "İngiltere", "Kanada", "Hollanda", "İrlanda", "Avustralya"];
+
+/** Mega menü “Ülkeler” — yüksek lisans destinasyonları */
+export const yuksekLisansUlkeMegaNav = [
+  "Almanya",
+  "ABD",
+  "İngiltere",
+  "Kanada",
+  "Hollanda",
+  "İrlanda",
+  "Avustralya",
+  "Fransa",
+  "İtalya",
+  "İspanya",
+  "Polonya",
+  "Çekya",
+  "Macaristan",
+  "Güney Kore",
+  "Letonya",
+  "Litvanya",
+  "Rusya",
+  "Ukrayna",
+];
 
 export const haberSpotlight = [
   {
-    baslik: "Berlin şehir rehberi",
-    kategori: "Şehir",
-    ozet: "Konaklama bölgeleri, ulaşım kartları ve günlük bütçe notları.",
+    baslik: "Almanya’da üniversite: harç, blokaj ve Studienkolleg",
+    kategori: "Üniversite",
+    ozet: "Devlet üniversiteleri, İngilizce bölümler ve vize öncesi mali ispat adımlarını öğrenci profilinize göre özetliyoruz.",
     img: img("haber-berlin-1"),
   },
   {
-    baslik: "Seul şehir rehberi",
-    kategori: "Asya",
-    ozet: "Kampüs çevresi, öğrenci ofisleri ve vize süreleri hakkında özet.",
+    baslik: "IELTS hedef band nasıl üniversite eşiğiyle eşleşir?",
+    kategori: "Sınav",
+    ozet: "Bölüm ve ülkeye göre dil yeterliliği tablosu, tekrar tarihleri ve kurs + sınav paketini aynı planda değerlendirin.",
     img: img("haber-seul-1"),
   },
   {
-    baslik: "Üniversite sıralamalarını okumak",
+    baslik: "QS ve THE yerine: doğru programı seçmek",
     kategori: "Üniversite",
-    ozet: "Bölüm gücü, staj imkânı ve mezun ağını tabloyla birlikte değerlendirin.",
+    ozet: "Sıralama etiketlerinin ötesinde staj, mezun ağı ve bölüm gücünü yurtdışı eğitim hedefinizle nasıl dengelersiniz?",
     img: img("haber-siralama-1"),
   },
   {
-    baslik: "Yurtdışında burs kalemleri",
+    baslik: "Yurtdışında burs: erken başvuru ve portföy",
     kategori: "Burs",
-    ozet: "Erken başvuru ve portfolyonun skorunu nasıl taşıdığına dair notlar.",
+    ozet: "Başvuru pencereleri, motivasyon mektubu ve akademik referansların burs değerlendirmesindeki rolü.",
     img: img("haber-burs-1"),
   },
 ];
@@ -248,24 +298,24 @@ export type FaqItem = { soru: string; cevap: string };
 
 export const faqItems: FaqItem[] = [
   {
-    soru: "Dil okulu fiyatları ülkeye göre nasıl değişir?",
+    soru: "Yurtdışında dil okulu fiyatları ülkeye göre neden farklı?",
     cevap:
-      "Konaklama ve kurs yoğunluğu haftalık bandı etkiler. Güncel bant için danışman görüşmesi önerilir.",
+      "Haftalık maliyeti kurs saati, konaklama tipi (aile, yurt, stüdyo), şehir ve sezon belirler. Campus Global’de bütçeyi kalem kalem açıp güncel kur ve kampanyayla netleştiriyoruz; nihai teklif okul onayı ve görüşmeyle kesinleşir.",
   },
   {
-    soru: "Hangi ülke bana daha uygun?",
+    soru: "Hangi ülke yurtdışı eğitim planım için daha uygun?",
     cevap:
-      "Bütçe, sınav durumu ve hedefiniz için kısa liste çıkarıyoruz; tek bir “doğru” ülke yerine uyum profili önceliklidir.",
+      "Sınav durumunuz, akademik arka plan, bütçe ve kariyer hedefinize göre ülke shortlist’i çıkarıyoruz. Tek bir “ideal ülke” yerine, sizin için puanlanmış seçenekler ve her biri için giriş koşulları tabloda sunulur.",
   },
   {
-    soru: "Ücretsiz veya düşük harçlı üniversite mümkün mü?",
+    soru: "Ücretsiz veya düşük harçlı yurtdışı üniversite mümkün mü?",
     cevap:
-      "Bazı Avrupa kamu üniversitelerinde harç politikaları uygundur; koşullar birlikte değerlendirilmelidir.",
+      "Bazı Avrupa ülkelerinde kamu üniversiteleri düşük veya sembolik harçla lisans sunar; dil yeterliliği, yaşam maliyeti ve blokaj gibi kalemler toplam bütçeyi belirler. Uygunluk program ve vize koşullarıyla birlikte değerlendirilir.",
   },
   {
-    soru: "YÖK denkliği süreci nasıl işler?",
+    soru: "Yurtdışı diploması için YÖK denkliği süreci nasıl işler?",
     cevap:
-      "Program ve üniversiteye göre evrak seti değişir; resmi rehberle güncel listeyi senkron tutarız.",
+      "Üniversite ve programa göre istenen belgeler değişir. Resmi YÖK duyuruları ve güncel denklik listeleriyle süreci eşzamanlı takip eder; eksik evrak ve çeviri adımlarını baştan planlarız.",
   },
 ];
 
@@ -291,10 +341,10 @@ export const preFooterPrograms = [
 ];
 
 export const preFooterPopuler = [
-  { label: "İngiltere dil okulu", href: "#fiyatlar" },
-  { label: "Almanya üniversite", href: "#universite" },
-  { label: "IELTS danışmanlığı", href: "#sinavlar" },
-  { label: "Yüksek lisans ABD", href: "#yuksek-lisans" },
+  { label: "İngiltere’de dil okulu fiyatları", href: "#fiyatlar" },
+  { label: "Almanya’da üniversite başvurusu", href: "#universite" },
+  { label: "IELTS sınav hazırlık danışmanlığı", href: "#sinavlar" },
+  { label: "ABD’de yüksek lisans başvurusu", href: "#yuksek-lisans" },
 ];
 
 export const preFooterSubeler = [
@@ -308,6 +358,6 @@ export const preFooterSubeler = [
 
 export const footerIletisim = {
   tel: "+90 (___) ___ __ __",
-  email: "info@campusglobal.example.com",
+  email: "info@campusglobal.com",
   mesai: "Hafta içi 09:00 — 18:30",
 };

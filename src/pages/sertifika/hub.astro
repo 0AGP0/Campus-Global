@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ProgramHubPage } from "@/components/program/ProgramHubPage";
+import { programHubById } from "@/data/program-hub-content";
+
+const model = programHubById.sertifika;
+---
+
+<Layout title={model.layoutTitle} description={model.metaDescription}>
+  <ProgramHubPage client:visible model={model} />
+</Layout>
