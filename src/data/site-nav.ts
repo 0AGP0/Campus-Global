@@ -3,6 +3,7 @@ import {
   universiteUlke,
   yuksekLisansUlkeMegaNav,
 } from "@/data/home-ia";
+import { slugify } from "@/data/slugify";
 
 export type NavSubLink = { label: string; href: string; desc?: string };
 export type NavColumn = { heading: string; links: NavSubLink[] };
@@ -19,32 +20,7 @@ const u = (slugs: string[]) => "/" + slugs.join("/");
 
 export const navBase = (segment: string, page: string) => u([segment, page]);
 
-function slugify(s: string) {
-  let t = s.normalize("NFKD").replace(/\p{M}/gu, "");
-  const tr: Record<string, string> = {
-    ü: "u",
-    Ü: "u",
-    ş: "s",
-    Ş: "s",
-    ğ: "g",
-    Ğ: "g",
-    ö: "o",
-    Ö: "o",
-    ç: "c",
-    Ç: "c",
-    İ: "i",
-    I: "i",
-    i: "i",
-    ı: "i",
-    â: "a",
-    ô: "o",
-  };
-  for (const [k, v] of Object.entries(tr)) t = t.split(k).join(v);
-  return t
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+export { slugify };
 
 export const dilUlkeler: NavSubLink[] = dilOkuluUlkeMegaNav.map((ülke) => ({
   label: `${ülke} dil okulu`,

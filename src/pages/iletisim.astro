@@ -36,12 +36,16 @@ const telHref =
 
       <div class="mt-10 space-y-6 rounded-2xl border-4 border-zap-ink bg-white p-6 shadow-brutal sm:p-8">
         <div>
+          <p class="text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">Adres</p>
+          <p class="mt-2 text-base font-semibold leading-relaxed text-zap-ink">{footerIletisim.adres}</p>
+        </div>
+        <div>
           <p class="text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">Telefon</p>
           <a
             href={telHref}
             class="mt-2 inline-flex min-h-12 items-center text-lg font-black text-zap-night underline-offset-4 hover:text-brand-teal hover:underline"
           >
-            {footerIletisim.tel}
+            📱 {footerIletisim.tel}
           </a>
         </div>
         <div>
@@ -50,7 +54,7 @@ const telHref =
             href={`mailto:${footerIletisim.email}`}
             class="mt-2 inline-flex min-h-12 items-center text-lg font-bold text-zap-ink underline-offset-4 hover:text-brand-teal hover:underline"
           >
-            {footerIletisim.email}
+            📧 {footerIletisim.email}
           </a>
         </div>
         <p class="flex items-center gap-2 text-[14px] font-medium text-zap-ink/70">

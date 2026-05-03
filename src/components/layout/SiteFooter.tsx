@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowUp, Mail, MapPin, Phone, Sparkles } from "lucide-react";
-import { footerIletisim, preFooterPrograms, preFooterSubeler } from "@/data/home-ia";
+import { footerIletisim, icefIas, preFooterPrograms, preFooterSubeler } from "@/data/home-ia";
 import { titleDarkOnBand } from "@/styles/typography";
 
 const inner = "relative mx-auto w-full max-w-7xl px-5 md:px-10 lg:px-14";
@@ -62,6 +62,7 @@ export function SiteFooter() {
             <div className="lg:col-span-4">
               <div className="h-full min-h-0 rounded-2xl border-4 border-zap-ink/90 bg-gradient-to-b from-zap-night/95 to-[#0a313a] p-5 shadow-brutal sm:p-6">
                 <p className="text-[11px] font-black uppercase tracking-[0.24em] text-zap-burstLight">İletişim</p>
+                <p className="mt-4 text-[13px] font-semibold leading-relaxed text-white/88">{footerIletisim.adres}</p>
                 <a
                   className="mt-4 flex min-h-14 items-center gap-3.5 text-[1rem] font-black leading-snug text-white transition hover:text-zap-burst"
                   href={telHref}
@@ -99,6 +100,45 @@ export function SiteFooter() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          <div
+            className="mt-10 rounded-2xl border-2 border-white/12 bg-white/[0.04] px-5 py-6 sm:px-6"
+            aria-labelledby="icef-footer-heading"
+          >
+            <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-md text-center sm:text-left">
+                <p
+                  id="icef-footer-heading"
+                  className="text-[11px] font-black uppercase tracking-[0.24em] text-zap-burstLight"
+                >
+                  ICEF Agency Status
+                </p>
+                <p className="mt-2 text-[13px] font-semibold leading-relaxed text-white/72">
+                  ICEF akrediteli acenteyiz. Rozet veya QR üzerinden kaydımızı resmi IAS dizininde doğrulayabilirsiniz.
+                </p>
+              </div>
+              <div className="flex shrink-0 justify-center sm:justify-end">
+                <span id="iasBadge" data-account-id={icefIas.accountId} className="inline-block">
+                  <a
+                    href={icefIas.verifyInfoUrl}
+                    className="inline-block rounded-xl border-2 border-white/25 bg-white/5 p-2 transition hover:border-zap-burst/55"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <img
+                      src={icefIas.fallbackBadgeImage}
+                      alt="ICEF Agency Status — Campus Global (IAS #7081). ICEF IAS dizininde doğrulayın."
+                      className="max-h-[200px] w-auto rounded-lg"
+                      width={160}
+                      height={220}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                </span>
+              </div>
             </div>
           </div>
 

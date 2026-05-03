@@ -134,7 +134,7 @@ export function SiteHeader() {
                 className="text-xs font-semibold text-zap-burstLight sm:text-sm md:text-[15px]"
                 style={{ textShadow: "0 1px 2px rgba(0,0,0,0.45)" }}
               >
-                26 yıl
+                Şeffaf danışmanlık
               </span>
               <span className="hidden text-white/40 md:inline" aria-hidden>
                 ·

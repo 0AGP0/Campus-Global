@@ -277,7 +277,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
 
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
-                  href="#site-footer"
+                  href="/iletisim"
                   className="inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-8 py-3 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-105 sm:w-auto"
                 >
                   İletişim
@@ -516,7 +516,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </a>
                   <a
-                    href="#site-footer"
+                    href="/iletisim"
                     className="inline-flex min-h-12 items-center justify-center rounded-full border-4 border-zap-ink/25 bg-zap-night px-6 py-3 text-[11px] font-black uppercase tracking-wide text-white transition hover:bg-zap-ink"
                   >
                     Footer · iletişim

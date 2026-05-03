@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { icefIas } from "@/data/home-ia";
 
 interface Props {
   title?: string;
@@ -78,5 +79,6 @@ const resolvedOgDesc = ogDescription ?? description ?? "";
       <slot />
     </div>
     <SiteFooter />
+    <script is:inline async defer crossorigin="anonymous" src={icefIas.badgeScriptSrc}></script>
   </body>
 </html>

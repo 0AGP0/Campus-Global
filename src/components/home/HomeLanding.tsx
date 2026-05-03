@@ -47,6 +47,7 @@ import {
 } from "@/data/home-ia";
 import { HeroDitherBackdrop } from "@/components/ui/hero-dither-backdrop";
 import { navBase } from "@/data/site-nav";
+import { slugify } from "@/data/slugify";
 import { titleDarkOnBand, titleHero, titleHeroBrand, titleLight } from "@/styles/typography";
 
 const inner = "relative mx-auto w-full max-w-7xl px-5 md:px-10 lg:px-14";
@@ -139,21 +140,20 @@ export function HomeLanding() {
       >
         {!reduceMotion ? (
           <>
-            <HeroDitherBackdrop />
-            {/* Düşük opaklık: dither görünsün; mavi hafif koyu (daha az göz yorar) */}
+            <HeroDitherBackdrop colorBack="#00a39b" colorFront="#f51d00" />
             <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(3,214,186,0.14),transparent_52%)]"
+              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_95%_70%_at_50%_-8%,rgba(255,255,255,0.16),transparent_52%)]"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-brand-teal/8 via-brand-aqua/5 to-brand-teal/22"
+              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-white/8 via-transparent to-transparent"
               aria-hidden
             />
           </>
         ) : (
           <>
-            <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-zap-burst/22 blur-3xl" aria-hidden />
-            <div className="pointer-events-none absolute -right-20 bottom-8 h-64 w-64 rounded-full bg-brand-flame/28 blur-3xl" aria-hidden />
+            <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-aqua/30 blur-3xl" aria-hidden />
+            <div className="pointer-events-none absolute -right-20 bottom-8 h-64 w-64 rounded-full bg-brand-teal/35 blur-3xl" aria-hidden />
           </>
         )}
 
@@ -183,7 +183,7 @@ export function HomeLanding() {
               className="relative z-[2] inline-flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-[0.28em] text-zap-burstLight md:text-[12px]"
             >
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-zap-burst md:h-4 md:w-4" aria-hidden />
-              Campus Global · 26 yıl yurtdışı eğitim danışmanlığı
+              Campus Global · yurtdışı eğitim danışmanlığı
             </motion.p>
 
             <motion.div variants={heroItemVariants} className="relative z-[2] mx-auto mt-4 h-1 w-44 overflow-hidden rounded-full bg-white/20 md:w-52">
@@ -230,16 +230,16 @@ export function HomeLanding() {
               className="relative z-[2] mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
             >
               <motion.a
-                href="#program-kategorileri"
+                href="/dil-okullari/hub"
                 className="inline-flex min-h-[48px] w-fit items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[14px] font-black uppercase leading-none text-zap-night shadow-brutal md:text-[16px]"
                 whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
               >
-                Programları keşfet
+                Dil okulları hub
                 <ArrowRight className="h-4 w-4 shrink-0 opacity-95" aria-hidden />
               </motion.a>
               <motion.a
-                href="#site-footer"
+                href="/iletisim"
                 className="inline-flex min-h-[48px] w-fit items-center justify-center rounded-full border-2 border-white/75 bg-white/12 px-10 py-3 text-[15px] font-bold leading-none text-white shadow-[0_4px_22px_rgba(0,0,0,0.22)] backdrop-blur-md md:text-[16px]"
                 whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
@@ -283,8 +283,9 @@ export function HomeLanding() {
                   </span>
                 </h2>
                 <p className="mt-5 max-w-xl text-[16px] font-medium leading-relaxed text-zap-ink/90 md:text-[17px]">
-                  Dil okulları, üniversite ve yüksek lisans seçeneklerini kartlardan seçin; her segment ana sayfadaki detaylı
-                  bölüme ve sınav ile fiyat rehberine bağlanır — yurtdışı eğitim planınız tek akışta ilerler.
+                  Dil okulları, üniversite ve yüksek lisans seçeneklerini kartlardan seçin; her kart ilgili{" "}
+                  <strong className="font-black text-zap-night">hub ve rehber sayfasına</strong> gider — sınav ve bütçe için de
+                  site içi makalelere yönlendirirsiniz.
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap gap-2 md:justify-end">
@@ -305,7 +306,7 @@ export function HomeLanding() {
                   Dil · üniversite · diğer programlar
                 </p>
                 <span className="hidden text-[12px] font-bold text-zap-ink/50 lg:inline">
-                  Kartlardan ilgili bölüme atlayın
+                  Kartlar ilgili hub veya rehber sayfasına gider
                 </span>
               </div>
 
@@ -371,7 +372,7 @@ export function HomeLanding() {
                         </h3>
                         <p className="mt-2 text-[14px] font-semibold leading-snug text-white/80 sm:text-[15px]">{c.blurb}</p>
                         <span className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-[0.12em] text-zap-burstLight">
-                          Bölüme git
+                          Sayfaya git
                           <ChevronRight className="h-4 w-4 shrink-0 transition group-hover:translate-x-0.5" aria-hidden />
                         </span>
                       </div>
@@ -401,7 +402,7 @@ export function HomeLanding() {
                 </div>
               </div>
               <a
-                href="#site-footer"
+                href="/iletisim"
                 className="relative inline-flex shrink-0 items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-brand-flame px-8 py-3.5 text-[12px] font-black uppercase tracking-wide text-white shadow-[4px_4px_0_#063242] transition hover:brightness-105"
               >
                 İletişime geç
@@ -472,6 +473,15 @@ export function HomeLanding() {
                 </span>
                 <span className="mt-1 block text-white">dil eğitimi</span>
               </h2>
+              <p className="mt-3">
+                <a
+                  href="/dil-okullari/hub"
+                  className="inline-flex items-center gap-1 text-[14px] font-bold text-brand-aqua underline decoration-2 underline-offset-[6px] hover:text-zap-burstLight"
+                >
+                  Dil okulları hub — tüm ülkeler ve kurs türleri
+                  <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
+                </a>
+              </p>
 
               <p className="mt-6 max-w-2xl text-[16px] font-medium leading-relaxed text-white/90 md:text-[17px]">
                 Genel İngilizce, akademik İngilizce veya IELTS ve TOEFL odaklı kursları; aile yan konaklama, yurt veya stüdyo
@@ -498,29 +508,30 @@ export function HomeLanding() {
                 <p className="text-[11px] font-black uppercase tracking-[0.24em] text-brand-aqua/95">Popüler destinasyonlar</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {dilOkuluUlke.map((u) => (
-                    <span
+                    <a
                       key={u}
+                      href={navBase("dil-okullari", slugify(u))}
                       className="rounded-xl border-2 border-white/20 bg-white/[0.07] px-3 py-2 text-[12px] font-black uppercase tracking-wide text-white/95 transition hover:border-zap-burst/80 hover:bg-white/10"
                     >
                       {u}
-                    </span>
+                    </a>
                   ))}
                 </div>
               </div>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
-                  href="#site-footer"
+                  href="/iletisim"
                   className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[13px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-105"
                 >
                   Ayrıntılı bilgi
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
                 </a>
                 <a
-                  href="#sinavlar"
+                  href="/dil-okullari/ielts-kurs"
                   className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-2 border-white/45 bg-transparent px-8 py-3 text-[13px] font-bold text-white transition hover:border-white/70 hover:bg-white/10"
                 >
-                  Sınav hazırlık bölümü
+                  IELTS rehberi
                   <ChevronRight className="h-4 w-4 shrink-0 opacity-90" aria-hidden />
                 </a>
               </div>
@@ -553,7 +564,7 @@ export function HomeLanding() {
             >
               <p className="inline-flex items-center gap-2 rounded-full border border-zap-ink/12 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-flame" aria-hidden />
-                Campus Global · 26 yıl
+                Campus Global · güvenilir ekip
               </p>
               <h2 className="mt-6 text-[clamp(1.85rem,5vw,2.9rem)] font-black uppercase leading-[0.9]">
                 <span className="block text-zap-ink" style={titleLight}>
@@ -602,7 +613,7 @@ export function HomeLanding() {
                     çevrimiçi randevuyle başlayabilirsiniz.
                   </p>
                   <a
-                    href="#site-footer"
+                    href="/iletisim"
                     className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-zap-ink/90 bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase leading-none tracking-wide text-zap-night shadow-[3px_3px_0_#063242] transition hover:brightness-105"
                   >
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={2.1} aria-hidden />
@@ -733,6 +744,15 @@ export function HomeLanding() {
                   Her ülkenin başvuru takvimi, dil yeterliliği ve finansal ispat kuralları farklıdır. Aşağıdaki kartlar popüler
                   yurtdışı üniversite destinasyonları için özet giriş rehberi sunar; detaylı program ve evrak takibi ilk görüşmede
                   planlanır.
+                </p>
+                <p className="mt-4">
+                  <a
+                    href="/universite/hub"
+                    className="inline-flex items-center gap-1 text-[14px] font-bold text-zap-burst underline decoration-2 decoration-zap-burst underline-offset-[6px] hover:text-zap-burstLight"
+                  >
+                    Üniversite hub — tüm ülke rehberleri
+                    <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
+                  </a>
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {[
@@ -912,6 +932,35 @@ export function HomeLanding() {
                   <span className="font-black text-zap-night">yeniden sınav tarihleri</span> başvuru takviminize bağlanır. Özet kartların
                   altında ilk görüşmede seans ve prova planı netleşir.
                 </p>
+                <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] font-bold text-zap-night">
+                  <a className="underline decoration-2 underline-offset-4 hover:text-brand-flame" href="/dil-okullari/ielts-kurs">
+                    IELTS rehberi
+                  </a>
+                  <span className="text-zap-ink/35" aria-hidden>
+                    ·
+                  </span>
+                  <a className="underline decoration-2 underline-offset-4 hover:text-brand-flame" href="/dil-okullari/toefl-kurs">
+                    TOEFL rehberi
+                  </a>
+                  <span className="text-zap-ink/35" aria-hidden>
+                    ·
+                  </span>
+                  <a className="underline decoration-2 underline-offset-4 hover:text-brand-flame" href="/universite/sat-ozet">
+                    SAT özeti
+                  </a>
+                  <span className="text-zap-ink/35" aria-hidden>
+                    ·
+                  </span>
+                  <a className="underline decoration-2 underline-offset-4 hover:text-brand-flame" href="/yuksek-lisans/gre-rehber">
+                    GRE rehberi
+                  </a>
+                  <span className="text-zap-ink/35" aria-hidden>
+                    ·
+                  </span>
+                  <a className="underline decoration-2 underline-offset-4 hover:text-brand-flame" href="/yuksek-lisans/gmat-rehber">
+                    GMAT rehberi
+                  </a>
+                </p>
               </div>
               <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
                 {(
@@ -940,7 +989,7 @@ export function HomeLanding() {
               <p className="mt-1 text-[13px] font-bold text-zap-ink/80">4 ana hat · kartta özet, görüşmede detay &amp; takvim</p>
             </div>
             <a
-              href="#site-footer"
+              href="/iletisim"
               className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-zap-ink bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-105"
             >
               Takvim netleştir
@@ -959,13 +1008,14 @@ export function HomeLanding() {
               const CardIcon = meta.Icon;
               const num = String(j + 1).padStart(2, "0");
               return (
-                <motion.div
+                <motion.a
                   key={s.kod}
+                  href={s.href}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-24px" }}
                   transition={{ delay: j * 0.07, duration: 0.45 }}
-                  className={`group relative overflow-hidden rounded-[1.35rem] border-4 border-zap-ink bg-gradient-to-b from-white to-[#f0fdf9] text-zap-ink shadow-brutal transition md:rounded-2xl ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.3deg] hover:shadow-brutalLg"}`}
+                  className={`group relative block overflow-hidden rounded-[1.35rem] border-4 border-zap-ink bg-gradient-to-b from-white to-[#f0fdf9] text-zap-ink shadow-brutal transition md:rounded-2xl ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.3deg] hover:shadow-brutalLg"}`}
                 >
                   <div className={`pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${meta.stripe}`} aria-hidden />
                   <span
@@ -1009,7 +1059,7 @@ export function HomeLanding() {
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zap-night">Görüşme · hedef &amp; seans</span>
                     <ChevronRight className="h-4 w-4 text-zap-night opacity-80 transition group-hover:translate-x-0.5" aria-hidden />
                   </div>
-                </motion.div>
+                </motion.a>
               );
             })}
           </div>
@@ -1075,6 +1125,14 @@ export function HomeLanding() {
                 >
                   Yurtdışı dil okulu için örnek fiyat <span className="text-zap-burst">bantları</span>
                 </h2>
+                <p className="mt-2">
+                  <a
+                    href="/dil-okullari/sure-planlama"
+                    className="text-[13px] font-bold text-zap-burstLight underline decoration-2 underline-offset-4 hover:text-white"
+                  >
+                    Süre ve bütçe planlama rehberi →
+                  </a>
+                </p>
               </div>
               <div className="flex flex-wrap items-center justify-end gap-2.5 sm:shrink-0">
                 {[
@@ -1114,7 +1172,7 @@ export function HomeLanding() {
                 Her kutuda şehir, konaklama ve yoğunluk gibi fiyatı etkileyen başlıkları açıklıyoruz — yurtdışında dil eğitimi bütçenizi böyle kuruyoruz.
               </p>
               <a
-                href="#site-footer"
+                href="/iletisim"
                 className="sm:col-span-5 inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-2xl border-2 border-zap-ink bg-zap-burst px-5 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_#063242] transition hover:translate-x-0.5 hover:shadow-brutal sm:justify-center sm:justify-self-end sm:max-w-sm sm:py-0"
               >
                 Bütçe hattı
@@ -1156,8 +1214,9 @@ export function HomeLanding() {
                   >
                     {n}→
                   </span>
-                  <div
-                    className={`group relative overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal transition ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg] hover:shadow-brutalLg"}`}
+                  <a
+                    href={f.href}
+                    className={`group relative block overflow-hidden rounded-2xl border-4 border-zap-ink bg-white text-inherit no-underline shadow-brutal transition ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg] hover:shadow-brutalLg"}`}
                   >
                     <div className={`h-1.5 w-full bg-gradient-to-r ${hair}`} aria-hidden />
                     <div className="p-4 sm:grid sm:grid-cols-[1fr_minmax(0,11rem)] sm:gap-5 sm:p-5">
@@ -1204,7 +1263,7 @@ export function HomeLanding() {
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </motion.li>
               );
             })}
@@ -1310,6 +1369,15 @@ export function HomeLanding() {
                       yurtdışı yüksek lisans planı
                     </span>
                   </h2>
+                  <p className="mt-3">
+                    <a
+                      href="/yuksek-lisans/hub"
+                      className="inline-flex items-center gap-1 text-[13px] font-bold text-zap-burstLight underline decoration-2 underline-offset-[6px] hover:text-white"
+                    >
+                      Yüksek lisans hub — tüm ülkeler ve kabul notları
+                      <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
+                    </a>
+                  </p>
                   <p className="mt-4 max-w-xl text-[15px] font-medium leading-relaxed text-white/78 sm:text-base">
                     Yurtdışında yüksek lisans ve MBA başvurularında araştırma çıkarımından essay turlarına, burs ve asistanlık
                     senaryolarından mezuniyet sonrası çalışma izni özetlerine kadar tek danışmanlık dosyasında ilerliyoruz. Okul
@@ -1371,7 +1439,7 @@ export function HomeLanding() {
                     })}
                   </div>
                   <a
-                    href="#site-footer"
+                    href="/iletisim"
                     className="mt-8 flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-4 border-white/30 bg-brand-flame px-5 text-center text-xs font-black uppercase leading-none tracking-wide text-white shadow-[6px_6px_0_rgba(0,0,0,0.5)] transition hover:brightness-110 sm:mt-9 sm:justify-center sm:px-8 md:w-auto"
                   >
                     Detaylı bilgi <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
@@ -1433,12 +1501,13 @@ export function HomeLanding() {
                     </div>
                     <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {yuksekLisansUlke.map((u) => (
-                        <span
+                        <a
                           key={u}
-                          className="rounded-md border-2 border-white/20 bg-zap-ink/90 px-2.5 py-1.5 text-[9px] font-black uppercase leading-none text-white/95 shadow-[2px_2px_0_rgba(0,0,0,0.4)] sm:px-3 sm:text-[11px] sm:leading-tight"
+                          href={navBase("yuksek-lisans", slugify(u))}
+                          className="rounded-md border-2 border-white/20 bg-zap-ink/90 px-2.5 py-1.5 text-[9px] font-black uppercase leading-none text-white/95 shadow-[2px_2px_0_rgba(0,0,0,0.4)] transition hover:border-zap-burst/70 hover:bg-zap-ink sm:px-3 sm:text-[11px] sm:leading-tight"
                         >
                           {u}
-                        </span>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -1558,7 +1627,7 @@ export function HomeLanding() {
                 </div>
 
                 <motion.a
-                  href="#haberler"
+                  href={haberVitrin.href}
                   initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                   whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
@@ -1616,7 +1685,7 @@ export function HomeLanding() {
                   {haberDiger.map((b, j) => (
                     <motion.a
                       key={b.baslik}
-                      href="#haberler"
+                      href={b.href}
                       initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-20px" }}
@@ -1909,12 +1978,14 @@ export function HomeLanding() {
                 {preFooterSubeler.map((s) => (
                   <li
                     key={s.sehir}
-                    className="flex gap-2.5 border-b-2 border-dashed border-zap-ink/12 py-2.5 first:pt-0 last:border-b-0"
+                    className="border-b-2 border-dashed border-zap-ink/12 py-2.5 first:pt-0 last:border-b-0"
                   >
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-zap-night/65" aria-hidden />
-                    <span className="text-[14px] font-semibold">
-                      <strong className="font-black">{s.sehir}</strong> · {s.ad}
-                    </span>
+                    <a href={s.href} className="flex gap-2.5 text-[14px] font-semibold text-zap-night no-underline transition hover:text-brand-flame">
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-zap-night/65" aria-hidden />
+                      <span>
+                        <strong className="font-black">{s.sehir}</strong> · {s.ad}
+                      </span>
+                    </a>
                   </li>
                 ))}
               </ul>
