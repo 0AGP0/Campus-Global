@@ -3,10 +3,10 @@ title: "Yurtdışında IELTS hazırlık kursu: Academic & General Training, sür
 description: "IELTS Academic ve General Training farkı, hedef band skoru, haftalık yoğunluk, mock sınav ve okulda IELTS hazırlık modülü seçimi. Yurtdışında dil okulu + sınav hazırlığı için uygulama rehberi."
 keywords: "IELTS kursu, yurtdışında IELTS hazırlık, IELTS Academic, General Training, band score, mock exam, dil okulu IELTS, Campus Global"
 publishedISO: "2026-04-29T10:00:00+03:00"
-modifiedISO: "2026-04-30T14:00:00+03:00"
+modifiedISO: "2026-06-20T12:00:00+03:00"
 eyebrow: "Dil okulları"
 section: "Sınav hazırlığı"
-readingMinutes: 12
+readingMinutes: 14
 toc:
   - id: sinav-yapisi
     label: "IELTS yapısı ve modüller"
@@ -28,38 +28,43 @@ toc:
     depth: 2
 faq:
   - question: "IELTS Academic ile General Training arasında nasıl seçim yaparım?"
-    answer: "Üniversite lisans/yüksek lisans başvurusu için çoğunlukla Academic gerekir. Göçmenlik, bazı meslek denklikleri veya belirli ülke giriş programlarında General Training istenebilir. Hedef kurumun veya vize sınıfının PDF şartnamesinde istenen modülü doğrulayın; modül yanlış seçilirse sonuç kabul edilmeyebilir."
+    answer: "Üniversite lisans, yüksek lisans ve akademik başvurular için çoğunlukla Academic modül gerekir. Göçmenlik, bazı meslek denklikleri veya belirli ülke programlarında General Training istenebilir. Karar verirken okul, kurum veya vize sınıfının güncel şartnamesi kaynak alınmalıdır."
   - question: "Okulda IELTS kursuna başlamadan önce genel İngilizce şart mı?"
-    answer: "Kural olarak zorunlu değildir; ancak çıkış seviyesi B1 altıysa önce genel/yoğun İngilizce ile temel oturtmak, IELTS strateji derslerinin verimini artırır. Birçok okul, placement sonrası hibrit rota (4–8 hafta genel + IELTS bloğu) önerir."
+    answer: "Kural olarak her zaman zorunlu değildir; ancak çıkış seviyesi B1 altındaysa doğrudan IELTS stratejisine başlamak verimsiz olabilir. Önce genel veya yoğun İngilizce ile temel grammar, kelime ve okuma hızını güçlendirmek daha sürdürülebilir rota sağlayabilir."
   - question: "Writing ve Speaking için okul dışında ne yapmalıyım?"
-    answer: "Writing için zamanlı görev yazma ve resmi kriterlere göre kendini puanlama alıştırması; Speaking için kayıt altında konuşma ve geri bildirim döngüsü kritiktir. Okulun writing lab veya birebir danışmanlık saatlerini programa erken kilitlemek faydalıdır."
-  - question: "Hedef ülkede IELTS sınav merkezi bulunamazsa?"
-    answer: "Bazı öğrenciler kursu yurtdışında alıp sınavı Türkiye’de veya üçüncü bir ülkede bırakır; seyahat maliyeti ve sınav kontenjanı plana dahil edilmelidir. Test tarihi, vize bitiş tarihi ve okul kabul son tarihleriyle çakışma kontrolü yapılmalıdır."
+    answer: "Writing için zamanlı görev yazma, örnek cevap analizi ve kriter bazlı geri bildirim gerekir. Speaking için kayıt alarak pratik yapmak, cevapları ezberlemek yerine fikir akışını geliştirmek ve telaffuz-duraksama hatalarını takip etmek önemlidir."
+  - question: "IELTS hedef band skoru ne kadar sürede yükselir?"
+    answer: "Süre mevcut seviye, hedef band, haftalık ders yoğunluğu ve bireysel çalışmaya göre değişir. Yalnızca sınav taktiğiyle kalıcı artış beklemek doğru değildir; akademik kelime, okuma hızı, essay yapısı ve konuşma pratiği birlikte ilerlemelidir."
+  - question: "Hedef ülkede IELTS sınav merkezi bulunamazsa ne yapılır?"
+    answer: "Bazı öğrenciler kursu yurtdışında alıp sınavı Türkiye’de veya üçüncü bir ülkede yapmayı planlayabilir. Bu durumda sınav kontenjanı, seyahat maliyeti, vize bitiş tarihi ve başvuru son tarihleri birlikte kontrol edilmelidir."
 ---
 
-<p><strong>IELTS</strong> (International English Language Testing System), akademik ve genel yollar için kabul gören uluslararası bir yeterlilik sınavıdır. Yurtdışında dil okulunda IELTS hazırlık programı; format bilgisi, zaman yönetimi ve görev tiplerine alışma üzerine kurulur. Bu sayfa; modül seçimi, hedef band, okul programı değerlendirmesi ve sınav kaydı için pratik bir çerçeve sunar.</p>
+<p><strong>IELTS</strong> (International English Language Testing System), akademik ve genel amaçlı İngilizce yeterliliğini ölçen uluslararası bir sınavdır. Yurtdışında IELTS hazırlık kursu seçerken yalnızca IELTS dersi var mı sorusu yeterli olmaz. Modül seçimi, hedef band, writing feedback düzeni, speaking pratiği, mock sınav sıklığı ve sınav merkezi lojistiği birlikte değerlendirilmelidir.</p>
 
 <h2 id="sinav-yapisi">IELTS yapısı ve modüller</h2>
-<p>Sınav dört bölümden oluşur: <strong>Listening</strong> (40 soru), <strong>Reading</strong> (40 soru), <strong>Writing</strong> (2 görev) ve <strong>Speaking</strong> (yüz yüze veya video görüşme formatına göre merkez politikası). Her bölüm ayrı puanlanır; genel <em>overall band</em> genellikle ortalamaya yakın bir değer olarak raporlanır (yuvarlama kuralları resmi kılavuza tabidir).</p>
+<p>IELTS; <strong>Listening</strong>, <strong>Reading</strong>, <strong>Writing</strong> ve <strong>Speaking</strong> bölümlerinden oluşur. Her bölüm ayrı değerlendirilir ve sonuçta overall band skoru raporlanır. Sınav formatı, sınav merkezi uygulamaları ve sonuç raporlama süreçleri zaman içinde güncellenebileceği için hazırlık planı yaparken resmi sınav kaynakları ve okulun güncel yönlendirmeleri dikkate alınmalıdır.</p>
+<p>IELTS hazırlığında temel hedef yalnızca soru tiplerini tanımak değildir. Öğrencinin akademik kelime hazinesi, metin tarama becerisi, essay yapısı, grafik yorumlama, fikir geliştirme ve konuşma akıcılığı birlikte gelişmelidir. Dil okulunda iyi bir IELTS programı, sınav stratejisini genel İngilizce altyapısıyla birleştirir.</p>
 
 <h2 id="academic-general">Academic ve General Training</h2>
-<p><strong>Academic</strong> reading ve writing görevleri akademik metin ve grafik yorumu ağırlıklıdır. <strong>General Training</strong> reading bölümü günlük ve işyeri metinlerine daha yakındır; writing Task 1 mektup formatıdır. Yanlış modül seçimi başvurunun reddine yol açabileceğinden, üniversite veya kurum şartnamesini kaynak kabul edin.</p>
+<p><strong>Academic</strong> modül; üniversite, yüksek lisans, akademik hazırlık veya bazı mesleki denklik süreçlerinde tercih edilir. Reading metinleri daha akademik yapıdadır; Writing Task 1 çoğunlukla grafik, tablo, harita veya süreç anlatımı üzerinden ilerler. <strong>General Training</strong> modül ise günlük yaşam ve işyeri bağlamına daha yakındır; Writing Task 1 mektup formatındadır.</p>
+<p>Yanlış modül seçimi, sınav sonucunuz yüksek olsa bile başvuruda sorun yaratabilir. Bu nedenle IELTS kursuna başlamadan önce hedef kurumun veya başvuru kanalının PDF şartnamesi incelenmeli, minimum overall band ve bölüm bazlı skor gereksinimleri not edilmelidir.</p>
 
 <h2 id="hedef-band">Hedef band ve süre planı</h2>
-<p>Örnek: mevcut 5.5 overall ve hedef 6.5 ise, haftalık ders yükü ve bireysel çalışma ile 8–16 haftalık aralıklar sık görülür; bu aralık <em>kesin vaat değildir</em>. Öğrencinin okuma hızı, kelime hazinesi ve yazı disiplini sonucu belirler. Danışmanlıkta başlangıç <strong>diagnostic test</strong> ile haftalık hedefler sayısallaştırılır.</p>
+<p>Hedef band planı, mevcut seviye ile istenen skor arasındaki fark üzerinden kurulmalıdır. Örneğin 5.5 overall seviyesinden 6.5 hedefleyen bir öğrenci için yalnızca test taktiği değil, writing kalitesi, okuma hızı ve speaking akıcılığı da geliştirilmelidir. Bu süreç kişiden kişiye değişir; belirli bir haftada kesin skor artışı vaadi doğru değildir.</p>
 <ul>
-<li>Haftalık en az bir <strong>full mock</strong> (özellikle yazma süresi disiplini için)</li>
-<li>Speaking için haftalık kayıtlı prova ve rubric kontrolü</li>
-<li>Hata günlüğü: tekrarlanan grammar/lexis kalıpları</li>
+<li><strong>Writing:</strong> Task achievement, coherence, grammar ve vocabulary hataları ayrı takip edilmelidir.</li>
+<li><strong>Speaking:</strong> Kayıtlı prova, akıcılık ve fikir geliştirme için düzenli geri bildirim gerekir.</li>
+<li><strong>Reading:</strong> Süre yönetimi, ana fikir bulma ve soru tiplerine göre okuma stratejisi çalışılmalıdır.</li>
+<li><strong>Listening:</strong> Not alma, dikkat sürekliliği ve farklı aksanlara maruz kalma planlanmalıdır.</li>
 </ul>
 
 <h2 id="okul-program">Okul programında nelere bakılır</h2>
-<p>IELTS bloğunun yanında <strong>skills</strong> derslerinin oranı, sınıf mevcudu, öğretmenlerin sınav deneyimi ve ekstra atölye saatleri değerlendirilmelidir. Okulun partner sınav merkezi veya şehir içi ulaşım süresi, sınav günü stresini etkiler. Genel dil temeli için <a href="/dil-okullari/genel-ingilizce">genel İngilizce rehberimizi</a> referans alabilirsiniz.</p>
+<p>IELTS kursu seçerken sınıf seviyesi, öğretmen deneyimi, haftalık mock sayısı ve writing feedback düzeni en kritik başlıklardır. Bazı okullar IELTS derslerini genel İngilizce programının yanında seçmeli modül olarak sunarken bazıları tamamen sınav odaklı sınıflar açar. Hangi modelin uygun olduğu öğrencinin mevcut seviyesine ve hedef tarihine göre değişir.</p>
+<p>Okuldan haftalık program örneği istenmelidir. IELTS derslerinin hangi günlerde olduğu, full mock yapılıp yapılmadığı, speaking pratiğinin birebir mi grup içinde mi yürüdüğü ve writing ödevlerine ne kadar sürede geri dönüş verildiği sorulmalıdır. Karşılaştırma mantığı için <a href="/dil-okullari/okul-secimi">dil okulu seçimi</a> rehberine bakabilirsiniz.</p>
 
 <h2 id="mock-geri-bildirim">Mock sınav ve geri bildirim</h2>
-<p>Mock sınav yalnızca puan üretmez; <strong>yanlış soru tiplerini</strong> ve zaman baskısı altındaki hata paternlerini görünür kılar. Writing için öğretmen geri bildirimi veya eş değerlendirme rubric’i (task achievement, coherence, lexical resource, grammar) aynı dilde tutarlı kullanılmalıdır.</p>
+<p>Mock sınav, IELTS hazırlığında ilerlemeyi ölçmenin en sağlıklı yollarından biridir. Ancak yalnızca skor görmek için yapılırsa sınırlı fayda sağlar. Her deneme sonrası hangi soru tiplerinde hata yapıldığı, writing kriterlerinde hangi band aralığında kalındığı ve speaking cevaplarında hangi tekrar eden sorunların bulunduğu analiz edilmelidir.</p>
+<p>İyi bir programda mock sınavlar üç aşamada kullanılır: başlangıçta seviye ve risk alanlarını görmek, süreç ortasında gelişimi ölçmek, sınav öncesinde ise zaman yönetimini test etmek. Öğrenci her mock sonrası hata günlüğü tutmalı ve aynı hataların tekrar edip etmediğini takip etmelidir.</p>
 
 <h2 id="sinav-tarihi">Sınav tarihi ve kayıt</h2>
-<p>Kurs bitişi ile sınav tarihi arasında tampon bırakın; olası <em>remark</em> veya yeniden sınav ihtiyacı için en az 2–3 haftalık esneklik planlayın. Resmi kayıt ve kimlik politikalarını sınav merkezinin güncel sayfasından doğrulayın.</p>
-<blockquote><p>“IELTS’te kısa vadede yükselen çoğu öğrenci; okuma hızı ve yazı planı disiplinini aynı anda çözenlerdir.”</p></blockquote>
-<p>Ülke ve şehir seçiminde <a href="/dil-okullari/hub">dil okulları hub</a> vitrininden başlayıp detaylı teklif için <a href="/iletisim">iletişim</a> kanalımızdan dosya açabilirsiniz.</p>
+<p>IELTS sınav tarihi, kursun son gününe bırakılmamalıdır. Başvuru son tarihi, vize bitiş tarihi, okul kabul süreci ve sonuç açıklanma takvimi birlikte düşünülmelidir. Yurtdışında kurs alırken sınava aynı şehirde girmek pratik olabilir; ancak kontenjan, merkez uzaklığı, ulaşım ve sınav günü stresi planlanmalıdır. Alternatif sınavları karşılaştırmak için <a href="/dil-okullari/toefl-kurs">TOEFL hazırlık</a> rehberini de inceleyebilir, program seçimi için <a href="/iletisim">Campus Global ile iletişime geçebilirsiniz</a>.</p>
