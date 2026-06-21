@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { getSiteOrigin } from "@/data/site-origin";
 import { footerIletisim } from "@/data/home-ia";
 import { ArticleHeaderDitherPanel } from "@/components/article/ArticleHeaderDitherPanel";
+import { ArticleHeroLeadButton } from "@/components/article/ArticleHeroLeadButton";
 import { titleLight } from "@/styles/typography";
 
 interface BreadcrumbItem {
@@ -53,6 +54,10 @@ interface Props {
   sidebarLinks?: SidebarLink[];
   /** CTA şeritlerindeki arka plan görselleri (kendi görselleriniz veya CDN) */
   sidebarCtaImages?: SidebarCtaImages;
+  /** Hero’da (makale gövdesinden önce) popup açan CTA düğmesi — metin özelleştirmesi */
+  heroLeadCtaLabel?: string;
+  /** Navbar ülke sayfası — program+ülke geçerliyse form doğrudan iletişim adımında açılır */
+  leadFormPrefill?: { programId: string; countryLabel: string } | null;
 }
 
 const props = Astro.props as Props;
@@ -277,6 +282,8 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
               <p class="mt-4 max-w-3xl text-pretty font-sans text-[17px] font-medium leading-[1.62] text-zap-ink md:mt-5 md:text-[18px] md:leading-[1.68]">
                 {props.description}
               </p>
+
+              <ArticleHeroLeadButton client:load label={props.heroLeadCtaLabel} leadFormPrefill={props.leadFormPrefill} />
 
               <div class="mt-7 flex flex-wrap items-center gap-2 border-t border-dashed border-zap-ink/15 pt-6 md:mt-8 md:gap-3">
                 <time
@@ -564,9 +571,7 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
 
         <!-- Ana metin -->
         <article class="order-1 min-w-0 lg:order-2">
-          <div
-            class="article-prose rounded-2xl border-4 border-zap-ink bg-white px-4 py-8 shadow-brutal sm:px-6 md:rounded-[1.75rem] md:px-8 md:py-10 lg:px-9 lg:py-12"
-          >
+          <div class="article-prose px-4 py-8 sm:px-6 md:px-8 md:py-10 lg:px-9 lg:py-12">
             <div
               class="max-w-none [&_blockquote]:my-8 [&_blockquote]:border-l-4 [&_blockquote]:border-brand-teal [&_blockquote]:bg-brand-aqua/[0.07] [&_blockquote]:py-4 [&_blockquote]:pl-6 [&_blockquote]:pr-4 [&_blockquote]:text-[17px] [&_blockquote]:italic [&_blockquote]:leading-relaxed [&_blockquote]:text-zap-ink/90 [&_code]:rounded-md [&_code]:border [&_code]:border-zap-ink/10 [&_code]:bg-zap-night/[0.04] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.9em] [&_code]:text-zap-ink [&_h2]:mt-12 [&_h2]:scroll-mt-28 [&_h2]:border-l-4 [&_h2]:border-zap-burst [&_h2]:pl-5 [&_h2]:text-[1.35rem] [&_h2]:font-black [&_h2]:uppercase [&_h2]:leading-snug [&_h2]:tracking-tight [&_h2]:text-zap-night [&_h2:first-of-type]:mt-0 md:[&_h2]:text-[1.5rem] [&_h2+p]:mt-4 [&_h3]:mt-10 [&_h3]:scroll-mt-28 [&_h3]:text-[1.15rem] [&_h3]:font-bold [&_h3]:leading-snug [&_h3]:text-zap-ink [&_li]:pl-1 [&_li]:marker:text-brand-teal [&_li]:marker:text-lg [&_ol>li]:mt-3 [&_ol]:my-6 [&_ol]:list-decimal [&_ol]:space-y-1 [&_ol]:pl-7 [&_ol]:text-[17px] [&_ol]:leading-[1.75] [&_ol]:text-zap-ink [&_p]:my-6 [&_p]:text-[17px] [&_p]:font-normal [&_p]:leading-[1.85] [&_p]:text-zap-ink [&_p:first-child]:mt-0 [&_strong]:font-bold [&_strong]:text-zap-night [&_table]:my-8 [&_table]:w-full [&_table]:border-collapse [&_table]:overflow-hidden [&_table]:rounded-xl [&_table]:border-2 [&_table]:border-zap-ink [&_td]:border [&_td]:border-zap-ink/15 [&_td]:px-4 [&_td]:py-3 [&_td]:text-left [&_td]:text-[15px] [&_th]:border [&_th]:border-zap-ink/15 [&_th]:bg-brand-aqua/15 [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:text-[13px] [&_th]:font-black [&_th]:uppercase [&_th]:tracking-wide [&_ul>li]:mt-3 [&_ul]:my-6 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-7 [&_ul]:text-[17px] [&_ul]:leading-[1.75] [&_ul]:text-zap-ink [&_a]:font-semibold [&_a]:text-brand-teal [&_a]:underline [&_a]:decoration-brand-teal/40 [&_a]:underline-offset-[3px] [&_a]:transition [&_a]:hover:decoration-brand-teal"
             >

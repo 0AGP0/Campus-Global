@@ -1,6 +1,7 @@
 ---
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getCollection, render } from "astro:content";
+import { resolveLeadFormPrefillFromPath } from "@/data/lead-form-data";
 import { megaNav, RESERVED_NON_ARTICLE_SLUGS, getMegaNavSegmentMeta } from "@/data/site-nav";
 
 export function getStaticPaths() {
@@ -66,6 +67,7 @@ if (entry) {
 const d = entry?.data;
 const displayTitle = d?.title ?? titleFromSlug(pathSlug);
 const canonicalPath = `/${pathSlug}`;
+const leadFormPrefill = resolveLeadFormPrefillFromPath(canonicalPath);
 const description =
   d?.description ??
   `${displayTitle} — Campus Global yurtdışı eğitim rehberi. Detay içerik hazırlanıyor; danışmanlık için iletişime geçebilirsiniz.`;
@@ -93,6 +95,7 @@ const breadcrumb = buildBreadcrumb(pathSlug);
   breadcrumb={breadcrumb}
   toc={toc}
   faq={faq}
+  leadFormPrefill={leadFormPrefill}
 >
   {
     entry && Content ? (

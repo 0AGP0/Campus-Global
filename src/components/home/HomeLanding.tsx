@@ -75,6 +75,10 @@ const IMG_MAP = "https://picsum.photos/seed/cg-harita-dunya-2024/1200/800";
 const IMG_NEDEN_CG = "https://picsum.photos/seed/cg-ayni-masada-net-karar-2024/1000/660";
 const IMG_YUKSEK = "https://picsum.photos/seed/cg-yuksek-lisans-kulvar-2024/1100/1200";
 
+/** Ana hero görseli. Yerel dosya kullanmak için `public/hero-ana.jpg` ekleyip URL’yi `/hero-ana.jpg` yapın. */
+const HERO_VISUAL_SRC =
+  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=960&h=1180&q=82";
+
 const categoryIcon: Record<string, LucideIcon> = {
   "dil-okullari": Languages,
   universite: Building2,
@@ -140,7 +144,7 @@ export function HomeLanding() {
       >
         {!reduceMotion ? (
           <>
-            <HeroDitherBackdrop colorBack="#00a39b" colorFront="#f51d00" />
+            <HeroDitherBackdrop colorBack="#0f4c75" colorFront="#40c4ff" />
             <div
               className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_95%_70%_at_50%_-8%,rgba(255,255,255,0.16),transparent_52%)]"
               aria-hidden
@@ -152,19 +156,20 @@ export function HomeLanding() {
           </>
         ) : (
           <>
-            <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-brand-aqua/30 blur-3xl" aria-hidden />
-            <div className="pointer-events-none absolute -right-20 bottom-8 h-64 w-64 rounded-full bg-brand-teal/35 blur-3xl" aria-hidden />
+            <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#0f4c75]/40 blur-3xl" aria-hidden />
+            <div className="pointer-events-none absolute -right-20 bottom-8 h-64 w-64 rounded-full bg-[#1d8ebf]/35 blur-3xl" aria-hidden />
           </>
         )}
 
         <div className={`${inner} relative z-10`}>
           <motion.div
-            className="relative mx-auto max-w-4xl"
+            className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14"
             variants={heroContainerVariants}
             initial="hidden"
             animate="visible"
           >
-            <div className="relative overflow-hidden rounded-2xl border-2 border-white/30 bg-zap-night/82 p-6 shadow-brutal ring-1 ring-white/10 backdrop-blur-xl md:rounded-[1.35rem] md:p-9">
+            <div className="lg:col-span-7">
+            <div className="relative overflow-hidden rounded-2xl border-2 border-white/30 bg-zap-night/82 p-6 ring-1 ring-white/10 backdrop-blur-xl md:rounded-[1.35rem] md:p-9">
               <div
                 className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.07] via-transparent to-brand-aqua/10"
                 aria-hidden
@@ -189,12 +194,12 @@ export function HomeLanding() {
             <motion.div variants={heroItemVariants} className="relative z-[2] mx-auto mt-4 h-1 w-44 overflow-hidden rounded-full bg-white/20 md:w-52">
               {!reduceMotion ? (
                 <motion.div
-                  className="absolute inset-y-0 w-2/5 rounded-full bg-gradient-to-r from-zap-burst via-brand-aqua to-brand-flame shadow-[0_0_12px_rgba(255,183,3,0.55)]"
+                  className="absolute inset-y-0 w-2/5 rounded-full bg-gradient-to-r from-brand-aqua via-[#5ecbff] to-[#0ea5e9]"
                   animate={{ left: ["-40%", "105%"] }}
                   transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.35 }}
                 />
               ) : (
-                <div className="mx-auto h-full w-3/5 rounded-full bg-gradient-to-r from-zap-burst via-brand-aqua to-brand-flame opacity-90" />
+                <div className="mx-auto h-full w-3/5 rounded-full bg-gradient-to-r from-brand-aqua via-[#5ecbff] to-[#0ea5e9] opacity-90" />
               )}
             </motion.div>
 
@@ -231,7 +236,7 @@ export function HomeLanding() {
             >
               <motion.a
                 href="/dil-okullari/hub"
-                className="inline-flex min-h-[48px] w-fit items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[14px] font-black uppercase leading-none text-zap-night shadow-brutal md:text-[16px]"
+                className="inline-flex min-h-[48px] w-fit items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[14px] font-black uppercase leading-none text-zap-night md:text-[16px]"
                 whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
               >
@@ -240,7 +245,7 @@ export function HomeLanding() {
               </motion.a>
               <motion.a
                 href="/iletisim"
-                className="inline-flex min-h-[48px] w-fit items-center justify-center rounded-full border-2 border-white/75 bg-white/12 px-10 py-3 text-[15px] font-bold leading-none text-white shadow-[0_4px_22px_rgba(0,0,0,0.22)] backdrop-blur-md md:text-[16px]"
+                className="inline-flex min-h-[48px] w-fit items-center justify-center rounded-full border-2 border-white/75 bg-white/12 px-10 py-3 text-[15px] font-bold leading-none text-white backdrop-blur-md md:text-[16px]"
                 whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.2 } }}
                 whileTap={reduceMotion ? undefined : { scale: 0.97 }}
               >
@@ -248,13 +253,42 @@ export function HomeLanding() {
               </motion.a>
             </motion.div>
             </div>
+            </div>
+
+            <motion.div
+              variants={heroItemVariants}
+              className="relative flex justify-center lg:col-span-5 lg:justify-end"
+            >
+              <figure className="relative w-full max-w-md lg:max-w-none">
+                <div
+                  className="pointer-events-none absolute -right-2 -top-2 z-[1] h-14 w-14 rounded-br-none rounded-tl-2xl border-l-4 border-t-4 border-zap-burst/90 bg-transparent md:h-16 md:w-16"
+                  aria-hidden
+                />
+                <div className="relative overflow-hidden rounded-2xl border-4 border-zap-ink ring-2 ring-white/25 md:rounded-[1.35rem]">
+                  <img
+                    src={HERO_VISUAL_SRC}
+                    alt="Yurtdışında eğitim ve üniversite ortamında öğrenciler — Campus Global danışmanlık vitrin görseli"
+                    width={960}
+                    height={1180}
+                    className="aspect-[4/5] w-full object-cover sm:aspect-[5/6] lg:aspect-[3/4] lg:max-h-[min(560px,62vh)] xl:max-h-[min(600px,65vh)]"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zap-night/50 via-transparent to-white/10"
+                    aria-hidden
+                  />
+                </div>
+              </figure>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
       {/* — Program kategorileri: bento + canlı kartlar (segmentasyon) */}
       <section id="program-kategorileri" className="relative z-[1] -mt-12 w-full scroll-mt-24 md:-mt-14">
-        <div className="relative overflow-hidden rounded-t-[2rem] bg-gradient-to-br from-[#f0fdfc] via-white to-[#e8faf7] pb-16 pt-14 text-zap-ink shadow-[0_-28px_80px_rgba(3,214,186,0.22)] md:rounded-t-[3rem] md:pb-24 md:pt-20">
+        <div className="relative overflow-hidden rounded-t-[2rem] bg-gradient-to-br from-[#f0fdfc] via-white to-[#e8faf7] pb-16 pt-14 text-zap-ink md:rounded-t-[3rem] md:pb-24 md:pt-20">
           <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-brand-aqua/20 blur-3xl" />
           <div className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-brand-flame/18 blur-3xl" />
           <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-zap-burst/20 blur-3xl" />
@@ -270,7 +304,7 @@ export function HomeLanding() {
               className="relative flex flex-col gap-6 border-b-4 border-dashed border-zap-ink/12 pb-10 md:flex-row md:items-end md:justify-between md:gap-10 md:pb-12"
             >
               <div className="max-w-2xl">
-                <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/15 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-teal shadow-sm">
+                <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/15 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-teal">
                   <Sparkles className="h-3.5 w-3.5 text-zap-burst" aria-hidden />
                   Programlar · Campus Global
                 </p>
@@ -292,7 +326,7 @@ export function HomeLanding() {
                 {["Şeffaf süreç", "Güncel rehber", "Öğrenci odağı"].map((t) => (
                   <span
                     key={t}
-                    className="rounded-xl border-2 border-zap-ink bg-zap-burst px-3 py-2 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[3px_3px_0_#063242]"
+                    className="rounded-xl border-2 border-zap-ink bg-zap-burst px-3 py-2 text-[12px] font-black uppercase tracking-wide text-zap-night"
                   >
                     {t}
                   </span>
@@ -310,24 +344,10 @@ export function HomeLanding() {
                 </span>
               </div>
 
-              <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-12 xl:auto-rows-auto xl:gap-5">
+              <div className="grid auto-rows-fr grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 lg:gap-5">
                 {programCategories.map((c, j) => {
                   const Icon = categoryIcon[c.id] ?? Globe2;
                   const vis = categoryVisual[c.id] ?? categoryVisual["dil-okullari"];
-                  const isHeroTile = c.id === "dil-okullari";
-                  const isTallPair = c.id === "universite" || c.id === "yuksek-lisans";
-                  const gridPlacement =
-                    isHeroTile
-                      ? "sm:col-span-2 xl:col-start-1 xl:col-end-7 xl:row-start-1 xl:row-end-3 min-h-[260px] sm:min-h-[280px] xl:min-h-0"
-                      : c.id === "universite"
-                        ? "xl:col-start-7 xl:col-end-10 xl:row-start-1 xl:row-end-3"
-                        : c.id === "yuksek-lisans"
-                          ? "xl:col-start-10 xl:col-end-13 xl:row-start-1 xl:row-end-3"
-                          : c.id === "diploma"
-                            ? "xl:col-start-1 xl:col-end-5 xl:row-start-3 xl:row-end-4"
-                            : c.id === "lise"
-                              ? "xl:col-start-5 xl:col-end-9 xl:row-start-3 xl:row-end-4"
-                              : "xl:col-start-9 xl:col-end-13 xl:row-start-3 xl:row-end-4";
 
                   return (
                     <motion.a
@@ -337,14 +357,10 @@ export function HomeLanding() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-40px" }}
                       transition={{ delay: j * 0.06, duration: 0.45 }}
-                      className={`group relative flex min-h-0 flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-zap-night shadow-brutal transition xl:h-full ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.35deg] hover:shadow-brutalLg"} ${gridPlacement}`}
+                      className={`group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-zap-night transition sm:min-h-[280px] ${reduceMotion ? "" : "hover:-translate-y-0.5"}`}
                     >
                       <span className={`pointer-events-none absolute left-0 top-0 z-[2] h-full w-1.5 ${vis.stripe}`} aria-hidden />
-                      <div
-                        className={`relative flex-1 overflow-hidden min-h-[140px] sm:min-h-[160px] ${
-                          isHeroTile ? "xl:min-h-[14rem]" : isTallPair ? "xl:min-h-[12rem]" : "xl:min-h-[11rem]"
-                        }`}
-                      >
+                      <div className="relative min-h-[140px] flex-1 overflow-hidden sm:min-h-[160px] lg:min-h-[11rem]">
                         <img
                           src={c.image}
                           alt=""
@@ -360,7 +376,7 @@ export function HomeLanding() {
                         <span className="pointer-events-none absolute bottom-2 right-3 font-black tabular-nums text-[clamp(3rem,8vw,5rem)] leading-none text-white/[0.07]">
                           {vis.num}
                         </span>
-                        <div className="absolute left-4 top-4 z-[2] flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-white/80 bg-gradient-to-br text-white shadow-lg ring-2 ring-black/20 sm:h-16 sm:w-16">
+                        <div className="absolute left-4 top-4 z-[2] flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-white/80 bg-gradient-to-br text-white sm:h-16 sm:w-16">
                           <div className={`flex h-full w-full items-center justify-center rounded-[0.65rem] bg-gradient-to-br ${vis.iconBg}`}>
                             <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={2.25} aria-hidden />
                           </div>
@@ -370,7 +386,6 @@ export function HomeLanding() {
                         <h3 className="text-[clamp(1rem,2.8vw,1.35rem)] font-black uppercase leading-tight tracking-tight text-white">
                           {c.title}
                         </h3>
-                        <p className="mt-2 text-[14px] font-semibold leading-snug text-white/80 sm:text-[15px]">{c.blurb}</p>
                         <span className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-[0.12em] text-zap-burstLight">
                           Sayfaya git
                           <ChevronRight className="h-4 w-4 shrink-0 transition group-hover:translate-x-0.5" aria-hidden />
@@ -387,11 +402,11 @@ export function HomeLanding() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
-              className="relative mt-10 flex flex-col gap-5 overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-r from-brand-teal via-brand-aqua to-brand-teal p-6 text-white shadow-brutal sm:flex-row sm:items-center sm:justify-between md:mt-12 md:p-8"
+              className="relative mt-10 flex flex-col gap-5 overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-r from-brand-teal via-brand-aqua to-brand-teal p-6 text-white sm:flex-row sm:items-center sm:justify-between md:mt-12 md:p-8"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.12),transparent_45%)]" aria-hidden />
               <div className="relative flex min-w-0 items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-white/50 bg-zap-burst text-zap-night shadow-lg">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-white/50 bg-zap-burst text-zap-night">
                   <Globe2 className="h-7 w-7" strokeWidth={2.25} aria-hidden />
                 </div>
                 <div>
@@ -403,7 +418,7 @@ export function HomeLanding() {
               </div>
               <a
                 href="/iletisim"
-                className="relative inline-flex shrink-0 items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-brand-flame px-8 py-3.5 text-[12px] font-black uppercase tracking-wide text-white shadow-[4px_4px_0_#063242] transition hover:brightness-105"
+                className="relative inline-flex shrink-0 items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-brand-flame px-8 py-3.5 text-[12px] font-black uppercase tracking-wide text-white transition hover:brightness-105"
               >
                 İletişime geç
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -431,7 +446,7 @@ export function HomeLanding() {
               transition={{ duration: 0.5 }}
               className="relative lg:col-span-5"
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border-4 border-zap-ink shadow-brutal sm:aspect-[5/4] lg:aspect-auto lg:min-h-[22rem] xl:min-h-[26rem]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border-4 border-zap-ink sm:aspect-[5/4] lg:aspect-auto lg:min-h-[22rem] xl:min-h-[26rem]">
                 <img
                   src={IMG_DIL}
                   alt=""
@@ -496,7 +511,7 @@ export function HomeLanding() {
                   "Başvuru evrakları ve süreç takibi",
                 ].map((line) => (
                   <li key={line} className="flex gap-3 text-[15px] font-semibold leading-snug text-white/92 md:text-[16px]">
-                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border-2 border-zap-burst bg-zap-burst text-zap-night shadow-[3px_3px_0_rgba(255,255,255,0.12)]">
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border-2 border-zap-burst bg-zap-burst text-zap-night">
                       <Check className="h-4 w-4" strokeWidth={3} aria-hidden />
                     </span>
                     <span className="pt-1">{line}</span>
@@ -504,7 +519,7 @@ export function HomeLanding() {
                 ))}
               </ul>
 
-              <div className="mt-10 rounded-2xl border-4 border-white/20 bg-zap-night/60 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md md:p-6">
+              <div className="mt-10 rounded-2xl border-4 border-white/20 bg-zap-night/60 p-5 backdrop-blur-md md:p-6">
                 <p className="text-[11px] font-black uppercase tracking-[0.24em] text-brand-aqua/95">Popüler destinasyonlar</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {dilOkuluUlke.map((u) => (
@@ -522,7 +537,7 @@ export function HomeLanding() {
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                 <a
                   href="/iletisim"
-                  className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[13px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-105"
+                  className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-10 py-3 text-[13px] font-black uppercase tracking-wide text-zap-night transition hover:brightness-105"
                 >
                   Ayrıntılı bilgi
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
@@ -543,7 +558,7 @@ export function HomeLanding() {
       {/* — Neden CG: açık zemin; kırmızı sadece vurgu */}
       <section
         id="neden-campus-global"
-        className="relative scroll-mt-24 overflow-hidden border-t border-b border-zap-ink/8 bg-gradient-to-b from-[#fbf9f6] via-[#f3f0ec] to-[#eef8f6] py-16 text-zap-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] md:py-24"
+        className="relative scroll-mt-24 overflow-hidden border-t border-b border-zap-ink/8 bg-gradient-to-b from-[#fbf9f6] via-[#f3f0ec] to-[#eef8f6] py-16 text-zap-ink md:py-24"
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_50%_at_50%_-20%,rgba(3,214,186,0.12),transparent_60%)]" />
         <div className="pointer-events-none absolute right-0 top-1/4 h-72 w-72 -translate-y-1/2 rounded-full bg-brand-aqua/10 blur-3xl" />
@@ -562,7 +577,7 @@ export function HomeLanding() {
               transition={{ duration: 0.5 }}
               className="lg:col-span-5"
             >
-              <p className="inline-flex items-center gap-2 rounded-full border border-zap-ink/12 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal shadow-sm">
+              <p className="inline-flex items-center gap-2 rounded-full border border-zap-ink/12 bg-white/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-flame" aria-hidden />
                 Campus Global · güvenilir ekip
               </p>
@@ -598,7 +613,7 @@ export function HomeLanding() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.45 }}
-                className="relative mt-9 w-full overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-gradient-to-b from-white to-[#f4faf7] p-0 shadow-[0_1px_0_rgba(6,50,66,0.06),4px_4px_0_rgba(6,50,66,0.06)] ring-1 ring-zap-ink/5"
+                className="relative mt-9 w-full overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-gradient-to-b from-white to-[#f4faf7] p-0 ring-1 ring-zap-ink/5"
               >
                 <div
                   className="h-1 w-full bg-gradient-to-r from-brand-aqua/90 via-brand-teal/80 to-brand-flame/50"
@@ -614,7 +629,7 @@ export function HomeLanding() {
                   </p>
                   <a
                     href="/iletisim"
-                    className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-zap-ink/90 bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase leading-none tracking-wide text-zap-night shadow-[3px_3px_0_#063242] transition hover:brightness-105"
+                    className="mt-4 flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-zap-ink/90 bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase leading-none tracking-wide text-zap-night transition hover:brightness-105"
                   >
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={2.1} aria-hidden />
                     İletişim &amp; şubeler
@@ -624,7 +639,7 @@ export function HomeLanding() {
             </motion.header>
 
             <div className="flex flex-col gap-6 sm:gap-7 lg:col-span-7">
-              <figure className="overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-white/60 shadow-sm ring-1 ring-zap-ink/[0.06] sm:rounded-[1.35rem]">
+              <figure className="overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-white/60 ring-1 ring-zap-ink/[0.06] sm:rounded-[1.35rem]">
                 <div className="h-1.5 w-full bg-gradient-to-r from-brand-aqua/80 via-brand-teal/60 to-brand-flame/50" aria-hidden />
                 <img
                   src={IMG_NEDEN_CG}
@@ -680,14 +695,14 @@ export function HomeLanding() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
                     transition={{ delay: j * 0.05, duration: 0.4 }}
-                    className="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-white p-5 shadow-sm ring-1 ring-zap-ink/5 transition hover:border-brand-teal/30 hover:shadow-md md:p-5"
+                    className="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-white p-5 ring-1 ring-zap-ink/5 transition hover:border-brand-teal/30 md:p-5"
                   >
                     <div
                       className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-brand-flame/80 via-brand-coral/60 to-brand-aqua/70"
                       aria-hidden
                     />
                     <div className="flex items-start gap-3 pt-1">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-2 border-zap-ink/8 bg-gradient-to-br from-zap-ink/95 to-zap-ink text-white shadow-[3px_3px_0_rgba(245,29,0,0.35)]">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-2 border-zap-ink/8 bg-gradient-to-br from-zap-ink/95 to-zap-ink text-white">
                         <Icon className="h-5 w-5 sm:h-5 sm:w-5" strokeWidth={2.1} aria-hidden />
                       </span>
                       <div>
@@ -708,20 +723,19 @@ export function HomeLanding() {
         </div>
       </section>
 
-      {/* — Üniversite: canlı kırmızı bant + brutal poster + ülke kartları */}
+      {/* — Üniversite: açık zemin + ülke kartları */}
       <section
         id="universite"
-        className="relative scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-gradient-to-b from-brand-flame via-[#e32218] to-[#c41a12] py-14 text-white md:py-20 lg:py-24"
+        className="relative scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-gradient-to-br from-[#f0fdfc] via-white to-[#e8faf7] py-14 text-zap-ink md:py-20 lg:py-24"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_-8%,rgba(255,255,255,0.38),transparent_48%)]" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,transparent_0%,rgba(6,50,66,0.06)_22%,transparent_45%,rgba(255,255,255,0.08)_70%,transparent_100%)]" aria-hidden />
-        <div className="pointer-events-none absolute -right-24 top-1/4 h-80 w-80 rounded-full bg-zap-burst/40 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -left-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-brand-coral/45 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 opacity-[0.22] [background-image:repeating-linear-gradient(-18deg,transparent,transparent_36px,rgba(255,255,255,0.07)_36px,rgba(255,255,255,0.07)_37px)]" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#0632420d_1px,transparent_1px),linear-gradient(to_bottom,#0632420d_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-50 mix-blend-overlay" aria-hidden />
+        <div className="pointer-events-none absolute -left-28 top-0 h-96 w-96 rounded-full bg-brand-aqua/18 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -right-20 top-1/3 h-72 w-72 rounded-full bg-brand-teal/14 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-zap-burst/16 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,#03d6ba08_0%,transparent_45%,rgba(6,50,66,0.04)_100%)]" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#06324206_1px,transparent_1px),linear-gradient(to_bottom,#06324206_1px,transparent_1px)] bg-[size:2.75rem_2.75rem] opacity-70" aria-hidden />
 
         <div className={`${inner} relative`}>
-          <div className="relative mb-12 rounded-[1.75rem] border-4 border-zap-ink bg-zap-night/25 p-6 shadow-brutalLg backdrop-blur-md md:mb-14 md:rounded-[2rem] md:p-8 lg:p-10">
+          <div className="relative mb-12 rounded-[1.75rem] border-4 border-zap-ink/12 bg-white/90 p-6 backdrop-blur-sm md:mb-14 md:rounded-[2rem] md:p-8 lg:p-10">
             <span className="pointer-events-none absolute left-4 top-4 z-[1] h-9 w-9 border-l-4 border-t-4 border-zap-burst md:left-6 md:top-6 md:h-11 md:w-11" aria-hidden />
             <span className="pointer-events-none absolute bottom-4 right-4 z-[1] h-9 w-9 border-b-4 border-r-4 border-brand-aqua md:bottom-6 md:right-6 md:h-11 md:w-11" aria-hidden />
 
@@ -733,14 +747,14 @@ export function HomeLanding() {
                 transition={{ duration: 0.5 }}
                 className="lg:col-span-7"
               >
-                <p className="inline-flex items-center gap-2 rounded-full border-2 border-white/35 bg-white/15 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-zap-burst shadow-[3px_3px_0_rgba(6,50,66,0.35)]">
+                <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/12 bg-white/95 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-brand-teal">
                   <Building2 className="h-4 w-4 text-brand-aqua" strokeWidth={2.25} aria-hidden />
                   Lisans · Üniversite
                 </p>
-                <h2 className="mt-6 text-[clamp(1.85rem,4.8vw,3.1rem)] font-black uppercase leading-[0.88] tracking-tighter drop-shadow-[0_2px_12px_rgba(0,0,0,0.2)]" style={titleDarkOnBand}>
-                  Yurtdışında üniversite: <span className="text-zap-burst">ülkeye göre giriş</span>
+                <h2 className="mt-6 text-[clamp(1.85rem,4.8vw,3.1rem)] font-black uppercase leading-[0.88] tracking-tighter" style={titleLight}>
+                  Yurtdışında üniversite: <span className="text-brand-teal">ülkeye göre giriş</span>
                 </h2>
-                <p className="mt-6 max-w-xl text-[16px] font-semibold leading-relaxed text-white/92 md:max-w-2xl md:text-[17px]">
+                <p className="mt-6 max-w-xl text-[16px] font-semibold leading-relaxed text-zap-ink/90 md:max-w-2xl md:text-[17px]">
                   Her ülkenin başvuru takvimi, dil yeterliliği ve finansal ispat kuralları farklıdır. Aşağıdaki kartlar popüler
                   yurtdışı üniversite destinasyonları için özet giriş rehberi sunar; detaylı program ve evrak takibi ilk görüşmede
                   planlanır.
@@ -748,7 +762,7 @@ export function HomeLanding() {
                 <p className="mt-4">
                   <a
                     href="/universite/hub"
-                    className="inline-flex items-center gap-1 text-[14px] font-bold text-zap-burst underline decoration-2 decoration-zap-burst underline-offset-[6px] hover:text-zap-burstLight"
+                    className="inline-flex items-center gap-1 text-[14px] font-bold text-brand-teal underline decoration-2 decoration-brand-teal underline-offset-[6px] hover:text-brand-aqua"
                   >
                     Üniversite hub — tüm ülke rehberleri
                     <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
@@ -765,7 +779,7 @@ export function HomeLanding() {
                     <a
                       key={x.href}
                       href={x.href}
-                      className="inline-flex items-center gap-2 rounded-xl border-2 border-zap-ink bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_#063242] transition hover:brightness-105 active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_#063242]"
+                      className="inline-flex items-center gap-2 rounded-xl border-2 border-zap-ink bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase tracking-wide text-zap-night transition hover:brightness-105 active:translate-x-0.5 active:translate-y-0.5"
                     >
                       <LinkIcon className="h-4 w-4 shrink-0" strokeWidth={2.4} aria-hidden />
                       {x.label}
@@ -811,9 +825,9 @@ export function HomeLanding() {
                   return (
                     <div
                       key={box.t}
-                      className="flex min-h-0 min-w-0 items-start gap-3.5 rounded-2xl border-2 border-zap-ink bg-white/95 p-3.5 text-zap-ink shadow-[5px_5px_0_#063242] sm:items-center sm:gap-4 sm:p-4"
+                      className="flex min-h-0 min-w-0 items-start gap-3.5 rounded-2xl border-2 border-zap-ink bg-white/95 p-3.5 text-zap-ink sm:items-center sm:gap-4 sm:p-4"
                     >
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink/12 bg-gradient-to-br from-brand-aqua/18 to-white shadow-sm sm:h-[3.25rem] sm:w-[3.25rem]">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink/12 bg-gradient-to-br from-brand-aqua/18 to-white sm:h-[3.25rem] sm:w-[3.25rem]">
                         <BoxIcon className="h-6 w-6 text-brand-teal" strokeWidth={2.1} aria-hidden />
                       </span>
                       <div className="min-w-0 flex-1">
@@ -831,10 +845,10 @@ export function HomeLanding() {
             </div>
           </div>
 
-          <div className="mb-4 flex items-end justify-between gap-4 border-b-2 border-dashed border-white/35 pb-4">
-            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-white/90">Destinasyon grid</p>
-            <span className="hidden items-center gap-2 text-[12px] font-bold text-white/80 sm:flex">
-              <Sparkles className="h-4 w-4 text-zap-burst" aria-hidden />
+          <div className="mb-4 flex items-end justify-between gap-4 border-b-2 border-dashed border-zap-ink/15 pb-4">
+            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-zap-ink/55">Destinasyon grid</p>
+            <span className="hidden items-center gap-2 text-[12px] font-bold text-zap-ink/60 sm:flex">
+              <Sparkles className="h-4 w-4 text-brand-teal" aria-hidden />
               Tıkla — ülke sayfasına git
             </span>
           </div>
@@ -844,7 +858,7 @@ export function HomeLanding() {
               const stripes = [
                 "from-brand-aqua via-brand-teal to-brand-aqua",
                 "from-zap-burst via-amber-400 to-zap-burst",
-                "from-brand-flame via-brand-coral to-brand-aqua",
+                "from-brand-teal via-brand-aqua to-cyan-400",
               ] as const;
               const stripe = stripes[j % 3];
               const num = String(j + 1).padStart(2, "0");
@@ -856,7 +870,7 @@ export function HomeLanding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
                   transition={{ delay: j * 0.05, duration: 0.42 }}
-                  className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#eef8f6] text-zap-ink shadow-brutal transition md:rounded-[1.35rem] ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.4deg] hover:shadow-brutalLg"}`}
+                  className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#eef8f6] text-zap-ink transition md:rounded-[1.35rem] ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.4deg]"}`}
                 >
                   <div className={`pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${stripe}`} aria-hidden />
                   <span className="pointer-events-none absolute bottom-3 right-3 font-black tabular-nums text-[clamp(3.5rem,10vw,4.5rem)] leading-none text-zap-ink/[0.06]" aria-hidden>
@@ -868,7 +882,7 @@ export function HomeLanding() {
                   <div className="relative flex flex-1 flex-col p-5 pb-0 md:p-6 md:pb-0">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex min-w-0 items-center gap-3">
-                        <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink bg-gradient-to-br from-brand-aqua to-brand-teal text-white shadow-md">
+                        <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink bg-gradient-to-br from-brand-aqua to-brand-teal text-white">
                           <GraduationCap className="h-7 w-7" strokeWidth={2.25} aria-hidden />
                           <span className="absolute -right-1 -top-1 flex h-6 min-w-[1.5rem] items-center justify-center rounded-full border-2 border-zap-ink bg-zap-burst px-1 text-[10px] font-black text-zap-night">
                             {num}
@@ -911,18 +925,18 @@ export function HomeLanding() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.55),transparent_52%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:repeating-linear-gradient(-45deg,#063242_0,#063242_1px,transparent_1px,transparent_14px)]" />
         <div className={`${inner} relative`}>
-          <div className="relative mb-10 overflow-hidden rounded-[1.75rem] border-4 border-zap-ink bg-gradient-to-br from-white via-white to-[#e8fbf8] p-6 shadow-brutalLg md:mb-12 md:rounded-[2rem] md:p-8">
+          <div className="relative mb-10 overflow-hidden rounded-[1.75rem] border-4 border-zap-ink bg-gradient-to-br from-white via-white to-[#e8fbf8] p-6 md:mb-12 md:rounded-[2rem] md:p-8">
             <span className="pointer-events-none absolute left-4 top-4 z-[1] h-8 w-8 border-l-[3px] border-t-[3px] border-zap-burst md:left-5 md:top-5 md:h-9 md:w-9" aria-hidden />
             <span className="pointer-events-none absolute bottom-4 right-4 z-[1] h-8 w-8 border-b-[3px] border-r-[3px] border-brand-teal md:bottom-5 md:right-5 md:h-9 md:w-9" aria-hidden />
             <div className="relative z-[2] grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
               <div className="lg:col-span-7">
-                <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/12 bg-zap-burst/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-zap-night shadow-[3px_3px_0_#063242]">
+                <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/12 bg-zap-burst/90 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-zap-night">
                   <Headphones className="h-4 w-4" strokeWidth={2.25} aria-hidden />
                   Hedef puan &amp; prova hattı
                 </p>
                 <h2 className="mt-5 text-[clamp(1.85rem,4.5vw,3rem)] font-black uppercase leading-[0.9] tracking-tighter" style={titleLight}>
                   <span className="block text-zap-night">Programına göre</span>
-                  <span className="mt-1.5 block text-white [text-shadow:2px_2px_0_#063242,4px_4px_0_rgba(3,91,75,0.4)]" style={titleHero}>
+                  <span className="mt-1.5 block text-white" style={titleHero}>
                     net sınav planı
                   </span>
                 </h2>
@@ -973,7 +987,7 @@ export function HomeLanding() {
                 ).map((chip) => (
                   <span
                     key={chip.t}
-                    className="inline-flex min-h-[2.5rem] items-center gap-2.5 rounded-xl border-2 border-zap-ink bg-white px-3.5 py-2 text-[11px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_#063242] sm:px-4"
+                    className="inline-flex min-h-[2.5rem] items-center gap-2.5 rounded-xl border-2 border-zap-ink bg-white px-3.5 py-2 text-[11px] font-black uppercase tracking-wide text-zap-night sm:px-4"
                   >
                     <span className={`h-2.5 w-2.5 shrink-0 rounded-sm ${chip.dot} ring-2 ring-zap-ink/20`} aria-hidden />
                     {chip.t}
@@ -990,7 +1004,7 @@ export function HomeLanding() {
             </div>
             <a
               href="/iletisim"
-              className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-zap-ink bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase tracking-wide text-zap-night shadow-brutal transition hover:brightness-105"
+              className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-zap-ink bg-zap-burst px-4 py-2.5 text-[11px] font-black uppercase tracking-wide text-zap-night transition hover:brightness-105"
             >
               Takvim netleştir
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -1015,7 +1029,7 @@ export function HomeLanding() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-24px" }}
                   transition={{ delay: j * 0.07, duration: 0.45 }}
-                  className={`group relative block overflow-hidden rounded-[1.35rem] border-4 border-zap-ink bg-gradient-to-b from-white to-[#f0fdf9] text-zap-ink shadow-brutal transition md:rounded-2xl ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.3deg] hover:shadow-brutalLg"}`}
+                  className={`group relative block overflow-hidden rounded-[1.35rem] border-4 border-zap-ink bg-gradient-to-b from-white to-[#f0fdf9] text-zap-ink transition md:rounded-2xl ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.3deg]"}`}
                 >
                   <div className={`pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${meta.stripe}`} aria-hidden />
                   <span
@@ -1028,7 +1042,7 @@ export function HomeLanding() {
                   <div className="relative p-6 md:p-7">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex min-w-0 items-center gap-3">
-                        <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink bg-gradient-to-br from-brand-aqua/25 to-white shadow-sm">
+                        <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-zap-ink bg-gradient-to-br from-brand-aqua/25 to-white">
                           <CardIcon className="h-7 w-7 text-brand-teal" strokeWidth={2.1} aria-hidden />
                           <span className="absolute -right-1 -top-1 flex min-w-[1.35rem] items-center justify-center rounded-full border-2 border-zap-ink bg-zap-burst px-1.5 text-[9px] font-black text-zap-night">
                             {num}
@@ -1047,7 +1061,7 @@ export function HomeLanding() {
                     <ul className="mt-4 space-y-2 border-t-2 border-dashed border-zap-ink/12 pt-4">
                       {s.maddeler.map((m) => (
                         <li key={m} className="flex gap-2.5 text-[12px] font-semibold leading-snug text-zap-ink/92 sm:text-[13px]">
-                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-zap-ink/10 bg-white text-brand-teal shadow-sm">
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-zap-ink/10 bg-white text-brand-teal">
                             <Check className="h-3 w-3" strokeWidth={3} aria-hidden />
                           </span>
                           {m}
@@ -1098,7 +1112,7 @@ export function HomeLanding() {
           <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-zap-burst/12 blur-3xl motion-safe:animate-pulse [animation-delay:1.4s] [animation-duration:4.8s] motion-reduce:animate-none" />
           <div className="absolute bottom-[5%] left-[12%] h-64 w-64 rounded-full bg-brand-teal/12 blur-3xl motion-safe:animate-pulse [animation-delay:0.3s] [animation-duration:7s] motion-reduce:animate-none" />
           <div className="absolute left-[40%] top-[55%] h-40 w-40 -translate-x-1/2 rounded-full bg-amber-300/10 blur-2xl motion-safe:animate-pulse [animation-delay:2.1s] [animation-duration:5.5s] motion-reduce:animate-none" />
-          <div className="absolute left-[5%] top-[18%] h-2.5 w-2.5 rotate-12 border-2 border-zap-ink/10 bg-zap-burst/30 shadow-sm" />
+          <div className="absolute left-[5%] top-[18%] h-2.5 w-2.5 rotate-12 border-2 border-zap-ink/10 bg-zap-burst/30" />
           <div className="absolute right-[10%] top-[32%] h-2 w-2 -rotate-6 border-2 border-zap-ink/12 bg-brand-aqua/35" />
           <div className="absolute bottom-[24%] right-[18%] h-2.5 w-2.5 border-2 border-zap-ink/10 bg-violet-400/25" />
           <div className="absolute left-[16%] bottom-[12%] h-1.5 w-6 -rotate-[18deg] rounded-full bg-zap-ink/[0.07]" />
@@ -1106,7 +1120,7 @@ export function HomeLanding() {
 
         <div className={`${inner} relative z-10`}>
           <motion.div
-            className="mb-10 overflow-hidden rounded-2xl border-4 border-zap-ink shadow-brutalLg md:mb-12"
+            className="mb-10 overflow-hidden rounded-2xl border-4 border-zap-ink md:mb-12"
             initial={reduceMotion ? false : { opacity: 0, y: 18 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-12%" }}
@@ -1173,7 +1187,7 @@ export function HomeLanding() {
               </p>
               <a
                 href="/iletisim"
-                className="sm:col-span-5 inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-2xl border-2 border-zap-ink bg-zap-burst px-5 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_#063242] transition hover:translate-x-0.5 hover:shadow-brutal sm:justify-center sm:justify-self-end sm:max-w-sm sm:py-0"
+                className="sm:col-span-5 inline-flex w-full min-h-12 items-center justify-center gap-2 rounded-2xl border-2 border-zap-ink bg-zap-burst px-5 text-[12px] font-black uppercase tracking-wide text-zap-night transition hover:translate-x-0.5 sm:justify-center sm:justify-self-end sm:max-w-sm sm:py-0"
               >
                 Bütçe hattı
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
@@ -1216,7 +1230,7 @@ export function HomeLanding() {
                   </span>
                   <a
                     href={f.href}
-                    className={`group relative block overflow-hidden rounded-2xl border-4 border-zap-ink bg-white text-inherit no-underline shadow-brutal transition ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg] hover:shadow-brutalLg"}`}
+                    className={`group relative block overflow-hidden rounded-2xl border-4 border-zap-ink bg-white text-inherit no-underline transition ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg]"}`}
                   >
                     <div className={`h-1.5 w-full bg-gradient-to-r ${hair}`} aria-hidden />
                     <div className="p-4 sm:grid sm:grid-cols-[1fr_minmax(0,11rem)] sm:gap-5 sm:p-5">
@@ -1255,7 +1269,7 @@ export function HomeLanding() {
                         {f.maddeler.map((m) => (
                           <span
                             key={m}
-                            className="inline-flex w-fit max-w-full items-center gap-1.5 rounded-full border-2 border-zap-ink/20 bg-white px-3.5 py-1.5 text-left text-[12px] font-extrabold text-zap-ink/80 shadow-sm"
+                            className="inline-flex w-fit max-w-full items-center gap-1.5 rounded-full border-2 border-zap-ink/20 bg-white px-3.5 py-1.5 text-left text-[12px] font-extrabold text-zap-ink/80"
                           >
                             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand-teal" aria-hidden />
                             {m}
@@ -1322,7 +1336,7 @@ export function HomeLanding() {
               >
                 02
               </span>
-              <div className="relative rounded-[1.75rem] border-4 border-white/20 bg-zap-night/35 p-6 shadow-brutalLg backdrop-blur-sm md:rounded-[2rem] md:p-8">
+              <div className="relative rounded-[1.75rem] border-4 border-white/20 bg-zap-night/35 p-6 backdrop-blur-sm md:rounded-[2rem] md:p-8">
                 <span
                   className="pointer-events-none absolute left-4 top-4 z-[1] h-8 w-8 border-l-4 border-t-4 border-zap-burst md:left-5 md:top-5 md:h-10 md:w-10"
                   aria-hidden
@@ -1337,7 +1351,7 @@ export function HomeLanding() {
                 />
 
                 <div className="relative z-[2]">
-                  <p className="inline-flex items-center gap-2 rounded-full border-2 border-white/25 bg-zap-burst/20 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zap-burstLight shadow-[2px_2px_0_rgba(0,0,0,0.35)]">
+                  <p className="inline-flex items-center gap-2 rounded-full border-2 border-white/25 bg-zap-burst/20 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-zap-burstLight">
                     <Award className="h-3.5 w-3.5 text-zap-burst" strokeWidth={2.2} aria-hidden />
                     Yüksek lisans
                   </p>
@@ -1364,7 +1378,7 @@ export function HomeLanding() {
                       <span className="block pl-0">MSc · MBA · doktora</span>
                     </span>
                     <span
-                      className="mt-2.5 block bg-gradient-to-r from-zap-burst via-amber-200 to-zap-burstLight bg-clip-text text-[1.1em] text-transparent [text-shadow:none] sm:mt-3"
+                      className="mt-2.5 block bg-gradient-to-r from-zap-burst via-amber-200 to-zap-burstLight bg-clip-text text-[1.1em] text-transparent sm:mt-3"
                     >
                       yurtdışı yüksek lisans planı
                     </span>
@@ -1408,14 +1422,14 @@ export function HomeLanding() {
                           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                           viewport={{ once: true, margin: "-24px" }}
                           transition={{ delay: j * 0.07, duration: 0.42, ease: heroEase }}
-                          className={`group relative flex gap-0 overflow-hidden rounded-2xl border-2 border-white/20 bg-zap-ink/45 pl-0 pr-0 shadow-[5px_5px_0_rgba(255,183,3,0.2)] sm:rounded-2xl ${reduceMotion ? "" : "hover:border-zap-burst/50 hover:shadow-[6px_6px_0_rgba(255,183,3,0.32)]"}`}
+                          className={`group relative flex gap-0 overflow-hidden rounded-2xl border-2 border-white/20 bg-zap-ink/45 pl-0 pr-0 sm:rounded-2xl ${reduceMotion ? "" : "hover:border-zap-burst/50"}`}
                         >
                           <div
                             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-brand-aqua/40 via-zap-burst/30 to-brand-flame/30 opacity-0 transition group-hover:opacity-100"
                             aria-hidden
                           />
                           <div
-                            className={`w-1.5 shrink-0 self-stretch bg-gradient-to-b ${row.stripe} shadow-[0_0_20px_rgba(255,183,3,0.15)]`}
+                            className={`w-1.5 shrink-0 self-stretch bg-gradient-to-b ${row.stripe}`}
                             aria-hidden
                           />
                           <div className="flex min-w-0 flex-1 items-start justify-between gap-2 py-3.5 pl-3.5 pr-2 sm:gap-3 sm:py-4 sm:pl-4 sm:pr-3">
@@ -1430,7 +1444,7 @@ export function HomeLanding() {
                                 {row.t}
                               </p>
                             </div>
-                            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 border-white/15 bg-gradient-to-br from-white/12 to-zap-ink/80 text-zap-burst shadow-sm">
+                            <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 border-white/15 bg-gradient-to-br from-white/12 to-zap-ink/80 text-zap-burst">
                               <RowIcon className="h-4 w-4" strokeWidth={2.2} aria-hidden />
                             </span>
                           </div>
@@ -1440,7 +1454,7 @@ export function HomeLanding() {
                   </div>
                   <a
                     href="/iletisim"
-                    className="mt-8 flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-4 border-white/30 bg-brand-flame px-5 text-center text-xs font-black uppercase leading-none tracking-wide text-white shadow-[6px_6px_0_rgba(0,0,0,0.5)] transition hover:brightness-110 sm:mt-9 sm:justify-center sm:px-8 md:w-auto"
+                    className="mt-8 flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl border-4 border-white/30 bg-brand-flame px-5 text-center text-xs font-black uppercase leading-none tracking-wide text-white transition hover:brightness-110 sm:mt-9 sm:justify-center sm:px-8 md:w-auto"
                   >
                     Detaylı bilgi <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
                   </a>
@@ -1455,7 +1469,7 @@ export function HomeLanding() {
                   aria-hidden
                 />
                 <div
-                  className="relative overflow-hidden rounded-[1.4rem] border-4 border-zap-ink bg-zap-night shadow-brutalLg ring-1 ring-zap-burst/20"
+                  className="relative overflow-hidden rounded-[1.4rem] border-4 border-zap-ink bg-zap-night ring-1 ring-zap-burst/20"
                 >
                   <div
                     className="pointer-events-none absolute inset-x-0 top-0 z-[2] h-1.5 bg-gradient-to-r from-zap-burst via-brand-coral/90 to-brand-aqua"
@@ -1470,7 +1484,7 @@ export function HomeLanding() {
                         Global ağ &amp; araştırma
                       </span>
                       <span
-                        className="inline-flex items-center gap-1 rounded-full border-2 border-zap-ink/30 bg-zap-burst px-2.5 py-1 text-[8px] font-black uppercase text-zap-night shadow-brutal sm:gap-1.5 sm:px-3 sm:text-[9px]"
+                        className="inline-flex items-center gap-1 rounded-full border-2 border-zap-ink/30 bg-zap-burst px-2.5 py-1 text-[8px] font-black uppercase text-zap-night sm:gap-1.5 sm:px-3 sm:text-[9px]"
                         style={{ boxShadow: "3px 3px 0 #063242" }}
                       >
                         <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden />
@@ -1504,7 +1518,7 @@ export function HomeLanding() {
                         <a
                           key={u}
                           href={navBase("yuksek-lisans", slugify(u))}
-                          className="rounded-md border-2 border-white/20 bg-zap-ink/90 px-2.5 py-1.5 text-[9px] font-black uppercase leading-none text-white/95 shadow-[2px_2px_0_rgba(0,0,0,0.4)] transition hover:border-zap-burst/70 hover:bg-zap-ink sm:px-3 sm:text-[11px] sm:leading-tight"
+                          className="rounded-md border-2 border-white/20 bg-zap-ink/90 px-2.5 py-1.5 text-[9px] font-black uppercase leading-none text-white/95 transition hover:border-zap-burst/70 hover:bg-zap-ink sm:px-3 sm:text-[11px] sm:leading-tight"
                         >
                           {u}
                         </a>
@@ -1547,7 +1561,7 @@ export function HomeLanding() {
                 return (
                   <span
                     key={chip.t}
-                    className="inline-flex items-center gap-1.5 rounded-lg border-2 border-white/15 bg-white/[0.08] px-2.5 py-2 text-[9px] font-bold uppercase text-white/88 shadow-[2px_2px_0_rgba(0,0,0,0.3)] sm:gap-2 sm:px-3 sm:text-[10px]"
+                    className="inline-flex items-center gap-1.5 rounded-lg border-2 border-white/15 bg-white/[0.08] px-2.5 py-2 text-[9px] font-bold uppercase text-white/88 sm:gap-2 sm:px-3 sm:text-[10px]"
                   >
                     <CIcon className="h-3.5 w-3.5 shrink-0 text-zap-burst" strokeWidth={2.1} aria-hidden />
                     {chip.t}
@@ -1588,7 +1602,7 @@ export function HomeLanding() {
                         İçerik
                       </p>
                       <span
-                        className="inline-flex items-center gap-1.5 rounded-full border-2 border-zap-ink/12 bg-zap-burst/90 px-2.5 py-0.5 text-[8px] font-black uppercase text-zap-night shadow-sm"
+                        className="inline-flex items-center gap-1.5 rounded-full border-2 border-zap-ink/12 bg-zap-burst/90 px-2.5 py-0.5 text-[8px] font-black uppercase text-zap-night"
                         title="Yeni parçalar eklenecek"
                       >
                         {!reduceMotion && (
@@ -1613,7 +1627,7 @@ export function HomeLanding() {
                       arama motorlarında daha zengin indeks oluşturacağız.
                     </p>
                   </div>
-                  <span className="inline-flex w-fit shrink-0 items-center justify-center gap-1.5 rounded-2xl border-4 border-zap-ink bg-white px-4 py-2.5 text-center text-[10px] font-black uppercase leading-tight text-zap-ink shadow-brutal sm:px-5 sm:text-[11px] sm:leading-none">
+                  <span className="inline-flex w-fit shrink-0 items-center justify-center gap-1.5 rounded-2xl border-4 border-zap-ink bg-white px-4 py-2.5 text-center text-[10px] font-black uppercase leading-tight text-zap-ink sm:px-5 sm:text-[11px] sm:leading-none">
                     Blog
                     <span className="text-zap-ink/30" aria-hidden>
                       ·
@@ -1632,8 +1646,8 @@ export function HomeLanding() {
                   whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.45, ease: heroEase }}
-                  className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutalLg md:min-h-[16rem] md:flex-row ${
-                    reduceMotion ? "" : "hover:-translate-y-0.5 hover:shadow-brutal"
+                  className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white md:min-h-[16rem] md:flex-row ${
+                    reduceMotion ? "" : "hover:-translate-y-0.5"
                   } `}
                 >
                   <div className="pointer-events-none absolute left-0 top-0 z-[2] h-1.5 w-full max-w-md bg-gradient-to-r from-brand-aqua via-brand-flame/90 to-zap-burst" aria-hidden />
@@ -1655,7 +1669,7 @@ export function HomeLanding() {
                       className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zap-ink/45 via-zap-ink/5 to-transparent md:hidden"
                       aria-hidden
                     />
-                    <span className="absolute left-3 top-3 z-[2] rounded-md border-2 border-zap-ink bg-zap-burst px-2.5 py-0.5 text-[9px] font-black uppercase text-zap-night shadow-[2px_2px_0_#063242] sm:text-[10px]">
+                    <span className="absolute left-3 top-3 z-[2] rounded-md border-2 border-zap-ink bg-zap-burst px-2.5 py-0.5 text-[9px] font-black uppercase text-zap-night sm:text-[10px]">
                       {haberVitrin.kategori}
                     </span>
                     <span
@@ -1690,8 +1704,8 @@ export function HomeLanding() {
                       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-20px" }}
                       transition={{ delay: j * 0.07, duration: 0.4, ease: heroEase }}
-                      className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#f1faf7] text-zap-ink shadow-brutal ${
-                        reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg] hover:shadow-brutalLg"
+                      className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#f1faf7] text-zap-ink ${
+                        reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.2deg]"
                       } `}
                     >
                       <div
@@ -1718,7 +1732,7 @@ export function HomeLanding() {
                           decoding="async"
                           referrerPolicy="no-referrer"
                         />
-                        <span className="absolute left-2.5 top-2.5 z-[1] max-w-[calc(100%-1.25rem)] rounded border-2 border-zap-ink/20 bg-zap-ink/75 px-2 py-0.5 text-[8.5px] font-black uppercase text-white/95 shadow-sm backdrop-blur-sm sm:text-[9.5px]">
+                        <span className="absolute left-2.5 top-2.5 z-[1] max-w-[calc(100%-1.25rem)] rounded border-2 border-zap-ink/20 bg-zap-ink/75 px-2 py-0.5 text-[8.5px] font-black uppercase text-white/95 backdrop-blur-sm sm:text-[9.5px]">
                           {b.kategori}
                         </span>
                         <div
@@ -1746,47 +1760,47 @@ export function HomeLanding() {
         </div>
       </section>
 
-      {/* — SSS: kırmızı bant (logo ailesi) */}
+      {/* — SSS: açık zemin */}
       <section
         id="sss"
-        className="relative scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-gradient-to-b from-[#ff5c4a] via-brand-flame to-[#d42814] py-12 text-white md:py-16"
+        className="relative scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-gradient-to-br from-[#f7fdfb] via-white to-[#eef8f6] py-12 text-zap-ink md:py-16"
         aria-labelledby="sss-heading"
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_60%_at_50%_-5%,rgba(255,255,255,0.4),transparent_55%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_55%_at_50%_-10%,rgba(3,214,186,0.12),transparent_52%)]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(100deg,transparent_0%,rgba(255,255,255,0.1)_30%,transparent_60%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(100deg,transparent_0%,rgba(6,50,66,0.03)_35%,transparent_65%)]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute -right-16 top-0 h-72 w-72 rounded-full bg-zap-burst/25 blur-3xl"
+          className="pointer-events-none absolute -right-16 top-0 h-72 w-72 rounded-full bg-brand-aqua/16 blur-3xl"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-brand-coral/25 blur-3xl"
+          className="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-brand-teal/12 blur-3xl"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(-20deg,transparent,transparent_38px,rgba(255,255,255,0.1)_38px,rgba(255,255,255,0.1)_39px)] opacity-50 mix-blend-overlay"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#06324205_1px,transparent_1px),linear-gradient(to_bottom,#06324205_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-60"
           aria-hidden
         />
 
           <div className={`${inner} relative z-[1]`}>
             <div className="mx-auto max-w-2xl text-center">
-              <p className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-zap-burstLight">
-                <HelpCircle className="h-4 w-4 text-zap-burst" strokeWidth={2.1} aria-hidden />
+              <p className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-brand-teal">
+                <HelpCircle className="h-4 w-4 text-brand-aqua" strokeWidth={2.1} aria-hidden />
                 SSS
               </p>
               <h2
                 id="sss-heading"
                 className="mt-2.5 text-[clamp(1.45rem,3.6vw,2.1rem)] font-black uppercase leading-[0.95]"
-                style={titleDarkOnBand}
+                style={titleLight}
               >
-                Sık sorulan <span className="text-zap-burst">sorular</span>
+                Sık sorulan <span className="text-brand-teal">sorular</span>
               </h2>
-              <p className="mt-3 text-[14px] font-medium leading-relaxed text-white/85">
+              <p className="mt-3 text-[14px] font-medium leading-relaxed text-zap-ink/80">
                 Yurtdışı eğitim ücretleri, ülke seçimi ve denklik sorularına hızlı cevaplar; kişisel planınız ilk görüşmede detaylanır.
               </p>
             </div>
@@ -1800,14 +1814,14 @@ export function HomeLanding() {
                   viewport={{ once: true, margin: "-30px" }}
                   transition={{ delay: i * 0.05, duration: 0.4, ease: heroEase }}
                 >
-                  <details className="group relative overflow-hidden rounded-2xl border-2 border-white/95 bg-white/95 p-0 shadow-[4px_4px_0_rgba(6,50,66,0.12)] backdrop-blur-sm open:border-white open:shadow-brutalLg sm:open:bg-white">
+                  <details className="group relative overflow-hidden rounded-2xl border-2 border-white/95 bg-white/95 p-0 backdrop-blur-sm open:border-white sm:open:bg-white">
                     <div
                       className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-zap-burst/80 via-white to-brand-aqua/50 opacity-0 transition group-open:opacity-100"
                       aria-hidden
                     />
                     <summary className="cursor-pointer list-none bg-white/90 px-4 py-4 pr-3 hover:bg-white [&::-webkit-details-marker]:hidden sm:px-5 sm:py-4">
                       <span className="flex min-w-0 items-start justify-between gap-3 text-left sm:gap-4">
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 border-brand-flame/25 bg-brand-flame/10 font-mono text-[10px] font-black text-zap-ink sm:h-7 sm:w-7 sm:text-[11px]">
+                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 border-brand-teal/25 bg-brand-aqua/10 font-mono text-[10px] font-black text-zap-ink sm:h-7 sm:w-7 sm:text-[11px]">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span className="min-w-0 flex-1 pt-0.5 text-[14px] font-bold uppercase leading-snug tracking-tight text-zap-night sm:text-[15px]">
@@ -1873,7 +1887,7 @@ export function HomeLanding() {
                 Program · içerik · <span className="text-zap-night/88">şubeler</span>
               </h2>
             </div>
-            <span className="inline-flex w-fit items-center gap-2 rounded-2xl border-4 border-zap-ink/35 bg-zap-burst/95 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-zap-night shadow-[3px_3px_0_#063242]">
+            <span className="inline-flex w-fit items-center gap-2 rounded-2xl border-4 border-zap-ink/35 bg-zap-burst/95 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-zap-night">
               Ana sayfa haritası
             </span>
           </div>
@@ -1884,14 +1898,14 @@ export function HomeLanding() {
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ duration: 0.45, ease: heroEase }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 shadow-[6px_6px_0_rgba(6,50,66,0.2)] backdrop-blur-sm sm:p-7"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"
             >
               <div
                 className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full bg-zap-burst/15 blur-2xl transition group-hover:bg-zap-burst/25"
                 aria-hidden
               />
               <div className="relative flex items-start gap-3.5">
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-zap-burst text-zap-night shadow-[3px_3px_0_#063242]">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-zap-burst text-zap-night">
                   <GraduationCap className="h-5 w-5" strokeWidth={2.1} aria-hidden />
                 </span>
                 <p className="pt-1.5 text-[11px] font-black uppercase leading-tight tracking-[0.2em] text-zap-night/80">
@@ -1924,14 +1938,14 @@ export function HomeLanding() {
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ delay: 0.06, duration: 0.45, ease: heroEase }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 shadow-[6px_6px_0_rgba(6,50,66,0.2)] backdrop-blur-sm sm:p-7"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"
             >
               <div
                 className="pointer-events-none absolute -right-4 -top-4 h-20 w-20 rounded-full bg-brand-aqua/25 blur-2xl"
                 aria-hidden
               />
               <div className="relative flex items-start gap-3.5">
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-gradient-to-br from-brand-aqua/95 to-brand-teal text-zap-night shadow-[3px_3px_0_#063242]">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-gradient-to-br from-brand-aqua/95 to-brand-teal text-zap-night">
                   <TrendingUp className="h-5 w-5" strokeWidth={2.1} aria-hidden />
                 </span>
                 <p className="pt-1.5 text-[11px] font-black uppercase leading-tight tracking-[0.2em] text-zap-night/80">
@@ -1964,10 +1978,10 @@ export function HomeLanding() {
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ delay: 0.12, duration: 0.45, ease: heroEase }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 shadow-[6px_6px_0_rgba(6,50,66,0.2)] backdrop-blur-sm sm:p-7"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"
             >
               <div className="relative flex items-start gap-3.5">
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-white/90 text-zap-night shadow-[3px_3px_0_#063242]">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border-4 border-zap-ink bg-white/90 text-zap-night">
                   <MapPin className="h-5 w-5" strokeWidth={2.1} aria-hidden />
                 </span>
                 <p className="pt-1.5 text-[11px] font-black uppercase leading-tight tracking-[0.2em] text-zap-night/80">

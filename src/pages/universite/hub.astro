@@ -1,9 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { ProgramHubPage } from "@/components/program/ProgramHubPage";
-import { programHubById } from "@/data/program-hub-content";
+import { getEntry } from "astro:content";
+import { programHubModelFromEntry } from "@/lib/program-hub-from-content";
 
-const model = programHubById.universite;
+const entry = await getEntry("hubs", "universite");
+if (!entry) throw new Error("Hub içeriği bulunamadı: universite");
+const model = programHubModelFromEntry(entry);
 ---
 
 <Layout title={model.layoutTitle} description={model.metaDescription}>

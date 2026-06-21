@@ -1,3 +1,8 @@
+/**
+ * Hub sayfa tipleri ve yedek veri.
+ * Canlı hub metinleri: `src/content/hubs/*.md` (içerik üreticisi düzenler).
+ * Ülke listeleri `site-nav.ts` üzerinden `programHubModelFromEntry` ile eklenir.
+ */
 import { footerIletisim } from "@/data/home-ia";
 import type { NavSubLink } from "@/data/site-nav";
 import { dilUlkeler, sertifikaUlkeler, uniTumUlkeler, ylUlkeler } from "@/data/site-nav";

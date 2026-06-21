@@ -1,4 +1,8 @@
-/** Ana sayfa metinleri — tek kaynak */
+/**
+ * Ana sayfa veri listeleri (program kartları, ülke kartları, SSS, fiyat bantları…).
+ * İçerik üreticisi düzenlemesi: `src/content/home/index.md` — senkron sonrası bu dosya güncellenir.
+ * Bölüm başlıkları: `src/data/home-page-copy.ts`
+ */
 
 export type ProgramCategory = {
   id: string;

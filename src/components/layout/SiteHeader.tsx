@@ -87,16 +87,17 @@ export function SiteHeader() {
   const NavButtons = ({ items }: { items: typeof megaNav }) => (
     <>
       {items.map((item) => (
-        <div key={item.id} className="relative shrink-0">
-          <button
-            type="button"
+        <div
+          key={item.id}
+          className="relative shrink-0"
+          onMouseEnter={() => setOpenId(item.id)}
+        >
+          <a
+            href={item.href}
             className={navLinkClass(openId === item.id)}
             aria-expanded={openId === item.id}
             aria-haspopup="true"
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenId((d) => (d === item.id ? null : item.id));
-            }}
+            onFocus={() => setOpenId(item.id)}
           >
             <span className="min-w-0 flex-1 truncate 2xl:whitespace-normal">{item.title}</span>
             <ChevronDown
@@ -104,7 +105,7 @@ export function SiteHeader() {
               strokeWidth={2}
               aria-hidden
             />
-          </button>
+          </a>
         </div>
       ))}
     </>
@@ -118,6 +119,7 @@ export function SiteHeader() {
         ref={shellRef}
         className="relative w-full border-b-2 border-zap-ink/10 bg-gradient-to-b from-white via-[#e8faf7] to-[#dff5f2] shadow-[0_8px_32px_rgba(3,214,186,0.12)]"
         onClick={(e) => e.stopPropagation()}
+        onMouseLeave={() => setOpenId(null)}
       >
         {/* Top bar: koyu — yalnızca md+; mobilde gizli (ek alan, sade logo+menü) */}
         <div className="hidden border-b border-white/10 bg-zap-night px-3 py-1.5 text-white sm:px-4 sm:py-2 md:block md:px-5">
@@ -151,8 +153,8 @@ export function SiteHeader() {
         </div>
 
         {/* Desktop: tek satır grid — nav asla logonun altına düşmez */}
-        <div className="mx-auto hidden w-full max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 px-2 py-1.5 sm:px-3 md:gap-x-3 md:px-4 lg:grid lg:min-h-[3.5rem]">
-          <div className="flex min-h-0 min-w-0 items-center justify-end gap-1 overflow-x-auto overflow-y-visible rounded-xl border-2 border-zap-ink bg-[#f8fafc] px-1.5 py-1 shadow-[3px_3px_0_rgba(6,50,66,0.12)] [scrollbar-width:thin] sm:gap-1.5 sm:px-2">
+        <div className="mx-auto hidden w-full max-w-[1600px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-x-2 px-2 py-2 sm:px-3 md:gap-x-3 md:px-4 lg:grid lg:min-h-[4.25rem]">
+          <div className="flex min-h-0 min-w-0 items-center justify-end gap-1 overflow-x-auto overflow-y-visible [scrollbar-width:thin] sm:gap-1.5">
             <NavButtons items={megaNavRowLeft} />
           </div>
           <a
@@ -169,20 +171,20 @@ export function SiteHeader() {
               className="pointer-events-none absolute -bottom-0.5 -right-0.5 z-[1] h-5 w-5 border-b-2 border-r-2 border-brand-aqua sm:h-6 sm:w-6"
               aria-hidden
             />
-            <span className="relative flex items-center rounded-lg border border-zap-ink/10 bg-white px-2 py-1 shadow-md ring-1 ring-zap-ink/5 sm:rounded-xl sm:px-2.5 sm:py-1.5">
+            <span className="relative flex items-center rounded-lg border border-zap-ink/10 bg-white px-2 py-1 shadow-md ring-1 ring-zap-ink/5 sm:rounded-xl sm:px-3 sm:py-2">
               <img
                 src="/campus-global-logo.png"
                 alt="Campus Global"
-                className="h-9 w-auto sm:h-10 md:h-11"
+                className="h-12 w-auto sm:h-[3.25rem] md:h-14 lg:h-[3.75rem]"
                 width={300}
                 height={90}
                 loading="eager"
                 decoding="async"
-                style={{ maxHeight: "3.35rem" }}
+                style={{ maxHeight: "4.25rem" }}
               />
             </span>
           </a>
-          <div className="flex min-h-0 min-w-0 items-center justify-start gap-1 overflow-x-auto overflow-y-visible rounded-xl border-2 border-zap-ink bg-[#f8fafc] px-1.5 py-1 shadow-[3px_3px_0_rgba(6,50,66,0.12)] [scrollbar-width:thin] sm:gap-1.5 sm:px-2">
+          <div className="flex min-h-0 min-w-0 items-center justify-start gap-1 overflow-x-auto overflow-y-visible [scrollbar-width:thin] sm:gap-1.5">
             <NavButtons items={megaNavRowRight} />
           </div>
         </div>
@@ -204,16 +206,16 @@ export function SiteHeader() {
               className="pointer-events-none absolute -bottom-0.5 -right-0.5 z-[1] h-6 w-6 border-b-2 border-r-2 border-brand-aqua"
               aria-hidden
             />
-            <span className="relative block rounded-lg border border-zap-ink/10 bg-white px-2 py-1 shadow-sm ring-1 ring-zap-ink/5 sm:rounded-xl sm:px-2.5 sm:py-1.5">
+            <span className="relative block rounded-lg border border-zap-ink/10 bg-white px-2.5 py-1.5 shadow-sm ring-1 ring-zap-ink/5 sm:rounded-xl sm:px-3 sm:py-2">
               <img
                 src="/campus-global-logo.png"
                 alt="Campus Global"
-                className="h-12 w-auto sm:h-14"
+                className="h-[3.35rem] w-auto sm:h-[3.85rem]"
                 width={300}
                 height={90}
                 loading="eager"
                 decoding="async"
-                style={{ maxHeight: "3.65rem" }}
+                style={{ maxHeight: "4rem" }}
               />
             </span>
           </a>
@@ -266,19 +268,18 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
 
   return (
     <div
-      className="absolute left-0 right-0 top-full z-[90] max-h-[min(78vh,820px)] overflow-y-auto border-t-4 border-zap-burst bg-zap-ink shadow-[0_24px_64px_rgba(0,0,0,0.28)]"
+      className="absolute left-0 right-0 top-full z-[90] max-h-[min(78vh,820px)] overflow-y-auto bg-transparent px-3 pb-4 pt-2 sm:px-5 sm:pb-5 sm:pt-2.5 md:px-8"
       role="region"
       aria-label="Alt menü"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_50%_at_50%_0%,rgba(3,214,186,0.1),transparent_55%)]" aria-hidden />
-      <div className="relative mx-auto w-full max-w-[1400px] px-3 py-5 sm:px-5 sm:py-6 md:px-8">
-        <div className="relative overflow-hidden rounded-2xl border-2 border-white/30 bg-zap-night p-5 shadow-brutal ring-1 ring-white/10 sm:p-6 md:rounded-[1.35rem] md:p-8">
+      <div className="relative mx-auto w-full max-w-[1400px]">
+        <div className="relative overflow-hidden rounded-2xl border-2 border-zap-ink/12 bg-white p-5 shadow-[0_20px_48px_rgba(6,50,66,0.14)] ring-1 ring-zap-ink/[0.06] sm:p-6 md:rounded-[1.35rem] md:p-8">
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-brand-aqua/8"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-brand-aqua/[0.07] via-transparent to-brand-teal/[0.06]"
             aria-hidden
           />
           <span
-            className="pointer-events-none absolute left-3 top-3 z-[1] h-7 w-7 border-l-2 border-t-2 border-zap-burst sm:left-4 sm:top-4 sm:h-9 sm:w-9"
+            className="pointer-events-none absolute left-3 top-3 z-[1] h-7 w-7 border-l-2 border-t-2 border-brand-teal/80 sm:left-4 sm:top-4 sm:h-9 sm:w-9"
             aria-hidden
           />
           <span
@@ -286,34 +287,19 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
             aria-hidden
           />
 
-          <div className="relative z-[2] flex flex-col gap-5 border-b border-dashed border-white/20 pb-5 sm:flex-row sm:items-end sm:justify-between">
-            <div className="min-w-0">
-              <p
-                className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-zap-burstLight md:text-[12px]"
-                style={navPanelHeading}
-              >
-                <Sparkles className="h-3.5 w-3.5 text-zap-burst md:h-4 md:w-4" aria-hidden />
-                {item.title}
-              </p>
-              {item.blurb ? (
-                <p className="mt-2 max-w-2xl text-[15px] font-semibold leading-relaxed text-white md:text-[16px]">
-                  {item.blurb}
-                </p>
-              ) : null}
-            </div>
-            <a
-              href={item.href}
-              className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full border-4 border-zap-ink bg-zap-burst px-5 py-2.5 text-[12px] font-black uppercase tracking-wide text-zap-ink shadow-brutal transition hover:bg-[#ffd166] sm:w-auto md:px-6 md:py-3 md:text-[13px]"
-              onClick={onClose}
+          <div className="relative z-[2] border-b border-dashed border-zap-ink/15 pb-5">
+            <p
+              className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal md:text-[12px]"
+              style={navPanelHeading}
             >
-              Bölüme git
-              <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-            </a>
+              <Sparkles className="h-3.5 w-3.5 text-zap-burst md:h-4 md:w-4" aria-hidden />
+              {item.title}
+            </p>
           </div>
 
           <div className="relative z-[2] mt-6 flex min-h-[10rem] flex-col gap-4 md:min-h-[12rem] md:flex-row md:gap-0">
             <div
-              className="flex w-full shrink-0 flex-col border-b border-dashed border-white/15 pb-4 md:w-56 md:border-b-0 md:border-r md:pb-0 md:pr-4 lg:w-64"
+              className="flex w-full shrink-0 flex-col border-b border-dashed border-zap-ink/15 pb-4 md:w-56 md:border-b-0 md:border-r md:border-zap-ink/12 md:pb-0 md:pr-4 lg:w-64"
               role="tablist"
               aria-label="Kategoriler"
             >
@@ -325,8 +311,8 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
                   aria-selected={safeIdx === i}
                   className={`mb-1.5 w-full rounded-xl border-2 px-3 py-2.5 text-left text-[12px] font-bold uppercase tracking-wide transition sm:text-[13px] ${
                     safeIdx === i
-                      ? "border-zap-burst bg-zap-burst/20 text-zap-burstLight shadow-[2px_2px_0_rgb(6_50_66)]"
-                      : "border-white/20 bg-zap-ink/80 text-white/90 hover:border-white/40 hover:bg-zap-ink"
+                      ? "border-brand-teal bg-brand-aqua/15 text-zap-night"
+                      : "border-zap-ink/12 bg-[#f8fafc] text-zap-ink hover:border-zap-ink/22 hover:bg-white"
                   }`}
                   style={navPanelHeading}
                   onClick={() => setActiveCol(i)}
@@ -341,24 +327,19 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
               aria-label={current?.heading ?? "Sayfalar"}
             >
               {current ? (
-                <ul className="grid grid-cols-1 gap-x-3 gap-y-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-4">
+                <ul className="grid grid-cols-1 gap-x-3 gap-y-0.5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 xl:gap-x-4">
                   {current.links.map((l) => (
                     <li key={l.label + l.href} className="min-w-0">
                       <a
                         href={l.href}
-                        className="group flex items-start gap-1.5 rounded-lg border-2 border-transparent px-1.5 py-2 text-[14px] font-semibold leading-snug text-white transition hover:border-white/25 hover:bg-white/8 hover:text-zap-burstLight md:text-[15px]"
+                        className="group flex items-start gap-1.5 rounded-lg border-2 border-transparent px-1.5 py-2 text-[14px] font-semibold leading-snug text-zap-ink transition hover:border-brand-teal/30 hover:bg-brand-aqua/10 hover:text-brand-teal md:text-[15px]"
                         onClick={onClose}
                       >
                         <span className="min-w-0 flex-1">{l.label}</span>
                         {l.href.startsWith("http") ? (
-                          <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 opacity-50 group-hover:opacity-90" aria-hidden />
+                          <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 opacity-45 group-hover:opacity-90" aria-hidden />
                         ) : null}
                       </a>
-                      {l.desc ? (
-                        <p className="mt-0.5 text-[12px] font-medium leading-snug text-white/50 line-clamp-2 md:text-[13px]">
-                          {l.desc}
-                        </p>
-                      ) : null}
                     </li>
                   ))}
                 </ul>
@@ -413,29 +394,33 @@ function MobileNav({
                 key={item.id}
                 className="overflow-hidden rounded-2xl border-2 border-zap-ink/15 bg-white shadow-[3px_3px_0_rgb(6_50_66)]"
               >
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-4 py-4 text-left"
-                  style={navPanelHeading}
-                  aria-expanded={mobileAcc === item.id}
-                  onClick={() => setMobileAcc((a) => (a === item.id ? null : item.id))}
-                >
-                  <span className="text-[12px] uppercase tracking-[0.06em] text-zap-ink">{item.title}</span>
-                  <ChevronDown
-                    className={`h-4 w-4 shrink-0 text-brand-teal transition ${mobileAcc === item.id ? "rotate-180" : ""}`}
-                    aria-hidden
-                  />
-                </button>
+                <div className="flex items-stretch gap-2 px-3 py-3 sm:px-4">
+                  <a
+                    href={item.href}
+                    className="flex min-w-0 flex-1 items-center rounded-lg px-2 py-2 text-left transition hover:bg-zap-ink/[0.04]"
+                    style={navPanelHeading}
+                    onClick={onClose}
+                  >
+                    <span className="text-[12px] uppercase tracking-[0.06em] text-zap-ink">{item.title}</span>
+                  </a>
+                  <button
+                    type="button"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-2 border-zap-ink/15 bg-white text-brand-teal transition hover:border-brand-teal/40 hover:bg-brand-aqua/10"
+                    aria-expanded={mobileAcc === item.id}
+                    aria-label={mobileAcc === item.id ? "Alt menüyü kapat" : "Alt menüyü aç"}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMobileAcc((a) => (a === item.id ? null : item.id));
+                    }}
+                  >
+                    <ChevronDown
+                      className={`h-4 w-4 shrink-0 transition ${mobileAcc === item.id ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </button>
+                </div>
                 {mobileAcc === item.id ? (
                   <div className="border-t-2 border-dashed border-zap-ink/15 bg-[#f0fbf9] px-2 py-3 sm:px-3">
-                    <a
-                      href={item.href}
-                      className="mb-3 flex items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-zap-burst py-2.5 text-center text-[11px] font-black uppercase tracking-wide text-zap-ink shadow-[2px_2px_0_rgb(6_50_66)]"
-                      onClick={onClose}
-                    >
-                      Bölüme git
-                      <ArrowRight className="h-4 w-4" aria-hidden />
-                    </a>
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                       <div className="flex shrink-0 flex-wrap gap-1.5 sm:w-40 sm:flex-col sm:gap-1">
                         {item.columns.map((c, i) => (

@@ -25,7 +25,6 @@ export { slugify };
 export const dilUlkeler: NavSubLink[] = dilOkuluUlkeMegaNav.map((ülke) => ({
   label: `${ülke} dil okulu`,
   href: navBase("dil-okullari", slugify(ülke)),
-  desc: `Yurtdışında ${ülke} dil okulları`,
 }));
 
 type UniExtra = { ulke: string; slug: string; ozet: string };
@@ -48,13 +47,11 @@ const uniNavEk: UniExtra[] = [
 const uniByKartlar: NavSubLink[] = universiteUlke.map((x) => ({
   label: `${x.ulke}'da üniversite`,
   href: navBase("universite", x.slug),
-  desc: x.ozet,
 }));
 
 const uniByEkstra: NavSubLink[] = uniNavEk.map((x) => ({
   label: `${x.ulke}'da üniversite`,
   href: navBase("universite", x.slug),
-  desc: x.ozet,
 }));
 
 export const uniTumUlkeler: NavSubLink[] = [...uniByKartlar, ...uniByEkstra];
@@ -62,17 +59,16 @@ export const uniTumUlkeler: NavSubLink[] = [...uniByKartlar, ...uniByEkstra];
 export const ylUlkeler: NavSubLink[] = yuksekLisansUlkeMegaNav.map((ülke) => ({
   label: ülke === "ABD" ? "ABD’de yüksek lisans" : `${ülke}'da yüksek lisans`,
   href: navBase("yuksek-lisans", slugify(ülke)),
-  desc: `${ülke} program ve başvuru notları`,
 }));
 
 /** Sertifika hub — destinasyon vitrinleri (mega menü ile uyumlu) */
 export const sertifikaUlkeler: NavSubLink[] = [
-  { label: "Avustralya sertifika", href: navBase("sertifika", "avustralya"), desc: "VET ve mesleki sertifika hatları" },
-  { label: "Amerika sertifika", href: navBase("sertifika", "amerika"), desc: "Community college ve sertifika programları" },
-  { label: "İngiltere sertifika", href: navBase("sertifika", "ingiltere"), desc: "Kısa süreli meslek ve diploma pathway" },
-  { label: "İrlanda sertifika", href: navBase("sertifika", "irlanda"), desc: "Çalışma hakkı odaklı seçenekler" },
-  { label: "İtalya sertifika", href: navBase("sertifika", "italya"), desc: "Tasarım ve teknik alan vitrinleri" },
-  { label: "Kanada sertifika", href: navBase("sertifika", "kanada"), desc: "College ve PGWP bağlantılı rotalar" },
+  { label: "Avustralya sertifika", href: navBase("sertifika", "avustralya") },
+  { label: "Amerika sertifika", href: navBase("sertifika", "amerika") },
+  { label: "İngiltere sertifika", href: navBase("sertifika", "ingiltere") },
+  { label: "İrlanda sertifika", href: navBase("sertifika", "irlanda") },
+  { label: "İtalya sertifika", href: navBase("sertifika", "italya") },
+  { label: "Kanada sertifika", href: navBase("sertifika", "kanada") },
 ];
 
 /** Sol şerit: ilk 4 ana başlık (elt.com.tr sırasına yakın) */
@@ -81,7 +77,6 @@ export const megaNavRowLeft: MegaNavItem[] = [
     id: "dil-okullari",
     title: "DİL OKULLARI",
     href: navBase("dil-okullari", "hub"),
-    blurb: "Yurtdışında akredite dil okulları ve kurs seçimi",
     columns: [
       {
         heading: "Ülkeler",
@@ -130,7 +125,6 @@ export const megaNavRowLeft: MegaNavItem[] = [
     id: "universite",
     title: "ÜNİVERSİTE",
     href: navBase("universite", "hub"),
-    blurb: "Yurtdışında lisans başvuru rehberi ve seçili ülkeler",
     columns: [
       {
         heading: "Ülkeler",
@@ -217,7 +211,6 @@ export const megaNavRowLeft: MegaNavItem[] = [
     id: "yuksek-lisans",
     title: "YÜKSEK LİSANS",
     href: navBase("yuksek-lisans", "hub"),
-    blurb: "MSc · MA · MBA ve doktora başvuru desteği",
     columns: [
       {
         heading: "Ülkeler",
@@ -282,7 +275,6 @@ export const megaNavRowLeft: MegaNavItem[] = [
     id: "work-study",
     title: "WORK & STUDY",
     href: navBase("work-study", "overview"),
-    blurb: "Eğitim + yasal çalışma hakkı bir arada modeller",
     columns: [
       {
         heading: "Ülkeler ve modeller",
@@ -319,7 +311,6 @@ export const megaNavRowRight: MegaNavItem[] = [
     id: "lise",
     title: "YURTDIŞINDA LİSE",
     href: navBase("lise", "overview"),
-    blurb: "IB · A-Level · AP ve yatılı okul seçenekleri",
     columns: [
       {
         heading: "Ülkeler",
@@ -353,7 +344,6 @@ export const megaNavRowRight: MegaNavItem[] = [
     id: "yaz-okulu",
     title: "YAZ OKULU",
     href: navBase("yaz-okulu", "dil-genel"),
-    blurb: "Dil kampı ve akademik kampüs yaz programları",
     columns: [
       {
         heading: "Ülkeler",
@@ -396,7 +386,6 @@ export const megaNavRowRight: MegaNavItem[] = [
     id: "sertifika",
     title: "SERTİFİKA",
     href: navBase("sertifika", "hub"),
-    blurb: "Kısa süreli sertifika ve meslek programları",
     columns: [
       {
         heading: "Destinasyon vitrinleri",
@@ -424,7 +413,6 @@ export const megaNavRowRight: MegaNavItem[] = [
     id: "work-travel",
     title: "WORK & TRAVEL",
     href: navBase("work-travel", "overview"),
-    blurb: "Kültürel değişim ve sezonluk iş deneyimi",
     columns: [
       {
         heading: "Genel başlıklar",
