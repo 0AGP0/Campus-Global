@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, ExternalLink, Menu, Phone, Sparkles, X } from "lucide-react";
-import { megaNav, megaNavRowLeft, megaNavRowRight } from "@/data/site-nav";
+import { megaNav as defaultMegaNav, megaNavRowLeft as defaultRowLeft, megaNavRowRight as defaultRowRight, type MegaNavItem } from "@/data/site-nav";
 import { footerIletisim } from "@/data/home-ia";
 import { navPanelHeading } from "@/styles/typography";
 
@@ -45,7 +45,15 @@ function TopBarActions({ className = "" }: { className?: string }) {
 /**
  * Açık renkli header, üst barda telefon+iletişim; nav butonları açık tema; mega menü absolute (sayfayı itmez).
  */
-export function SiteHeader() {
+export function SiteHeader({
+  megaNav = defaultMegaNav,
+  megaNavRowLeft = defaultRowLeft,
+  megaNavRowRight = defaultRowRight,
+}: {
+  megaNav?: MegaNavItem[];
+  megaNavRowLeft?: MegaNavItem[];
+  megaNavRowRight?: MegaNavItem[];
+}) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAcc, setMobileAcc] = useState<string | null>(null);
@@ -84,7 +92,7 @@ export function SiteHeader() {
     };
   }, [openId]);
 
-  const NavButtons = ({ items }: { items: typeof megaNav }) => (
+  const NavButtons = ({ items }: { items: MegaNavItem[] }) => (
     <>
       {items.map((item) => (
         <div

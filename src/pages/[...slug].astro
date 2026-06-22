@@ -2,24 +2,18 @@
 import ArticleLayout from "@/layouts/ArticleLayout.astro";
 import { getCollection, render } from "astro:content";
 import { resolveLeadFormPrefillFromPath } from "@/data/lead-form-data";
-import { megaNav, RESERVED_NON_ARTICLE_SLUGS, getMegaNavSegmentMeta } from "@/data/site-nav";
+import { RESERVED_NON_ARTICLE_SLUGS } from "@/data/site-nav";
+import { getSiteNavigation, collectSlugPathsFromNav } from "@/lib/cms/navigation";
+import { getAllArticleSlugs, getCmsArticleBySlug } from "@/lib/cms/articles";
 
-export function getStaticPaths() {
-  const paths = new Set<string>();
-  const push = (href: string) => {
-    if (href.startsWith("/") && !href.startsWith("/#") && !href.startsWith("http")) {
-      const rest = href.replace(/^\//, "");
-      if (rest.length > 0) paths.add(rest);
-    }
-  };
-  for (const m of megaNav) {
-    push(m.href);
-    for (const c of m.columns) {
-      for (const l of c.links) {
-        push(l.href);
-      }
-    }
+export async function getStaticPaths() {
+  const nav = await getSiteNavigation();
+  const paths = new Set(collectSlugPathsFromNav(nav));
+
+  for (const slug of await getAllArticleSlugs()) {
+    paths.add(slug);
   }
+
   return [...paths]
     .filter((slug) => !RESERVED_NON_ARTICLE_SLUGS.has(slug))
     .map((slug) => ({ params: { slug } }));
@@ -40,13 +34,22 @@ function titleFromSlug(slug: string): string {
     .join(" · ");
 }
 
-function buildBreadcrumb(slug: string): { label: string; href?: string }[] {
+function buildBreadcrumb(
+  slug: string,
+  megaNavItems: Awaited<ReturnType<typeof getSiteNavigation>>["megaNav"],
+): { label: string; href?: string }[] {
   const parts = slug.split("/").filter(Boolean);
   const items: { label: string; href?: string }[] = [{ label: "Ana sayfa", href: "/" }];
   const root = parts[0];
-  const meta = getMegaNavSegmentMeta(root);
-  if (meta && parts.length > 1) {
-    items.push({ label: meta.label, href: meta.hubHref });
+  const item = megaNavItems.find((m) => m.id === root);
+  if (item && parts.length > 1) {
+    const label = item.title
+      .toLocaleLowerCase("tr-TR")
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => w.charAt(0).toLocaleUpperCase("tr-TR") + w.slice(1))
+      .join(" ");
+    items.push({ label, href: item.href });
   }
   items.push({ label: humanizeSegment(parts[parts.length - 1] ?? "") });
   return items;
@@ -55,31 +58,39 @@ function buildBreadcrumb(slug: string): { label: string; href?: string }[] {
 const { slug } = Astro.params;
 const pathSlug = slug ?? "";
 
+const siteNav = await getSiteNavigation();
+const cmsArticle = await getCmsArticleBySlug(pathSlug);
+
 const articleEntries = await getCollection("articles");
-const entry = articleEntries.find((e) => e.id === pathSlug);
+const mdEntry = articleEntries.find((e) => e.id === pathSlug);
 
 let Content: Awaited<ReturnType<typeof render>>["Content"] | undefined;
-if (entry) {
-  const rendered = await render(entry);
+if (mdEntry && cmsArticle?.source !== "sanity") {
+  const rendered = await render(mdEntry);
   Content = rendered.Content;
 }
 
-const d = entry?.data;
-const displayTitle = d?.title ?? titleFromSlug(pathSlug);
+const d = cmsArticle ?? (mdEntry ? { ...mdEntry.data, slug: mdEntry.id } : null);
+const displayTitle = cmsArticle?.title ?? mdEntry?.data.title ?? titleFromSlug(pathSlug);
 const canonicalPath = `/${pathSlug}`;
 const leadFormPrefill = resolveLeadFormPrefillFromPath(canonicalPath);
 const description =
-  d?.description ??
+  cmsArticle?.description ??
+  mdEntry?.data.description ??
   `${displayTitle} — Campus Global yurtdışı eğitim rehberi. Detay içerik hazırlanıyor; danışmanlık için iletişime geçebilirsiniz.`;
-const keywords = d?.keywords ?? "yurtdışı eğitim, Campus Global, danışmanlık, dil okulu, üniversite";
-const publishedISO = d?.publishedISO ?? "2026-04-01T10:00:00+03:00";
-const modifiedISO = d?.modifiedISO ?? publishedISO;
-const eyebrow = d?.eyebrow;
-const section = d?.section;
-const readingMinutes = d?.readingMinutes;
-const toc = d?.toc?.length ? d.toc : undefined;
-const faq = d?.faq?.length ? d.faq : undefined;
-const breadcrumb = buildBreadcrumb(pathSlug);
+const keywords =
+  cmsArticle?.keywords ??
+  mdEntry?.data.keywords ??
+  "yurtdışı eğitim, Campus Global, danışmanlık, dil okulu, üniversite";
+const publishedISO = cmsArticle?.publishedISO ?? mdEntry?.data.publishedISO ?? "2026-04-01T10:00:00+03:00";
+const modifiedISO = cmsArticle?.modifiedISO ?? mdEntry?.data.modifiedISO ?? publishedISO;
+const eyebrow = cmsArticle?.eyebrow ?? mdEntry?.data.eyebrow;
+const section = cmsArticle?.section ?? mdEntry?.data.section;
+const readingMinutes = cmsArticle?.readingMinutes ?? mdEntry?.data.readingMinutes;
+const toc = cmsArticle?.toc?.length ? cmsArticle.toc : mdEntry?.data.toc?.length ? mdEntry.data.toc : undefined;
+const faq = cmsArticle?.faq?.length ? cmsArticle.faq : mdEntry?.data.faq?.length ? mdEntry.data.faq : undefined;
+const breadcrumb = buildBreadcrumb(pathSlug, siteNav.megaNav);
+const bodyHtml = cmsArticle?.source === "sanity" ? cmsArticle.bodyHtml : undefined;
 ---
 
 <ArticleLayout
@@ -98,7 +109,9 @@ const breadcrumb = buildBreadcrumb(pathSlug);
   leadFormPrefill={leadFormPrefill}
 >
   {
-    entry && Content ? (
+    bodyHtml ? (
+      <div class="article-cms-body" set:html={bodyHtml} />
+    ) : mdEntry && Content ? (
       <Content />
     ) : (
       <>
@@ -125,14 +138,12 @@ const breadcrumb = buildBreadcrumb(pathSlug);
 
         <h2 id="ozet">Özet</h2>
         <p>
-          Tam içerikli makaleler <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">src/content/articles/</code> altında
-          <strong>.md</strong> dosyası olarak eklenir; <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">src/content.config.ts</code> şeması
-          frontmatter’ı doğrular. Dosya yolu URL ile eşleşmelidir (örn. <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">dil-okullari/malta.md</code> →{" "}
-          <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">/dil-okullari/malta</code>).
+          Tam içerikli makaleler içerik panelinden veya <code class="rounded bg-zap-ink/[0.06] px-1.5 py-0.5 font-mono text-[13px]">src/content/articles/</code> altında
+          yönetilir; yayın sonrası build ile siteye yansır.
         </p>
 
         <p class="mt-10 rounded-xl border-2 border-dashed border-zap-ink/15 bg-zap-ink/[0.03] px-4 py-3 text-center text-[12px] font-medium text-zap-ink/55">
-          Yer tutucu — yeni yazı için Markdown dosyası ekleyin; build sırasında koleksiyon şeması kontrol edilir.
+          Yer tutucu — içerik panelinden veya Markdown dosyası ile güncelleyin.
         </p>
       </>
     )

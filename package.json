@@ -8,12 +8,20 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "content:export": "tsx scripts/export-editorial-content.mts"
+    "content:export": "tsx scripts/export-editorial-content.mts",
+    "studio": "npm run dev --prefix studio",
+    "studio:deploy": "npm run deploy --prefix studio",
+    "sanity:seed": "tsx scripts/seed-sanity-navigation.mts",
+    "sanity:import-articles": "tsx scripts/import-articles-to-sanity.mts",
+    "sanity:fix-keys": "tsx scripts/fix-sanity-array-keys.mts",
+    "sanity:setup": "npm run sanity:seed && npm run sanity:import-articles"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
     "@astrojs/tailwind": "^6.0.2",
+    "@sanity/client": "^6.28.0",
     "astro": "^5.5.6",
+    "dotenv": "^17.4.2",
     "lucide-react": "^0.511.0",
     "motion": "^12.23.0",
     "react": "^19.1.0",
