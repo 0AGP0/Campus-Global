@@ -23,6 +23,9 @@ export function ArticleHeroLeadButton({ label, leadFormPrefill }: Props) {
 
   useEffect(() => {
     setMounted(true);
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, []);
 
   const close = useCallback(() => {

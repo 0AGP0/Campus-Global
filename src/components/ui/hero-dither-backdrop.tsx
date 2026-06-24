@@ -10,6 +10,8 @@ export interface HeroDitherBackdropProps {
   shape?: DitheringShape;
   /** Makale header gibi dar panellerde IO yanlışlıkla durdurmasın diye kapatılabilir */
   pauseWhenOffscreen?: boolean;
+  /** Boş alanları şeffaf bırak; alttaki header gradient görünsün */
+  transparentBackground?: boolean;
 }
 
 /** Hero yüksekliği sabit kalır; shader üst üste ölçülür (ResizeObserver, debounce). */
@@ -18,6 +20,7 @@ export function HeroDitherBackdrop({
   colorFront = "#f51d00",
   shape = "wave",
   pauseWhenOffscreen = true,
+  transparentBackground = false,
 }: HeroDitherBackdropProps = {}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 1200, h: 520 });
@@ -64,6 +67,7 @@ export function HeroDitherBackdrop({
         renderScale={0.62}
         pauseWhenTabHidden
         pauseWhenOffscreen={pauseWhenOffscreen}
+        transparentBackground={transparentBackground}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       />
     </div>

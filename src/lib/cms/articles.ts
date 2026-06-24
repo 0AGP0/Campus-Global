@@ -33,7 +33,23 @@ function mdToCms(entry: Awaited<ReturnType<typeof getCollection<"articles">>>[nu
   };
 }
 
+let cachedArticles: CmsArticleWithNav[] | null = null;
+let articlesInflight: Promise<CmsArticleWithNav[]> | null = null;
+
 export async function getAllCmsArticles(): Promise<CmsArticleWithNav[]> {
+  if (cachedArticles) return cachedArticles;
+  if (articlesInflight) return articlesInflight;
+
+  articlesInflight = loadAllCmsArticles();
+  try {
+    cachedArticles = await articlesInflight;
+    return cachedArticles;
+  } finally {
+    articlesInflight = null;
+  }
+}
+
+async function loadAllCmsArticles(): Promise<CmsArticleWithNav[]> {
   const mdEntries = await getCollection("articles");
   const mdMap = new Map(mdEntries.map((e) => [e.id, mdToCms(e)]));
   const sanityArticles = isSanityConfigured() ? await fetchSanityArticles() : [];

@@ -3,7 +3,6 @@ import "../styles/global.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { icefIas } from "@/data/home-ia";
-import { getSiteNavigation } from "@/lib/cms/navigation";
 
 interface Props {
   title?: string;
@@ -39,8 +38,6 @@ const {
 
 const resolvedOgTitle = ogTitle ?? title;
 const resolvedOgDesc = ogDescription ?? description ?? "";
-
-const siteNav = await getSiteNavigation();
 ---
 
 <!doctype html>
@@ -78,12 +75,7 @@ const siteNav = await getSiteNavigation();
     />
   </head>
   <body id="top" class="flex min-h-dvh flex-col font-sans text-zap-ink">
-    <SiteHeader
-      client:load
-      megaNav={siteNav.megaNav}
-      megaNavRowLeft={siteNav.megaNavRowLeft}
-      megaNavRowRight={siteNav.megaNavRowRight}
-    />
+    <SiteHeader client:idle />
     <div class="flex min-h-0 flex-1 flex-col">
       <slot />
     </div>

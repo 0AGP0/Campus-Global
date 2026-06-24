@@ -48,7 +48,7 @@ import {
 import { HeroDitherBackdrop } from "@/components/ui/hero-dither-backdrop";
 import { navBase } from "@/data/site-nav";
 import { slugify } from "@/data/slugify";
-import { titleDarkOnBand, titleHero, titleHeroBrand, titleLight } from "@/styles/typography";
+import { homePageImages } from "@/data/home-page-copy";
 
 const inner = "relative mx-auto w-full max-w-7xl px-5 md:px-10 lg:px-14";
 
@@ -75,9 +75,10 @@ const IMG_MAP = "https://picsum.photos/seed/cg-harita-dunya-2024/1200/800";
 const IMG_NEDEN_CG = "https://picsum.photos/seed/cg-ayni-masada-net-karar-2024/1000/660";
 const IMG_YUKSEK = "https://picsum.photos/seed/cg-yuksek-lisans-kulvar-2024/1100/1200";
 
-/** Ana hero görseli. Yerel dosya kullanmak için `public/hero-ana.jpg` ekleyip URL’yi `/hero-ana.jpg` yapın. */
-const HERO_VISUAL_SRC =
-  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=960&h=1180&q=82";
+import { titleDarkOnBand, titleHero, titleHeroBrand, titleLight } from "@/styles/typography";
+
+const HERO_VISUAL_SRC = homePageImages.heroVisual;
+const HERO_VISUAL_ALT = homePageImages.heroVisualAlt;
 
 const categoryIcon: Record<string, LucideIcon> = {
   "dil-okullari": Languages,
@@ -267,7 +268,7 @@ export function HomeLanding() {
                 <div className="relative overflow-hidden rounded-2xl border-4 border-zap-ink ring-2 ring-white/25 md:rounded-[1.35rem]">
                   <img
                     src={HERO_VISUAL_SRC}
-                    alt="Yurtdışında eğitim ve üniversite ortamında öğrenciler — Campus Global danışmanlık vitrin görseli"
+                    alt={HERO_VISUAL_ALT}
                     width={960}
                     height={1180}
                     className="aspect-[4/5] w-full object-cover sm:aspect-[5/6] lg:aspect-[3/4] lg:max-h-[min(560px,62vh)] xl:max-h-[min(600px,65vh)]"

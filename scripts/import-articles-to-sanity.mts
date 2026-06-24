@@ -55,7 +55,12 @@ function sanityIdForSlug(slug: string) {
   return `article-${slug.replace(/\//g, "--")}`;
 }
 
-const files = walkMdFiles(articlesRoot);
+const files = walkMdFiles(articlesRoot).filter((file) => {
+  const prefixes = process.argv.slice(2);
+  if (!prefixes.length) return true;
+  const slug = relative(articlesRoot, file).replace(/\\/g, "/").replace(/\.md$/, "");
+  return prefixes.some((p) => slug === p || slug.startsWith(`${p}/`));
+});
 let ok = 0;
 
 for (const file of files) {

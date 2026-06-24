@@ -10,5 +10,5 @@ const model = programHubModelFromEntry(entry);
 ---
 
 <Layout title={model.layoutTitle} description={model.metaDescription}>
-  <ProgramHubPage client:visible model={model} />
+  <ProgramHubPage client:load model={model} />
 </Layout>

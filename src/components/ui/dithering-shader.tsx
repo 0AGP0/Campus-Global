@@ -266,6 +266,8 @@ export interface DitheringShaderProps {
   pauseWhenTabHidden?: boolean;
   /** Viewport dışındayken (scroll) animasyonu durdur */
   pauseWhenOffscreen?: boolean;
+  /** true: boş alanlar şeffaf; alttaki gradient görünür (makale hero vb.) */
+  transparentBackground?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -337,6 +339,7 @@ export function DitheringShader({
   renderScale = 1,
   pauseWhenTabHidden = true,
   pauseWhenOffscreen = true,
+  transparentBackground = false,
   className = "",
   style = {},
 }: DitheringShaderProps) {
@@ -359,6 +362,8 @@ export function DitheringShader({
     const gl = canvas.getContext("webgl2", {
       powerPreference: "low-power",
       antialias: false,
+      alpha: true,
+      premultipliedAlpha: true,
     } as WebGLContextAttributes);
     if (!gl) {
       console.error("WebGL2 not supported");
@@ -367,6 +372,14 @@ export function DitheringShader({
 
     glRef.current = gl;
     startTimeRef.current = Date.now();
+
+    if (transparentBackground) {
+      gl.clearColor(0, 0, 0, 0);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    }
+
+    const backRgba = transparentBackground ? ([0, 0, 0, 0] as const) : hexToRgba(colorBack);
 
     const program = createProgram(gl, vertexShaderSource, fragmentShaderSource);
     if (!program) return;
@@ -433,7 +446,7 @@ export function DitheringShader({
 
         if (locations.u_time) context.uniform1f(locations.u_time, currentTime);
         if (locations.u_resolution) context.uniform2f(locations.u_resolution, bufW, bufH);
-        if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, hexToRgba(colorBack));
+        if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, backRgba);
         if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
         if (locations.u_shape) context.uniform1f(locations.u_shape, DitheringShapes[shape]);
         if (locations.u_type) context.uniform1f(locations.u_type, DitheringTypes[type]);
@@ -500,7 +513,7 @@ export function DitheringShader({
         const locations = uniformLocationsRef.current;
         if (locations.u_time) context.uniform1f(locations.u_time, currentTime);
         if (locations.u_resolution) context.uniform2f(locations.u_resolution, bufW, bufH);
-        if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, hexToRgba(colorBack));
+        if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, backRgba);
         if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
         if (locations.u_shape) context.uniform1f(locations.u_shape, DitheringShapes[shape]);
         if (locations.u_type) context.uniform1f(locations.u_type, DitheringTypes[type]);
@@ -536,6 +549,7 @@ export function DitheringShader({
     renderScale,
     pauseWhenTabHidden,
     pauseWhenOffscreen,
+    transparentBackground,
   ]);
 
   return (

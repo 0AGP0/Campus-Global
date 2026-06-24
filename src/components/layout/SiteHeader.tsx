@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, ExternalLink, Menu, Phone, Sparkles, X } from "lucide-react";
 import { megaNav as defaultMegaNav, megaNavRowLeft as defaultRowLeft, megaNavRowRight as defaultRowRight, type MegaNavItem } from "@/data/site-nav";
+import { generatedSiteNav } from "@/data/generated-site-nav";
 import { footerIletisim } from "@/data/home-ia";
 import { navPanelHeading } from "@/styles/typography";
 
@@ -42,18 +43,22 @@ function TopBarActions({ className = "" }: { className?: string }) {
   );
 }
 
+function resolveNav() {
+  const megaNav = generatedSiteNav.megaNav?.length ? generatedSiteNav.megaNav : defaultMegaNav;
+  const megaNavRowLeft = generatedSiteNav.megaNavRowLeft?.length
+    ? generatedSiteNav.megaNavRowLeft
+    : defaultRowLeft;
+  const megaNavRowRight = generatedSiteNav.megaNavRowRight?.length
+    ? generatedSiteNav.megaNavRowRight
+    : defaultRowRight;
+  return { megaNav, megaNavRowLeft, megaNavRowRight };
+}
+
 /**
  * Açık renkli header, üst barda telefon+iletişim; nav butonları açık tema; mega menü absolute (sayfayı itmez).
  */
-export function SiteHeader({
-  megaNav = defaultMegaNav,
-  megaNavRowLeft = defaultRowLeft,
-  megaNavRowRight = defaultRowRight,
-}: {
-  megaNav?: MegaNavItem[];
-  megaNavRowLeft?: MegaNavItem[];
-  megaNavRowRight?: MegaNavItem[];
-}) {
+export function SiteHeader() {
+  const { megaNav, megaNavRowLeft, megaNavRowRight } = resolveNav();
   const [openId, setOpenId] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAcc, setMobileAcc] = useState<string | null>(null);
@@ -66,6 +71,12 @@ export function SiteHeader({
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -244,11 +255,12 @@ export function SiteHeader({
         </div>
 
         {/* Mega: absolute — sayfa layout’unu itmez */}
-        {openId ? <MegaPanel openId={openId} onClose={() => setOpenId(null)} /> : null}
+        {openId ? <MegaPanel megaNav={megaNav} openId={openId} onClose={() => setOpenId(null)} /> : null}
       </div>
 
       {mobileOpen ? (
         <MobileNav
+          megaNav={megaNav}
           mobileAcc={mobileAcc}
           setMobileAcc={setMobileAcc}
           mobileCol={mobileCol}
@@ -260,7 +272,15 @@ export function SiteHeader({
   );
 }
 
-function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void }) {
+function MegaPanel({
+  megaNav,
+  openId,
+  onClose,
+}: {
+  megaNav: MegaNavItem[];
+  openId: string;
+  onClose: () => void;
+}) {
   const item = megaNav.find((m) => m.id === openId);
   const [activeCol, setActiveCol] = useState(0);
 
@@ -361,12 +381,14 @@ function MegaPanel({ openId, onClose }: { openId: string; onClose: () => void })
 }
 
 function MobileNav({
+  megaNav,
   mobileAcc,
   setMobileAcc,
   mobileCol,
   setMobileCol,
   onClose,
 }: {
+  megaNav: MegaNavItem[];
   mobileAcc: string | null;
   setMobileAcc: React.Dispatch<React.SetStateAction<string | null>>;
   mobileCol: Record<string, number>;

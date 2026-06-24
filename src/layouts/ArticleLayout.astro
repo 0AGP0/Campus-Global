@@ -246,14 +246,20 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
       </nav>
 
       <div class="relative overflow-hidden">
+        <!-- Sol/sağ hero aynı zemin: header gradient + ortak blur (yalnızca sağ sütunda ayrı bg yok) -->
+        <div
+          class="pointer-events-none absolute -left-4 top-0 h-56 w-56 rounded-full bg-brand-aqua/30 blur-3xl lg:-left-2"
+          aria-hidden
+        />
+        <div
+          class="pointer-events-none absolute bottom-0 left-0 h-36 w-48 rounded-full bg-zap-burst/18 blur-3xl"
+          aria-hidden
+        />
         <div
           class="grid w-full grid-cols-1 items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(300px,min(46vw,520px))] lg:gap-0 lg:pl-[60px] xl:grid-cols-[minmax(0,1fr)_minmax(320px,min(44vw,560px))]"
         >
           <!-- Sol: metin — hücre içinde blok ortalanır (poster başlık ile aynı dil) -->
           <div class="relative z-10 px-3 pb-8 pt-6 sm:px-4 md:px-5 md:pb-10 md:pt-8 lg:mx-auto lg:w-full lg:max-w-[42rem] lg:px-5 lg:pb-12 lg:pt-10 xl:max-w-[44rem]">
-            <div class="pointer-events-none absolute -left-4 top-0 h-56 w-56 rounded-full bg-brand-aqua/30 blur-3xl lg:-left-2" aria-hidden />
-            <div class="pointer-events-none absolute bottom-0 left-0 h-36 w-48 rounded-full bg-zap-burst/18 blur-3xl" aria-hidden />
-
             <div class="relative text-left">
               <div class="flex flex-wrap items-center gap-2">
                 {
@@ -314,13 +320,12 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
             </div>
           </div>
 
-          <!-- Sağ: ana sayfa hero ile aynı dither + dalgalı sınır (yalnız lg+) -->
+          <!-- Sağ: header ile aynı zemin (şeffaf) + dither dalga -->
           <div
             class="relative hidden min-h-[300px] w-full lg:flex lg:min-h-[min(20rem,38vh)] lg:flex-col lg:self-stretch"
-            aria-hidden="true"
           >
-            <div class="h-full min-h-[300px] w-full flex-1 lg:min-h-0">
-              <ArticleHeaderDitherPanel client:media="(min-width: 1024px)" />
+            <div class="relative h-full min-h-[300px] w-full flex-1">
+              <ArticleHeaderDitherPanel client:idle />
             </div>
           </div>
         </div>
