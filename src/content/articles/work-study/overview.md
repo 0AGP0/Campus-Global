@@ -5,7 +5,7 @@ keywords: "work study nedir, yurtdışında okurken çalışmak, student work ri
 publishedISO: "2026-05-02T10:00:00+03:00"
 eyebrow: "Work & Study"
 section: "Program rehberi"
-readingMinutes: 14
+readingMinutes: 15
 toc:
   - id: tanim
     label: "Tanım"
@@ -27,41 +27,43 @@ toc:
     depth: 2
 faq:
   - question: "Work & Study ile Work & Travel aynı mı?"
-    answer: "Hayır; Work & Travel genelde sezonluk kültür değişimi vizesiyle ilişkilendirilir. Work & Study ise öğrenci veya mesleki eğitim statüsüne dayanır."
+    answer: "Hayır. Work & Travel genellikle sezonluk kültürel değişim programlarıyla ilişkilidir; Work & Study ise öğrencinin kayıtlı olduğu eğitim programı, vize statüsü ve ülke kuralları üzerinden değerlendirilir."
   - question: "Her ülkede sınırsız çalışma var mı?"
-    answer: "Hayır; çoğu ülkede dönem içi saat üst sınırı, tatil dönemleri veya staj için ayrı izin kuralları vardır."
+    answer: "Hayır. Çalışma hakkı ülkeye, vize türüne, program süresine, ders devamına ve bazen dönem/tatil ayrımına göre değişir. Planlama yaparken en güncel resmi kaynaklar esas alınmalıdır."
   - question: "Danışmanlık neyi kapsar?"
-    answer: "Program-kurum eşlemesi, belge listesi ve başvuru akışı; nihai vize kararı yetkili makamlara aittir."
+    answer: "Campus Global, ülke ve program seçimi, kurum karşılaştırması, belge listesi, başvuru takvimi ve süreç takibi konularında destek verir. Nihai kabul, vize veya çalışma izni kararı ilgili okul ve resmi kurumlara aittir."
   - question: "Önce dil mi, doğrudan kolej mi?"
-    answer: "Mevcut İngilizce seviyesi ve akademik hedefe göre değişir; ikisi de Work & Study ile birleştirilebilir."
+    answer: "Bu karar mevcut İngilizce seviyesine, akademik geçmişe ve hedef ülkeye göre verilir. Dil seviyesi yeterli değilse önce dil programı, hedef daha akademik veya meslekiyse kolej/pathway modeli daha doğru olabilir."
 ---
 
-<p><strong>Work & Study</strong>; yurtdışında <strong>akredite bir eğitim programına</strong> kayıtlıyken, mevzuata uygun şekilde <strong>yarı zamanlı veya yapılandırılmış iş/staj</strong> bileşenini ifade eden pratik bir modeldir. Ülke, vize sınıfı ve kurum politikası çıktıyı belirler.</p>
+<p><strong>Work & Study</strong>; yurtdışında kayıtlı bir eğitim programına devam ederken, ülkenin izin verdiği çerçevede <strong>yarı zamanlı çalışma, staj, co-op veya iş deneyimi</strong> bileşenini planlamayı ifade eder. Bu model, yalnızca “çalışarak masrafları karşılama” fikrinden ibaret değildir; doğru kurgulandığında dil gelişimi, akademik hedef ve kariyer deneyimini aynı rota içinde birleştirir.</p>
 
-<p>Campus Global tarafında bu başlık; menünüzdeki <a href="/work-study/avustralya">Avustralya</a>, <a href="/work-study/irlanda">İrlanda</a>, <a href="/work-study/kanada">Kanada</a>, <a href="/work-study/malta">Malta</a> ve <a href="/work-study/dubai">Dubai</a> vitrinleriyle birlikte <strong>rehber ve planlama</strong> amaçlı sunulur. Kesin çalışma hakkı ve süreler için her zaman güncel resmi kaynakları esas alın.</p>
+<p>Campus Global için bu kategori; <a href="/work-study/avustralya">Avustralya</a>, <a href="/work-study/irlanda">İrlanda</a>, <a href="/work-study/kanada">Kanada</a>, <a href="/work-study/malta">Malta</a> ve <a href="/work-study/dubai">Dubai</a> gibi ülke sayfalarıyla birlikte düşünülmelidir. Her ülke farklı eğitim modeli, vize statüsü, iş piyasası ve konaklama gerçekliği sunduğu için karar süreci kişisel bütçe ve hedefe göre kurulmalıdır.</p>
 
 <h2 id="tanim">Tanım</h2>
-<p>Dil okulu haftalık ders yükü, mesleki sertifika veya pathway programları bu çatıda değerlendirilebilir. Kritik nokta: <strong>çalışma hakkı vize ve kayıtlı kurum şartlarına</strong> bağlıdır; broşürdeki “iş garantisi” ifadeleri resmi izin yerine geçmez.</p>
+<p>Work & Study’de ana unsur eğitimdir. Dil okulu, mesleki sertifika, VET/college programı veya pathway eğitimi bu çatıda değerlendirilebilir. Çalışma tarafı ise eğitim kaydı, vize sınıfı, program süresi ve kurum onayı ile bağlantılıdır. Bu nedenle herhangi bir program broşüründeki “iş imkânı” ifadesi tek başına çalışma hakkı veya iş garantisi anlamına gelmez.</p>
 
-<p>Programa kayıt olduktan sonra iş arama süresi, sektör (hospitality, perakende, ofis destek rolleri vb.) ve şehir rekabeti <strong>gerçekçi bir işe başlama takvimine</strong> etki eder. Bu nedenle eğitim takviminizi (sınav haftaları, devam zorunluluğu) çalışma hedefiyle aynı takvimde çizmek gerekir.</p>
+<p>Sağlıklı planlama için önce eğitim hedefi netleştirilir: İngilizce seviyesini yükseltmek mi, mesleki deneyim kazanmak mı, üniversite veya yüksek lisansa geçiş için altyapı kurmak mı? Ardından çalışma beklentisi bu hedefe göre gerçekçi bir zaman çizelgesine yerleştirilir.</p>
 
 <h2 id="modeller">Yaygın modeller</h2>
-<p><strong>Öğrenci statüsünde</strong> haftalık saat sınırı ve tatil dönemlerinde farklı üst sınırlar sık görülür. <strong>Kooperatif eğitim (co-op)</strong> için ayrı çalışma izni gerekebilir; özellikle <a href="/work-study/kanada">Kanada</a> tarafında program şartnamesi ile birlikte okunmalıdır.</p>
+<p>En yaygın model, öğrencinin dil veya akademik programa devam ederken ülke kurallarına uygun şekilde yarı zamanlı çalışmasıdır. Bazı ülkelerde tatil dönemleri, dönem içi ders zamanı ve staj dönemi farklı kurallarla yönetilebilir. Bu nedenle programın haftalık ders saati, devam zorunluluğu ve sınav takvimi çalışma planıyla birlikte okunmalıdır.</p>
 
-<p><strong>Mesleki İngilizce + staj veya gözlem</strong> paketleri ise <a href="/work-study/mesleki">kurum bazlı içerik</a> ile sunulur; sözleşmede placement süresi, ücretlilik ve iptal koşulları net olmalıdır. <a href="/work-study/kurum">Kurum bazlı programa giriş</a> sayfasındaki kontrol listesini bu model için de kullanabilirsiniz.</p>
+<p>Diğer bir model, <strong>co-op, internship veya placement</strong> içeren yapılandırılmış programlardır. Özellikle <a href="/work-study/kanada">Kanada</a> gibi ülkelerde co-op bileşeni ayrı izin veya program şartı gerektirebilir. <a href="/work-study/mesleki">Mesleki İngilizce + iş deneyimi</a> ve <a href="/work-study/kurum">kurum bazlı programlar</a> ise sözleşme, placement ve beklenti yönetimi açısından ayrıca incelenmelidir.</p>
 
 <h2 id="uygunluk">Kimler için mantıklı?</h2>
-<p>Dilini güçlendirmek isteyen lise veya üniversite mezunları; kısa sürede <strong>uluslararası işyeri referansı</strong> biriktirmek isteyen adaylar; veya sonrasında <a href="/universite/hub">lisans</a> / <a href="/yuksek-lisans/hub">yüksek lisans</a> başvurusuna zemin hazırlayanlar için uygun olabilir.</p>
+<p>Work & Study; dilini pratik ortamda geliştirmek isteyenler, mezuniyet öncesi uluslararası deneyim eklemek isteyen öğrenciler, kariyer geçişi düşünen genç profesyoneller ve ileride lisans/yüksek lisans başvurusu planlayan adaylar için anlamlı olabilir. Ancak bu modelin başarılı olması için adayın çalışma temposu ile ders yükünü aynı anda sürdürebilmesi gerekir.</p>
 
-<p>Aksine; sadece tam zamanlı ve yüksek gelir hedefiyle giden veya ders yükünü hafife alan adaylar için risk taşır: akademik başarısızlık vize ve statüyi doğrudan etkileyebilir.</p>
+<p>Yalnızca yüksek gelir beklentisiyle hareket eden, ilk aydan itibaren tam zamanlı çalışacağını varsayan veya konaklama bütçesini çalışma gelirine bağlayan adaylar için risk artar. Campus Global danışmanlığında bu yüzden önce “güvenli bütçe”, ardından “eğitim ve iş dengesi” konuşulur.</p>
 
 <h2 id="planlama">Planlama ve riskler</h2>
-<p>Bütçede sadece çalışma gelirine güvenmek risklidir; ders devamı ve sınav dönemleri iş arama hızını etkiler. <a href="/work-study/basvuru-sartlari">Tipik başvuru şartları</a> ve <a href="/dil-okullari/sure-planlama">dil okulu süre planlama</a> notlarını birlikte okuyun.</p>
+<p>Planlama aşamasında en sık yapılan hata, vize ve çalışma hakkını ülke adı üzerinden genelleştirmektir. Oysa aynı ülkede dil okulu, sertifika, lisans veya yüksek lisans farklı sonuçlar doğurabilir. Program kodu, kurum kaydı, eğitim süresi ve öğrencinin geçmişi başvuru değerlendirmesinde önemlidir.</p>
 
-<p><a href="/work-travel/overview">Work & Travel</a> ürününden farklı olarak Work & Study’de <strong>okul–iş dengesi</strong> ve çoğu zaman daha uzun süreli belge/mali ispat beklentisi öne çıkar.</p>
+<p>Bütçe tarafında ilk ay konaklama depozitosu, ulaşım kartı, sağlık sigortası, telefon hattı, temel alışveriş ve acil durum fonu ayrı hesaplanmalıdır. Çalışma geliri planı destekleyebilir fakat başvuru ve ilk yerleşim bütçesinin yerine geçmemelidir. <a href="/work-study/basvuru-sartlari">Başvuru şartları</a> sayfası bu tabloyu kurmak için başlangıç noktasıdır.</p>
 
 <h2 id="checklist">Kontrol listesi</h2>
-<p>Hedef ülke için: kayıtlı kurum mu, program süresi ve haftalık ders saati nedir, çalışma hakkı hangi vize notunda tanımlı, sağlık sigortası ve konaklama kalemleri tamam mı? Bu sorulara cevap vermeden uçuş ve iş arama adımına geçmeyin.</p>
+<p>Karar vermeden önce şu başlıklar netleşmelidir: seçilen kurum kayıtlı mı, program çalışma hakkıyla uyumlu mu, ders saatleri çalışma planına izin veriyor mu, konaklama ilk ay için güvenli mi, mali yeterlilik belgeleri hazırlanabiliyor mu, sağlık sigortası ve vize takvimi çakışıyor mu?</p>
+
+<p>Bu soruların tamamı “evet” olmadan uçuş, iş arama ve konaklama adımlarına geçmek risklidir. Campus Global, adayın hedefini ve ülke seçeneklerini bu kontrol listesiyle karşılaştırarak daha gerçekçi bir yol haritası oluşturmasına destek olur.</p>
 
 <h2 id="sonraki">Sonraki adımlar</h2>
-<p><a href="/work-study/basvuru-sartlari">Başvuru şartları</a> · <a href="/work-study/avustralya-irlanda-karsilastirma">Avustralya–İrlanda karşılaştırması</a> · <a href="/work-travel/overview">Work & Travel (ayrı ürün)</a> · <a href="/iletisim">İletişim</a></p>
+<p><a href="/work-study/basvuru-sartlari">Başvuru şartları</a> · <a href="/work-study/avustralya-irlanda-karsilastirma">Avustralya–İrlanda karşılaştırması</a> · <a href="/work-study/kanada">Kanada</a> · <a href="/work-study/avustralya">Avustralya</a> · <a href="/work-travel/overview">Work & Travel</a> · <a href="/iletisim">İletişim</a></p>

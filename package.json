@@ -14,7 +14,7 @@
     "studio:deploy": "npm run deploy --prefix studio",
     "sanity:seed": "tsx scripts/seed-sanity-navigation.mts",
     "sanity:import-articles": "tsx scripts/import-articles-to-sanity.mts",
-    "content:import-optimized": "tsx scripts/import-optimized-content.mts all",
+    "content:import-optimized": "tsx scripts/import-optimized-content.mts",
     "sanity:fix-keys": "tsx scripts/fix-sanity-array-keys.mts",
     "sanity:setup": "npm run sanity:seed && npm run sanity:import-articles"
   },

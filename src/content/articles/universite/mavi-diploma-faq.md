@@ -1,43 +1,55 @@
 ---
-title: "Mavi diploma (IB) sık sorulanlar: denklik, YÖK ve yurtdışı başvuru"
-description: "Türkiye’de mavi diploma tabiri, IBDP ile ilişki, YÖK denkliği sürecinde sık sorulanlar ve yurtdışı üniversite başvurusunda evrak seti. Resmi teyit vurgusu."
-keywords: "mavi diploma, IB denkliği, YÖK IB, yurtdışı üniversite, Campus Global"
+title: "Mavi diploma ve IB sık sorulanlar: resmi terim, denklik ve yurtdışı başvuru etkisi"
+description: "Mavi diploma ifadesi, IB Diploma Programme ile ilişkisi, YÖK ve yurtdışı başvurularda belge kullanımı hakkında güvenli SSS rehberi."
+keywords: "mavi diploma, IB diploma, IB denkliği, YÖK IB, yurtdışı üniversite başvurusu, Campus Global"
 publishedISO: "2026-05-01T10:00:00+03:00"
 eyebrow: "Üniversite"
 section: "Bilgi bankası"
-readingMinutes: 9
+readingMinutes: 7
 toc:
   - id: terim
-    label: "Terim netliği"
+    label: "Mavi diploma neyi ifade eder?"
+    depth: 2
+  - id: ib
+    label: "IB ile ilişkisi"
     depth: 2
   - id: yok
-    label: "YÖK ve denklik"
+    label: "YÖK ve resmi işlemler"
     depth: 2
-  - id: yurtdisi
-    label: "Yurtdışı başvuru"
+  - id: basvuru
+    label: "Yurtdışı başvuruda kullanımı"
     depth: 2
-  - id: sonraki
-    label: "Sonraki adımlar"
+  - id: campus
+    label: "Campus Global ile belge okuması"
     depth: 2
 faq:
+  - question: "Mavi diploma resmi bir belge adı mı?"
+    answer: "Günlük kullanımda farklı anlamlara gelebilir. Resmi işlemlerde okulun verdiği diploma, transkript ve program adı esas alınmalıdır."
   - question: "Mavi diploma her IB okulunda aynı mı?"
-    answer: "Okul müfredatı ve MEB/özel statü farklılıkları olabilir; resmi belge üzerinden hareket edin."
+    answer: "Hayır. Okul statüsü, verilen belge türü ve müfredat yapısı değişebilir. Full IB Diploma ile course certificate ayrımı dikkatle okunmalıdır."
   - question: "YÖK denkliği otomatik mi?"
-    answer: "Hayır; başvuru, belge seti ve güncel YÖK duyurularına tabidir."
-  - question: "IB’siz Türkiye lisesiyle aynı mı?"
-    answer: "Başvuru dosyası ve ülke dönüşüm tabloları farklıdır; danışmanınızla tablo çıkarın."
+    answer: "Hayır. YÖK süreçleri resmi başvuru ve güncel duyurulara bağlıdır. Diploma türü tek başına otomatik sonuç anlamına gelmez."
+  - question: "Yurtdışı üniversite başvurusunda avantaj sağlar mı?"
+    answer: "IB Diploma, özellikle HL ders seçimi ve predicted grades ile güçlü bir akademik sinyal olabilir; ancak kabul okul ve bölüm şartlarına bağlıdır."
+  - question: "Campus Global nasıl yardımcı olur?"
+    answer: "Campus Global IB ders seçimi, predicted grades, başvuru metni ve ülke şartlarını birlikte değerlendirerek belge setinin doğru kullanılmasına destek olur."
 ---
 
-<p>“<strong>Mavi diploma</strong>” ifadesi günlük dilde çoğu zaman <strong>IB Diploma Programme</strong> mezuniyetiyle ilişkilendirilir. Resmi işlemlerde okulunuzun verdiği <strong>transkript ve diploma</strong> metinleri esas alınmalıdır.</p>
-
-<h2 id="terim">Terim netliği</h2>
-<p>IB Course Certificate ile Full Diploma farklıdır; üniversite şartnamesi hangi yapıyı istediğini yazar.</p>
-
-<h2 id="yok">YÖK ve denklik</h2>
-<p>Türkiye’de yükseköğretim erişimi veya denklik süreçleri için güncel YÖK kılavuzunu takip edin. <a href="/universite/yok-denklik">YÖK denkliği rehberi</a> genel çerçeve sunar.</p>
-
-<h2 id="yurtdisi">Yurtdışı başvuru</h2>
-<p>Predicted grades, referanslar ve HL ders eşlemesi başvurunun omurgasıdır. <a href="/universite/ib-diploma-notu">IB diploması özeti</a> ile birlikte okuyun.</p>
-
-<h2 id="sonraki">Sonraki adımlar</h2>
-<p><a href="/universite/belgeler">Belgeler</a> · <a href="/universite/hub">Hub</a> · <a href="/iletisim">İletişim</a></p>
+<p>“<strong>Mavi diploma</strong>” ifadesi Türkiye’de farklı bağlamlarda kullanılabilir ve çoğu zaman IB Diploma Programme ile ilişkilendirilir. Ancak resmi işlemlerde günlük terimler değil, okulun verdiği diploma, transkript ve program adı esas alınır.</p>
+<p>Bu nedenle yurtdışı başvuru veya YÖK süreci planlayan öğrencilerin “mavi diploma” ifadesini tek başına yeterli görmemesi gerekir. Hangi belgenin hangi kurum tarafından verildiği netleştirilmelidir.</p>
+<p>Bu konu aileler arasında sık karıştığı için başvuru öncesinde okuldan resmi belge örneği, diploma adı ve transkript formatı istenmelidir. Üniversite ya da resmi kurumlar, günlük kullanılan “mavi diploma” ifadesinden ziyade belgenin yasal ve akademik karşılığına bakar.</p>
+<h2 id="terim">Mavi diploma neyi ifade eder?</h2>
+<p>Mavi diploma, resmi bağlama göre farklı anlamlara gelebilen bir ifadedir. Bazı aileler bunu IB diploması için kullanırken, bazıları uluslararası geçerliliği olan diploma anlamında kullanır. Bu ayrım başvuru sırasında karışıklık yaratabilir.</p>
+<p>Üniversite başvurusunda okulun resmi diploma adı, transkript formatı, not sistemi ve program açıklaması kullanılır. Bu nedenle belgeyi veren kurumdan yazılı teyit almak önemlidir.</p>
+<h2 id="ib">IB ile ilişkisi</h2>
+<p>IB Diploma Programme, altı ders grubu, TOK, EE ve CAS bileşenleriyle yapılandırılmış uluslararası bir lise diplomasıdır. Full Diploma ile yalnızca bazı IB derslerinden alınan course certificate aynı şey değildir.</p>
+<p>Yurtdışı üniversiteler çoğu zaman toplam IB puanı, HL dersleri, predicted grades ve final sonuçlara bakar. Hedef bölümün hangi HL derslerini istediği başvuru başlamadan önce kontrol edilmelidir.</p>
+<h2 id="yok">YÖK ve resmi işlemler</h2>
+<p>YÖK süreçlerinde veya Türkiye’deki resmi işlemlerde belge türü, okul statüsü ve güncel mevzuat belirleyici olabilir. “Mavi diploma var” ifadesi tek başına otomatik sonuç sağlamaz.</p>
+<p>Denklik, tanıma veya Türkiye’de yükseköğretime erişim gibi konularda resmi YÖK ve ilgili kurum kaynakları takip edilmelidir. Bu alanlarda garanti dilden kaçınmak gerekir.</p>
+<h2 id="basvuru">Yurtdışı başvuruda kullanımı</h2>
+<p>IB diploması, özellikle İngiltere, Hollanda, Kanada, ABD ve Avrupa başvurularında güçlü bir akademik çerçeve sunabilir. Ancak her ülke IB puanını farklı yorumlayabilir.</p>
+<p>Predicted grades, HL/SL ders dengesi, referanslar ve motivasyon metni birlikte değerlendirilir. Sadece diploma adı değil, öğrencinin akademik hikâyesi önemlidir.</p>
+<h2 id="campus">Campus Global ile belge okuması</h2>
+<p>Campus Global, öğrencinin diploma türünü, ders seçimini, hedef ülke şartlarını ve başvuru belgelerini birlikte okuyarak daha doğru bir strateji oluşturmasına destek olur.</p>
+<p>Bu destek resmi denklik veya kabul garantisi değildir; ancak öğrencinin hangi belgeleri nasıl sunması gerektiğini daha net anlamasını sağlar.</p>

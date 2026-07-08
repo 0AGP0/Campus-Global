@@ -5,7 +5,7 @@ keywords: "post study work permit, mezuniyet sonrası çalışma izni, work stud
 publishedISO: "2026-05-02T10:00:00+03:00"
 eyebrow: "Work & Study"
 section: "Program rehberi"
-readingMinutes: 12
+readingMinutes: 13
 toc:
   - id: kavram
     label: "Kavram"
@@ -24,40 +24,42 @@ toc:
     depth: 2
 faq:
   - question: "Kısa dil kursu sonrası otomatik PGWP var mı?"
-    answer: "Genelde hayır; akademik program ve resmi şartlar belirleyicidir."
+    answer: "Genellikle hayır. Post-study veya PGWP gibi haklar çoğu sistemde program türü, kurum uygunluğu, süre ve resmi şartlara bağlıdır; kısa dil kursları bu kapsama otomatik girmez."
   - question: "Süre uzatılabilir mi?"
-    answer: "Ülkeye göre iç içe başvuru veya ek eğitim senaryoları vardır; güncel mevzuata bakın."
+    answer: "Bu ülkeye ve vize sınıfına göre değişir. Bazı sistemlerde ek eğitim veya yeni başvuru senaryoları olabilir; ancak uzatma hakkı garanti kabul edilmemelidir."
   - question: "YL ile aynı mı?"
-    answer: "Benzer hedef, farklı vize sınıfları; YL rehberinde ayrıntı vardır."
+    answer: "Hayır, hedef benzer olabilir ama vize sınıfı, program seviyesi ve değerlendirme kriterleri farklıdır. Yüksek lisans sonrası çalışma planı ayrıca okunmalıdır."
   - question: "İş teklifi şart mı?"
-    answer: "Ülkeye ve vize sınıfına göre değişir; bazı hatlarda işveren sponsorluğu gerekir, bazılarında değildir."
+    answer: "Bazı ülkelerde iş teklifi veya işveren sponsorluğu gerekebilir, bazılarında program mezuniyeti esas alınabilir. Bu ayrım resmi göçmenlik kaynaklarıyla doğrulanmalıdır."
 ---
 
-<p><strong>Post-study</strong> (mezuniyet sonrası çalışma) izinleri; <strong>program süresi</strong>, <strong>kurum/statü</strong> ve bazen <strong>meslek listeleri</strong> ile bağlanır. Work & Study planı yaparken bu hattı <strong>erken</strong> okumak, süre ve bütçe hatalarını azaltır.</p>
+<p><strong>Post-study</strong>, öğrencinin eğitimini tamamladıktan sonra belirli koşullarla çalışma statüsüne geçebilmesini ifade eder. Work & Study planı yapan adaylar için bu başlık önemlidir; çünkü kısa dönem eğitim, dil okulu, sertifika, lisans veya yüksek lisans farklı sonuçlar doğurabilir.</p>
 
-<p>Bu özet hukuki danışmanlık değildir; başvuru öncesi <strong>resmi göçmenlik kaynakları</strong> ve kabul ofisi yönergeleri esas alınmalıdır.</p>
+<p>Bu sayfa hukuki danışmanlık değildir. Amaç, adayın “eğitimden sonra ne olur?” sorusunu erken sormasını sağlamak ve yanlış beklentileri azaltmaktır. Nihai koşullar her zaman güncel resmi göçmenlik kaynakları ve kurum yönergeleriyle doğrulanmalıdır.</p>
 
 <h2 id="kavram">Kavram</h2>
-<p>Öğrenci vizesinden farklı bir <strong>geçiş başvurusu</strong> veya otomatik hak olabilir; ülkeye göre değişir.</p>
+<p>Post-study hakkı bazı ülkelerde mezuniyet sonrası ayrı bir başvuru, bazı ülkelerde belirli bir vize geçişi, bazı ülkelerde ise işveren sponsorluğu gerektiren bir süreç olabilir. Bu hak, yalnızca ülke adıyla değil, program türü ve kurum statüsüyle birlikte değerlendirilir.</p>
 
-<p>Bazı sistemlerde mezuniyet tarihi, son ders günü ve sınav sonuçlarının açıklanması <strong>statü başlangıcını</strong> etkileyebilir; akademik takvimle uyumlu planlayın.</p>
+<p>Mezuniyet tarihi, son ders günü, final notlarının açıklanması, tam zamanlı statü ve uzaktan eğitim oranı gibi teknik ayrıntılar süreci etkileyebilir. Bu yüzden program seçimi yapılırken post-study hedefi en baştan konuşulmalıdır.</p>
 
 <h2 id="ulke">Ülke farkları</h2>
-<p><a href="/work-study/kanada">Kanada PGWP</a>, <a href="/work-study/avustralya">Avustralya</a> mezuniyet hatları ve <a href="/work-study/irlanda">İrlanda</a> senaryoları ayrı ayrı resmi kaynaklardan doğrulanmalıdır.</p>
+<p><a href="/work-study/kanada">Kanada</a>, <a href="/work-study/avustralya">Avustralya</a> ve <a href="/work-study/irlanda">İrlanda</a> gibi ülkelerde post-study mantığı farklı kriterlerle ilerler. Aynı ülkede bile dil okulu, college, lisans veya yüksek lisans farklı sonuçlar doğurabilir.</p>
 
-<p>Aynı ülkede bile <strong>program türü</strong> (dil, sertifika, lisans, master) farklı sonuçlar doğurur; “arkadaşım böyle yaptı” örneği yerine kendi program kodunuzu baz alın.</p>
+<p>Bu nedenle “arkadaşım aynı ülkede kaldı” örneği güvenli karşılaştırma değildir. Adayın kendi program kodu, kurum tipi, eğitim süresi ve mezuniyet koşulları esas alınmalıdır.</p>
 
 <h2 id="tuzak">Yaygın yanlış anlamalar</h2>
 <ul>
-<li>“Dil okulu bitince otomatik uzun çalışma” beklentisi çoğu sistemde doğru değildir.</li>
-<li>“Part-time iş deneyimi post-study süresine eklenir” iddiası ülkeye göre yanlıştır.</li>
-<li>“Mezuniyetten önce tam zamanlı çalıştım, post-study garanti” — program şartları ve izin türü ayrı incelenmelidir.</li>
+<li>“Dil okulu bitince otomatik uzun çalışma hakkı doğar” beklentisi çoğu sistemde doğru değildir.</li>
+<li>“Part-time iş yaptım, bu post-study hakkımı artırır” iddiası ülkeye göre geçersiz olabilir.</li>
+<li>“Okula kabul aldım, mezuniyet sonrası statüm garanti” düşüncesi yanlıştır; programı tamamlama ve resmi koşullar belirleyicidir.</li>
 </ul>
 
-<h2 id="yl">Yüksek lisansla ilişki</h2>
-<p>Master sonrası çalışma ve kariyer planı için <a href="/yuksek-lisans/post-study-calisma">yüksek lisans post-study özeti</a> ile birlikte düşünün.</p>
+<p>Bu yanlış anlamaları azaltmak için program seçimi aşamasında post-study hedefi not edilmeli, uygunluk resmi kaynaklardan kontrol edilmeli ve alternatif plan hazırlanmalıdır.</p>
 
-<p>Work & Study ile başlayıp sonra <a href="/yuksek-lisans/hub">YL</a> hedefliyorsanız, lisans tamamlama veya sınav kanıtı çizelgesini erken senkronize edin.</p>
+<h2 id="yl">Yüksek lisansla ilişki</h2>
+<p>Work & Study ile başlayan adaylar, daha sonra <a href="/yuksek-lisans/hub">yüksek lisans</a> hedefleyebilir. Bu durumda lisans diploması, not ortalaması, dil skoru, referanslar ve mali plan yeniden değerlendirilir.</p>
+
+<p><a href="/yuksek-lisans/post-study-calisma">Yüksek lisans post-study çalışma</a> içeriği, master sonrası çalışma hedefini ayrı bir bağlamda açıklar. Work & Study, yüksek lisansa hazırlık zemini olabilir; ancak doğrudan geçiş garantisi sunmaz.</p>
 
 <h2 id="sonraki">Sonraki adımlar</h2>
 <p><a href="/work-study/overview">Work & Study nedir?</a> · <a href="/work-study/basvuru-sartlari">Başvuru şartları</a> · <a href="/yuksek-lisans/hub">Yüksek lisans hub</a> · <a href="/iletisim">İletişim</a></p>
