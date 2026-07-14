@@ -1,0 +1,387 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getSiteOrigin } from "@/data/site-origin";
+
+const title = "Campus Global — QR İletişim";
+const description =
+  "Campus Global iletişim bilgileri, ofis adresleri ve sosyal medya hesapları.";
+const canonicalUrl = `${getSiteOrigin()}/qr`;
+
+const email = "info@campusglobal.com.tr";
+const mailHref = `mailto:${email}`;
+const telTr = "+90 312 911 96 63";
+const telTrHref = "tel:+903129119663";
+const telDe = "+49 1573 5610475";
+const telDeHref = "tel:+4915735610475";
+const waHref = "https://wa.me/903129119663";
+const webHref = "https://campusglobal.com.tr/";
+
+const quickActions = [
+  {
+    href: waHref,
+    label: "WhatsApp",
+    external: true,
+    tone: "bg-[#25d366] text-white hover:brightness-105",
+    icon: "wa",
+  },
+  {
+    href: telTrHref,
+    label: "Ara",
+    external: false,
+    tone: "bg-brand-teal text-white hover:brightness-105",
+    icon: "phone",
+  },
+  {
+    href: mailHref,
+    label: "E-posta",
+    external: false,
+    tone: "bg-brand-flame text-white hover:brightness-105",
+    icon: "mail",
+  },
+  {
+    href: webHref,
+    label: "Web Sitesi",
+    external: true,
+    tone: "bg-zap-burst text-zap-night hover:brightness-105",
+    icon: "web",
+  },
+] as const;
+
+const trOffices = [
+  {
+    id: "ankara",
+    title: "Ankara Merkez",
+    badge: "Merkez Ofis",
+    address:
+      "Barbaros Mahallesi, Tunalı Hilmi Caddesi, Yavuz İş Merkezi, No: 81/9, 5. Kat, Daire: 9, 06660 Çankaya / Ankara",
+    mapHref:
+      "https://www.google.com/maps/place/Avrupa+G%C3%B6%C3%A7+Yurtd%C4%B1%C5%9F%C4%B1+E%C4%9Fitim+%26+Kariyer+Dan%C4%B1%C5%9Fmanl%C4%B1k/@39.906662,32.8601253,219m/data=!3m1!1e3!4m14!1m7!3m6!1s0x14d34fcd21b7292f:0x1380e1b505a67f99!2zQXZydXBhIEfDtsOcIFl1cnRkxLHFn8SxIEXEn2l0aW0gJiBLYXJpeWVyIERhbsSxxZ9tYW5sxLFr!8m2!3d39.906661!4d32.861343!16s%2Fg%2F11vxcq7sjy!3m5!1s0x14d34fcd21b7292f:0x1380e1b505a67f99!8m2!3d39.906661!4d32.861343!16s%2Fg%2F11vxcq7sjy?entry=ttu",
+    accent: "border-l-brand-flame",
+    badgeTone: "bg-brand-flame text-white",
+  },
+  {
+    id: "istanbul",
+    title: "İstanbul Merkez",
+    badge: null,
+    address:
+      "Osmanağa Mah. Kuşdili Cd. Atakol Han Apt. No: 5 Kat: 3 Daire No: 4, 34714 Kadıköy/İstanbul",
+    mapHref:
+      "https://www.google.com/maps/search/?api=1&query=Atakol+Han,+Osmana%C4%9Fa,+Ku%C5%9Fdili+Cd.+No%3A5,+34714+Kad%C4%B1k%C3%B6y",
+    accent: "border-l-brand-teal",
+    badgeTone: "",
+  },
+  {
+    id: "izmir",
+    title: "İzmir Ofisi",
+    badge: null,
+    address: "Adalet, Folkart Tower No: 39/31, 35530 Bayraklı/İzmir",
+    mapHref: "https://maps.google.com/?q=Adalet+Folkart+Tower+%C4%B0zmir",
+    accent: "border-l-brand-aqua",
+    badgeTone: "",
+  },
+] as const;
+
+const deOffices = [
+  {
+    id: "bremen",
+    title: "Bremen Ofisi",
+    address: "Karl-Ferdinand-Braun-Straße 5, 28359 Bremen",
+    mapHref: "https://maps.google.com/?q=Karl-Ferdinand-Braun-Stra%C3%9Fe+5+Bremen",
+    accent: "border-l-zap-burst",
+  },
+  {
+    id: "dortmund",
+    title: "Dortmund Ofisi",
+    address: "Florianstraße 15-21, 44139 Dortmund",
+    mapHref: "https://maps.google.com/?q=Florianstra%C3%9Fe+15-21+Dortmund",
+    accent: "border-l-brand-coral",
+  },
+] as const;
+
+const socialLinks = [
+  {
+    href: "https://www.instagram.com/avrupagoc/",
+    label: "Instagram",
+    tone: "from-[#f09433] via-[#dc2743] to-[#bc1888]",
+  },
+  {
+    href: "https://www.facebook.com/avrupagoc",
+    label: "Facebook",
+    tone: "from-[#1877f2] to-[#0d65d9]",
+  },
+  {
+    href: "https://www.youtube.com/@avrupagoc",
+    label: "YouTube",
+    tone: "from-[#ff0000] to-[#cc0000]",
+  },
+  {
+    href: "https://www.linkedin.com/company/avrupagoc/",
+    label: "LinkedIn",
+    tone: "from-[#0a66c2] to-[#004182]",
+  },
+  {
+    href: waHref,
+    label: "WhatsApp",
+    tone: "from-[#25d366] to-[#128c7e]",
+  },
+] as const;
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogTitle="Campus Global — İletişim"
+  ogDescription={description}
+  ogType="website"
+  robots="noindex, nofollow"
+>
+  <div
+    class="relative flex min-h-0 flex-1 flex-col overflow-x-hidden bg-gradient-to-br from-white via-[#e6faf8] to-brand-aqua/25 text-zap-ink"
+  >
+    <div
+      class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#06324208_1px,transparent_1px),linear-gradient(to_bottom,#06324208_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] opacity-60"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none absolute -right-24 top-16 h-72 w-72 rounded-full bg-brand-aqua/25 blur-3xl"
+      aria-hidden="true"
+    />
+    <div
+      class="pointer-events-none absolute -left-20 bottom-24 h-64 w-64 rounded-full bg-brand-flame/10 blur-3xl"
+      aria-hidden="true"
+    />
+
+    <main class="relative z-[1] mx-auto w-full max-w-2xl px-4 py-10 sm:px-6 md:py-14">
+      <header
+        class="overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-br from-white via-[#f4fdfb] to-brand-aqua/30 p-6 shadow-brutal sm:p-8"
+      >
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          {
+            ["tr", "de", "it", "nl"].map((code) => (
+              <img
+                src={`https://flagcdn.com/${code}.svg`}
+                alt=""
+                width="28"
+                height="20"
+                class="rounded-sm shadow-sm"
+                loading="eager"
+                decoding="async"
+              />
+            ))
+          }
+        </div>
+        <div class="mt-5 flex justify-center">
+          <img
+            src="/campus-global-logo.png"
+            alt="Campus Global"
+            width="220"
+            height="88"
+            class="h-[72px] w-auto object-contain sm:h-20"
+          />
+        </div>
+        <p class="mt-4 text-center text-[11px] font-black uppercase tracking-[0.28em] text-brand-teal">
+          Yurtdışı eğitim danışmanlığı
+        </p>
+      </header>
+
+      <section class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4" aria-label="Hızlı iletişim">
+        {
+          quickActions.map((action) => (
+            <a
+              href={action.href}
+              class:list={[
+                "inline-flex min-h-[5.5rem] flex-col items-center justify-center gap-2 rounded-2xl border-4 border-zap-ink px-3 py-4 text-[12px] font-black uppercase tracking-wide shadow-[4px_4px_0_#063242] transition",
+                action.tone,
+              ]}
+              {...(action.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {action.icon === "wa" ? (
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.85 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              ) : null}
+              {action.icon === "phone" ? (
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+              ) : null}
+              {action.icon === "mail" ? (
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              ) : null}
+              {action.icon === "web" ? (
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z" />
+                </svg>
+              ) : null}
+              <span>{action.label}</span>
+            </a>
+          ))
+        }
+      </section>
+
+      <section class="mt-10">
+        <p class="text-[11px] font-black uppercase tracking-[0.24em] text-brand-teal">İletişim bilgileri</p>
+        <div class="mt-4 space-y-0 overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal">
+          <div class="border-b-2 border-zap-ink/10 border-l-4 border-l-brand-flame px-5 py-4 sm:px-6">
+            <p class="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">
+              <img src="https://flagcdn.com/tr.svg" alt="" width="16" height="12" class="rounded-sm" />
+              Türkiye
+            </p>
+            <a
+              href={telTrHref}
+              class="mt-1 inline-flex min-h-11 items-center text-lg font-black text-zap-night underline-offset-4 hover:text-brand-teal hover:underline"
+            >
+              {telTr}
+            </a>
+          </div>
+          <div class="border-b-2 border-zap-ink/10 border-l-4 border-l-zap-burst px-5 py-4 sm:px-6">
+            <p class="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">
+              <img src="https://flagcdn.com/de.svg" alt="" width="16" height="12" class="rounded-sm" />
+              Almanya
+            </p>
+            <a
+              href={telDeHref}
+              class="mt-1 inline-flex min-h-11 items-center text-lg font-black text-zap-night underline-offset-4 hover:text-brand-teal hover:underline"
+            >
+              {telDe}
+            </a>
+          </div>
+          <div class="border-b-2 border-zap-ink/10 border-l-4 border-l-brand-aqua px-5 py-4 sm:px-6">
+            <p class="text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">E-posta</p>
+            <a
+              href={mailHref}
+              class="mt-1 inline-flex min-h-11 items-center text-base font-bold text-zap-ink underline-offset-4 hover:text-brand-teal hover:underline"
+            >
+              {email}
+            </a>
+          </div>
+          <div class="border-l-4 border-l-brand-coral px-5 py-4 sm:px-6">
+            <p class="text-[11px] font-black uppercase tracking-[0.2em] text-brand-teal">Çalışma saatleri</p>
+            <p class="mt-2 text-[15px] font-semibold text-zap-ink/80">
+              <strong class="text-zap-night">Hafta içi:</strong> 09:00 – 18:00
+            </p>
+            <p class="mt-1 text-[15px] font-semibold text-zap-ink/80">
+              <strong class="text-zap-night">Cumartesi:</strong> 09:00 – 13:00
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <p class="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-brand-teal">
+          <img src="https://flagcdn.com/tr.svg" alt="" width="16" height="12" class="rounded-sm" />
+          Türkiye ofisleri
+        </p>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          {
+            trOffices.map((office, i) => (
+              <article
+                class:list={[
+                  "rounded-2xl border-4 border-zap-ink border-l-8 bg-white p-5 shadow-[4px_4px_0_#063242]",
+                  office.accent,
+                  i === 0 && "sm:col-span-2",
+                ]}
+              >
+                <div class="flex items-start justify-between gap-3">
+                  <h2 class="text-base font-black uppercase tracking-tight text-zap-night">{office.title}</h2>
+                  {
+                    office.badge ? (
+                      <span
+                        class:list={[
+                          "shrink-0 rounded-full border-2 border-zap-ink px-2.5 py-1 text-[9px] font-black uppercase tracking-wide",
+                          office.badgeTone,
+                        ]}
+                      >
+                        {office.badge}
+                      </span>
+                    ) : null
+                  }
+                </div>
+                <p class="mt-2 text-[13px] font-medium leading-relaxed text-zap-ink/75">{office.address}</p>
+                <a
+                  href={office.mapHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-brand-aqua/90 px-4 text-[11px] font-black uppercase tracking-wide text-zap-night transition hover:brightness-105"
+                >
+                  Yol tarifi al
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <p class="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-brand-teal">
+          <img src="https://flagcdn.com/de.svg" alt="" width="16" height="12" class="rounded-sm" />
+          Almanya ofisleri
+        </p>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          {
+            deOffices.map((office) => (
+              <article
+                class:list={[
+                  "rounded-2xl border-4 border-zap-ink border-l-8 bg-white p-5 shadow-[4px_4px_0_#063242]",
+                  office.accent,
+                ]}
+              >
+                <h2 class="text-base font-black uppercase tracking-tight text-zap-night">{office.title}</h2>
+                <p class="mt-2 text-[13px] font-medium leading-relaxed text-zap-ink/75">{office.address}</p>
+                <a
+                  href={office.mapHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border-2 border-zap-ink bg-zap-burst px-4 text-[11px] font-black uppercase tracking-wide text-zap-night transition hover:brightness-105"
+                >
+                  Yol tarifi al
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <p class="text-[11px] font-black uppercase tracking-[0.24em] text-brand-teal">Sosyal medya</p>
+        <div class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-4 border-zap-ink bg-white px-3 py-3 text-[12px] font-black uppercase tracking-wide text-zap-ink shadow-[3px_3px_0_#063242] transition hover:-translate-y-0.5"
+              >
+                <span
+                  class:list={["h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br", link.tone]}
+                  aria-hidden="true"
+                />
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <div class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <a
+          href={webHref}
+          class="inline-flex min-h-12 items-center justify-center rounded-full border-4 border-zap-ink bg-white px-6 py-3 text-sm font-black uppercase text-zap-night shadow-brutal transition hover:bg-[#f6fdfc]"
+        >
+          campusglobal.com.tr
+        </a>
+        <a
+          href="/"
+          class="inline-flex min-h-12 items-center justify-center rounded-full border-4 border-zap-ink bg-zap-burst px-6 py-3 text-sm font-black uppercase text-zap-night shadow-brutal transition hover:brightness-105"
+        >
+          Ana sayfa
+        </a>
+      </div>
+    </main>
+  </div>
+</Layout>
