@@ -223,6 +223,131 @@ const socialLinks = [
         }
       </section>
 
+      <section class="mt-10" aria-labelledby="qr-form-heading">
+        <div class="mb-4 flex items-center gap-3">
+          <span
+            class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-teal to-brand-aqua text-white shadow-[3px_3px_0_#063242]"
+            aria-hidden="true"
+          >
+            <svg class="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </span>
+          <h2 id="qr-form-heading" class="text-base font-black uppercase tracking-tight text-zap-night">
+            Bilgi Formu
+          </h2>
+        </div>
+
+        <form class="qr-form" id="qrForm" novalidate>
+          <div class="qr-form-block" data-accent="blue">
+            <p class="qr-form-label">Sen</p>
+            <div class="qr-seg" role="group" data-exclusive>
+              <label class="qr-seg-item"><input type="checkbox" name="rol" value="ogrenci" /><span>Öğrenci</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="rol" value="veli" /><span>Veli</span></label>
+            </div>
+          </div>
+
+          <div class="qr-form-grid">
+            <label class="qr-form-block" data-accent="blue">
+              <span class="qr-form-label">Ad Soyad</span>
+              <input class="qr-input" type="text" name="adSoyad" autocomplete="name" required placeholder="Adın ve soyadın" />
+            </label>
+            <label class="qr-form-block" data-accent="teal">
+              <span class="qr-form-label">Şehir</span>
+              <input class="qr-input" type="text" name="sehir" autocomplete="address-level2" required placeholder="Örn. Ankara" />
+            </label>
+          </div>
+
+          <div class="qr-form-grid">
+            <label class="qr-form-block" data-accent="teal">
+              <span class="qr-form-label">Telefon</span>
+              <input class="qr-input" type="tel" name="telefon" autocomplete="tel" required placeholder="05xx xxx xx xx" />
+            </label>
+            <label class="qr-form-block" data-accent="orange">
+              <span class="qr-form-label">E-posta</span>
+              <input class="qr-input" type="email" name="eposta" autocomplete="email" required placeholder="ornek@mail.com" />
+            </label>
+          </div>
+
+          <div class="qr-form-grid">
+            <label class="qr-form-block" data-accent="purple">
+              <span class="qr-form-label">Yerleştirme Puanı</span>
+              <input class="qr-input" type="text" name="yerlestirmePuani" inputmode="decimal" placeholder="Örn. 420" />
+            </label>
+            <label class="qr-form-block" data-accent="gold">
+              <span class="qr-form-label">Hedef Bölüm</span>
+              <input class="qr-input" type="text" name="hedefBolum" placeholder="Örn. Bilgisayar Müh." />
+            </label>
+          </div>
+
+          <div class="qr-form-block" data-accent="teal">
+            <p class="qr-form-label">Alan</p>
+            <div class="qr-seg" role="group" data-exclusive>
+              <label class="qr-seg-item"><input type="checkbox" name="alan" value="sayisal" /><span>Sayısal</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="alan" value="sozel" /><span>Sözel</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="alan" value="ea" /><span>Eşit Ağırlık</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="alan" value="dil" /><span>Dil</span></label>
+            </div>
+          </div>
+
+          <div class="qr-form-block" data-accent="purple">
+            <p class="qr-form-label">Lise Türü</p>
+            <div class="qr-seg qr-seg--grid" role="group" data-exclusive>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="anadolu" /><span>Anadolu</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="fen" /><span>Fen</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="acik" /><span>Açık</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="ozel-anadolu" /><span>Özel Anadolu</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="ozel-fen" /><span>Özel Fen</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="liseTuru" value="diger" /><span>Diğer</span></label>
+            </div>
+          </div>
+
+          <div class="qr-form-block" data-accent="orange">
+            <p class="qr-form-label">İngilizce Seviyen</p>
+            <div class="qr-seg" role="group" data-exclusive>
+              <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="az" /><span>Az</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="orta" /><span>Orta</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="cok-iyi" /><span>Çok iyi</span></label>
+            </div>
+          </div>
+
+          <div class="qr-form-block" data-accent="blue">
+            <p class="qr-form-label">Üniversite Hedefi</p>
+            <div class="qr-seg" role="group" data-exclusive>
+              <label class="qr-seg-item"><input type="checkbox" name="universiteHedefi" value="devlet" /><span>Devlet</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="universiteHedefi" value="ozel" /><span>Özel</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="universiteHedefi" value="yurt-disi" /><span>Yurt Dışı</span></label>
+            </div>
+          </div>
+
+          <div class="qr-form-block" data-accent="red">
+            <p class="qr-form-label">Pasaportun</p>
+            <div class="qr-seg" role="group" data-exclusive>
+              <label class="qr-seg-item"
+                ><input type="checkbox" name="pasaport" value="yesil-var" /><span
+                  ><i class="qr-dot qr-dot--green" aria-hidden="true"></i>Yeşil Var</span
+                ></label
+              >
+              <label class="qr-seg-item"
+                ><input type="checkbox" name="pasaport" value="bordo-var" /><span
+                  ><i class="qr-dot qr-dot--bordo" aria-hidden="true"></i>Bordo Var</span
+                ></label
+              >
+              <label class="qr-seg-item"><input type="checkbox" name="pasaport" value="henuz-yok" /><span>Henüz Yok</span></label>
+              <label class="qr-seg-item"
+                ><input type="checkbox" name="pasaport" value="yesil-hakkim-var" /><span
+                  ><i class="qr-dot qr-dot--green" aria-hidden="true"></i>Yeşil Hakkı</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="qr-form-submit" id="qrFormSubmit">Gönder</button>
+          <p class="qr-form-success" id="qrFormSuccess" hidden>Bilgilerin alındı, teşekkürler.</p>
+          <p class="qr-form-error" id="qrFormError" hidden>Gönderilemedi, lütfen tekrar dene.</p>
+        </form>
+      </section>
+
       <section class="mt-10">
         <p class="text-[11px] font-black uppercase tracking-[0.24em] text-brand-teal">İletişim bilgileri</p>
         <div class="mt-4 space-y-0 overflow-hidden rounded-2xl border-4 border-zap-ink bg-white shadow-brutal">
@@ -384,4 +509,512 @@ const socialLinks = [
       </div>
     </main>
   </div>
+
+  <style is:global>
+    .qr-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-radius: 1rem;
+      border: 4px solid #063242;
+      background: rgba(255, 255, 255, 0.97);
+      padding: clamp(1rem, 3.5vw, 1.35rem);
+      box-shadow: 4px 4px 0 #063242;
+    }
+
+    .qr-form-block {
+      display: block;
+      min-width: 0;
+      margin: 0;
+      --accent-soft: #eff6ff;
+      --accent-mid: #3b82f6;
+      --accent-text: #1d4ed8;
+      --accent-ring: rgba(59, 130, 246, 0.2);
+    }
+
+    .qr-form-block[data-accent="blue"] {
+      --accent-soft: #eff6ff;
+      --accent-mid: #3b82f6;
+      --accent-text: #1d4ed8;
+      --accent-ring: rgba(59, 130, 246, 0.2);
+    }
+    .qr-form-block[data-accent="teal"] {
+      --accent-soft: #f0fdfa;
+      --accent-mid: #00a39b;
+      --accent-text: #0f766e;
+      --accent-ring: rgba(0, 163, 155, 0.2);
+    }
+    .qr-form-block[data-accent="orange"] {
+      --accent-soft: #fff7ed;
+      --accent-mid: #f97316;
+      --accent-text: #c2410c;
+      --accent-ring: rgba(249, 115, 22, 0.2);
+    }
+    .qr-form-block[data-accent="purple"] {
+      --accent-soft: #f5f3ff;
+      --accent-mid: #8b5cf6;
+      --accent-text: #6d28d9;
+      --accent-ring: rgba(139, 92, 246, 0.2);
+    }
+    .qr-form-block[data-accent="gold"] {
+      --accent-soft: #fffbeb;
+      --accent-mid: #eab308;
+      --accent-text: #a16207;
+      --accent-ring: rgba(234, 179, 8, 0.22);
+    }
+    .qr-form-block[data-accent="red"] {
+      --accent-soft: #fef2f2;
+      --accent-mid: #f51d00;
+      --accent-text: #b91c1c;
+      --accent-ring: rgba(245, 29, 0, 0.18);
+    }
+
+    .qr-form-label {
+      display: block;
+      margin: 0 0 0.4rem;
+      padding-left: 0.45rem;
+      border-left: 2.5px solid var(--accent-mid);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--accent-text);
+    }
+
+    .qr-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 400px) {
+      .qr-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .qr-input {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #063242;
+      outline: none;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+    }
+
+    .qr-input::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .qr-input:focus {
+      border-color: var(--accent-mid);
+      background: var(--accent-soft);
+      box-shadow: 0 0 0 3px var(--accent-ring);
+    }
+
+    .qr-seg {
+      display: flex;
+      gap: 0;
+      padding: 3px;
+      border: 1px solid color-mix(in srgb, var(--accent-mid) 22%, #cbd5e1);
+      border-radius: 10px;
+      background: var(--accent-soft);
+    }
+
+    .qr-seg-item {
+      position: relative;
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .qr-seg-item + .qr-seg-item::before {
+      content: "";
+      position: absolute;
+      top: 22%;
+      bottom: 22%;
+      left: 0;
+      z-index: 1;
+      width: 1px;
+      background: color-mix(in srgb, var(--accent-mid) 28%, #cbd5e1);
+      pointer-events: none;
+    }
+
+    .qr-seg--grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      padding: 0;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--accent-mid) 22%, #cbd5e1);
+    }
+
+    .qr-seg--grid .qr-seg-item {
+      flex: none;
+      background: var(--accent-soft);
+    }
+
+    .qr-seg--grid .qr-seg-item::before {
+      display: none;
+    }
+
+    .qr-seg--grid .qr-seg-item span {
+      min-height: 2.4rem;
+      padding: 0.45rem 0.35rem;
+      border-radius: 0;
+      font-size: 0.74rem;
+      line-height: 1.2;
+      white-space: normal;
+    }
+
+    .qr-seg--grid .qr-seg-item:first-child span {
+      border-top-left-radius: 9px;
+    }
+    .qr-seg--grid .qr-seg-item:nth-child(3) span {
+      border-top-right-radius: 9px;
+    }
+    .qr-seg--grid .qr-seg-item:nth-child(4) span {
+      border-bottom-left-radius: 9px;
+    }
+    .qr-seg--grid .qr-seg-item:last-child span {
+      border-bottom-right-radius: 9px;
+    }
+
+    .qr-seg-item input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .qr-seg-item span {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      padding: 0.52rem 0.3rem;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #334155;
+      text-align: center;
+      white-space: nowrap;
+      transition:
+        background 0.15s,
+        color 0.15s,
+        box-shadow 0.15s;
+    }
+
+    .qr-seg-item input:checked + span {
+      background: #fff;
+      color: var(--accent-text);
+      box-shadow:
+        0 1px 4px rgba(15, 23, 42, 0.08),
+        inset 0 0 0 1.5px var(--accent-mid);
+    }
+
+    .qr-seg-item input:focus-visible + span {
+      outline: 2px solid var(--accent-mid);
+      outline-offset: 1px;
+    }
+
+    .qr-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+    .qr-dot--green {
+      background: #16a34a;
+    }
+    .qr-dot--bordo {
+      background: #9f1239;
+    }
+
+    .qr-form-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.15rem;
+      padding: 0.72rem 1rem;
+      border: 3px solid #063242;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #00a39b, #03d6ba);
+      box-shadow: 3px 3px 0 #063242;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #fff;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+    }
+
+    .qr-form-submit:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .qr-form-submit:active {
+      transform: scale(0.98);
+    }
+
+    .qr-form-submit:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .qr-form-success {
+      margin: 0;
+      text-align: center;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #00a39b;
+    }
+
+    .qr-form-error {
+      margin: 0;
+      text-align: center;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #b91c1c;
+    }
+
+    @media (max-width: 767px) {
+      .qr-form-submit:hover {
+        transform: none;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      "use strict";
+
+      var WEBHOOK_URL = "https://hook.eu2.make.com/gi9ljt1pln4gna968773eggx5okcjc9d";
+      var LABEL_MAP = {
+        rol: { ogrenci: "Öğrenci", veli: "Veli" },
+        alan: { sayisal: "Sayısal", sozel: "Sözel", ea: "Eşit Ağırlık", dil: "Dil" },
+        liseTuru: {
+          anadolu: "Anadolu",
+          fen: "Fen",
+          acik: "Açık",
+          "ozel-anadolu": "Özel Anadolu",
+          "ozel-fen": "Özel Fen",
+          diger: "Diğer",
+        },
+        ingilizce: { az: "Az", orta: "Orta", "cok-iyi": "Çok iyi" },
+        universiteHedefi: { devlet: "Devlet", ozel: "Özel", "yurt-disi": "Yurt Dışı" },
+        pasaport: {
+          "yesil-var": "Yeşil Var",
+          "bordo-var": "Bordo Var",
+          "henuz-yok": "Henüz Yok",
+          "yesil-hakkim-var": "Yeşil Hakkı",
+        },
+      };
+
+      function initExclusiveChips() {
+        document.querySelectorAll("[data-exclusive]").forEach(function (group) {
+          group.addEventListener("change", function (e) {
+            var input = e.target;
+            if (!input || input.type !== "checkbox" || !input.checked) return;
+            group.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+              if (cb !== input) cb.checked = false;
+            });
+          });
+        });
+      }
+
+      function initForm() {
+        var form = document.getElementById("qrForm");
+        var success = document.getElementById("qrFormSuccess");
+        var errorEl = document.getElementById("qrFormError");
+        var submitBtn = document.getElementById("qrFormSubmit");
+        if (!form) return;
+
+        function checkedLabel(name) {
+          var input = form.querySelector('input[name="' + name + '"]:checked');
+          if (!input) return "";
+          var map = LABEL_MAP[name];
+          return (map && map[input.value]) || input.value;
+        }
+
+        function setMessage(el, show) {
+          if (!el) return;
+          el.hidden = !show;
+        }
+
+        function buildPayload() {
+          return {
+            rol: checkedLabel("rol"),
+            adSoyad: (form.adSoyad.value || "").trim(),
+            sehir: (form.sehir.value || "").trim(),
+            telefon: (form.telefon.value || "").trim(),
+            eposta: (form.eposta.value || "").trim(),
+            yerlestirmePuani: (form.yerlestirmePuani.value || "").trim(),
+            hedefBolum: (form.hedefBolum.value || "").trim(),
+            alan: checkedLabel("alan"),
+            liseTuru: checkedLabel("liseTuru"),
+            ingilizce: checkedLabel("ingilizce"),
+            universiteHedefi: checkedLabel("universiteHedefi"),
+            pasaport: checkedLabel("pasaport"),
+            kaynak: "QR Sayfa",
+            tarih: new Date().toISOString(),
+          };
+        }
+
+        function toFormBody(payload) {
+          var body = new URLSearchParams();
+          Object.keys(payload).forEach(function (key) {
+            body.append(key, payload[key] == null ? "" : String(payload[key]));
+          });
+          return body.toString();
+        }
+
+        function postViaIframe(payload) {
+          return new Promise(function (resolve, reject) {
+            var frameName = "qrMakeFrame_" + Date.now();
+            var iframe = document.createElement("iframe");
+            iframe.name = frameName;
+            iframe.title = "make-webhook";
+            iframe.style.cssText = "position:absolute;width:0;height:0;border:0;visibility:hidden";
+            document.body.appendChild(iframe);
+
+            var f = document.createElement("form");
+            f.method = "POST";
+            f.action = WEBHOOK_URL;
+            f.target = frameName;
+            f.acceptCharset = "UTF-8";
+            f.style.display = "none";
+
+            Object.keys(payload).forEach(function (key) {
+              var input = document.createElement("input");
+              input.type = "hidden";
+              input.name = key;
+              input.value = payload[key] == null ? "" : String(payload[key]);
+              f.appendChild(input);
+            });
+
+            document.body.appendChild(f);
+
+            var done = false;
+            function cleanup(ok) {
+              if (done) return;
+              done = true;
+              try {
+                f.remove();
+              } catch (e) {}
+              try {
+                iframe.remove();
+              } catch (e) {}
+              if (ok) resolve();
+              else reject(new Error("iframe post failed"));
+            }
+
+            iframe.addEventListener("load", function () {
+              cleanup(true);
+            });
+            try {
+              f.submit();
+            } catch (err) {
+              cleanup(false);
+              return;
+            }
+            setTimeout(function () {
+              cleanup(true);
+            }, 2000);
+          });
+        }
+
+        function sendPayload(payload) {
+          var body = toFormBody(payload);
+
+          return fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            },
+            body: body,
+            mode: "cors",
+            credentials: "omit",
+            cache: "no-store",
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error("Webhook " + res.status);
+              return res.text().catch(function () {
+                return "";
+              });
+            })
+            .catch(function () {
+              return postViaIframe(payload);
+            });
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          setMessage(success, false);
+          setMessage(errorEl, false);
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          var payload = buildPayload();
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Gönderiliyor...";
+          }
+
+          sendPayload(payload)
+            .then(function () {
+              setMessage(success, true);
+              form.reset();
+              setTimeout(function () {
+                setMessage(success, false);
+              }, 4000);
+            })
+            .catch(function () {
+              setMessage(errorEl, true);
+              setTimeout(function () {
+                setMessage(errorEl, false);
+              }, 5000);
+            })
+            .finally(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Gönder";
+              }
+            });
+        });
+      }
+
+      function boot() {
+        initExclusiveChips();
+        initForm();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", boot);
+      } else {
+        boot();
+      }
+    })();
+  </script>
 </Layout>
