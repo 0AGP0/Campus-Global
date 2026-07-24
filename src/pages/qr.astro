@@ -304,9 +304,10 @@ const socialLinks = [
 
           <div class="qr-form-block" data-accent="orange">
             <p class="qr-form-label">İngilizce Seviyen</p>
-            <div class="qr-seg qr-seg--3" role="group" data-exclusive>
+            <div class="qr-seg qr-seg--4" role="group" data-exclusive>
               <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="az" /><span>Az</span></label>
               <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="orta" /><span>Orta</span></label>
+              <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="iyi" /><span>İyi</span></label>
               <label class="qr-seg-item"><input type="checkbox" name="ingilizce" value="cok-iyi" /><span>Çok iyi</span></label>
             </div>
           </div>
@@ -341,6 +342,16 @@ const socialLinks = [
               >
             </div>
           </div>
+
+          <label class="qr-form-block" data-accent="teal">
+            <span class="qr-form-label">Eklemek İstediğin</span>
+            <textarea
+              class="qr-input qr-textarea"
+              name="eklemekIstedigin"
+              rows="3"
+              placeholder="Varsa eklemek istediğin notu yazabilirsin"
+            ></textarea>
+          </label>
 
           <button type="submit" class="qr-form-submit" id="qrFormSubmit">Gönder</button>
           <p class="qr-form-error" id="qrFormError" hidden>Gönderilemedi, lütfen tekrar dene.</p>
@@ -674,6 +685,12 @@ const socialLinks = [
         inset 0 1px 0 rgba(255, 255, 255, 0.9),
         0 0 0 3px var(--accent-ring);
       transform: translateY(-1px);
+    }
+
+    .qr-textarea {
+      min-height: 5.5rem;
+      resize: vertical;
+      line-height: 1.45;
     }
 
     .qr-seg {
@@ -1087,7 +1104,7 @@ const socialLinks = [
           "ozel-fen": "Özel Fen",
           diger: "Diğer",
         },
-        ingilizce: { az: "Az", orta: "Orta", "cok-iyi": "Çok iyi" },
+        ingilizce: { az: "Az", orta: "Orta", iyi: "İyi", "cok-iyi": "Çok iyi" },
         universiteHedefi: { devlet: "Devlet", ozel: "Özel", "yurt-disi": "Yurt Dışı" },
         pasaport: {
           "yesil-var": "Yeşil Var",
@@ -1168,6 +1185,7 @@ const socialLinks = [
             ingilizce: checkedLabel("ingilizce"),
             universiteHedefi: checkedLabel("universiteHedefi"),
             pasaport: checkedLabel("pasaport"),
+            eklemekIstedigin: (form.eklemekIstedigin.value || "").trim(),
             kaynak: "QR Sayfa",
             tarih: new Date().toISOString(),
           };
