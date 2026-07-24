@@ -320,12 +320,12 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
             </div>
           </div>
 
-          <!-- Sağ: header ile aynı zemin (şeffaf) + dither dalga -->
+          <!-- Sağ: header ile aynı zemin + yükselip alçalan dither piksel dalgası -->
           <div
             class="relative hidden min-h-[300px] w-full lg:flex lg:min-h-[min(20rem,38vh)] lg:flex-col lg:self-stretch"
           >
-            <div class="relative h-full min-h-[300px] w-full flex-1">
-              <ArticleHeaderDitherPanel client:idle />
+            <div class="relative h-full min-h-[300px] w-full flex-1 overflow-hidden">
+              <ArticleHeaderDitherPanel client:load />
             </div>
           </div>
         </div>

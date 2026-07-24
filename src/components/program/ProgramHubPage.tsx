@@ -24,7 +24,6 @@ import type { ProgramHubModel } from "@/data/program-hub-content";
 import { titleDarkOnBand, titleLight } from "@/styles/typography";
 
 const inner = "relative mx-auto w-full max-w-7xl px-5 md:px-10 lg:px-14";
-const heroEase = [0.22, 1, 0.36, 1] as const;
 
 /** public/Campus Global Logo Tek.png */
 const hubHeroLogoSrc = "/Campus%20Global%20Logo%20Tek.png";
@@ -159,10 +158,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
 
         <div className={`${inner} relative z-[1]`}>
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45 }}
+            initial={false}
           >
             <p className="inline-flex items-center gap-2 rounded-full border-2 border-zap-ink/15 bg-white/95 px-4 py-2 text-[10px] font-black uppercase tracking-[0.22em] text-brand-teal shadow-sm">
               <Globe2 className="h-4 w-4 text-brand-aqua" strokeWidth={2.25} aria-hidden />
@@ -177,10 +173,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
           <div className="mt-10 flex flex-col gap-6 lg:gap-8">
             <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-x-10">
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.45 }}
+              initial={false}
               className="flex flex-col gap-6 lg:col-span-5"
             >
               <div className="relative overflow-hidden rounded-2xl border-4 border-zap-ink bg-zap-ink shadow-brutalLg">
@@ -232,10 +225,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
 
             <div className="flex flex-col gap-6 lg:col-span-7">
               <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-24px" }}
-                transition={{ duration: 0.42, delay: 0.05 }}
+                initial={false}
                 className="rounded-2xl border-4 border-zap-ink bg-white p-5 shadow-brutal md:p-6"
               >
                 <div className={`mb-4 h-1 w-16 rounded-full bg-gradient-to-r ${valueStripe[2]}`} aria-hidden />
@@ -257,10 +247,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
                 {model.spotlight.pillars.map((p, i) => (
                   <motion.article
                     key={p.title}
-                    initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                    whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-20px" }}
-                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    initial={false}
                     className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white p-5 shadow-brutal"
                   >
                     <div className={`pointer-events-none absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${valueStripe[i % 3]}`} aria-hidden />
@@ -385,10 +372,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
             </div>
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, x: 12 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.45 }}
+              initial={false}
               className="relative overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-zap-night to-zap-ink p-6 text-white shadow-brutal lg:col-span-5"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(3,214,186,0.2),transparent_45%)]" aria-hidden />
@@ -426,10 +410,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
               return (
                 <motion.article
                   key={v.title}
-                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-24px" }}
-                  transition={{ delay: j * 0.06, duration: 0.42, ease: heroEase }}
+                  initial={false}
                   className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white p-6 shadow-brutal"
                 >
                   <div
@@ -599,10 +580,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
               return (
                 <motion.li
                   key={p.title}
-                  initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-20px" }}
-                  transition={{ delay: i * 0.05, duration: 0.4 }}
+                  initial={false}
                   className="relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white p-5 text-zap-ink shadow-brutal"
                 >
                   <div className={`mb-4 h-1.5 w-full rounded-full bg-gradient-to-r ${countryStripe[i % 3]}`} aria-hidden />
@@ -664,10 +642,7 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
                 <motion.a
                   key={c.href}
                   href={c.href}
-                  initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-24px" }}
-                  transition={{ delay: (j % 8) * 0.03, duration: 0.38 }}
+                  initial={false}
                   className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#eef8f6] text-zap-ink shadow-brutal transition ${
                     reduceMotion ? "" : "hover:-translate-y-0.5 hover:shadow-brutalLg"
                   }`}
