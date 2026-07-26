@@ -275,10 +275,15 @@ const socialLinks = [
               <input class="qr-input" type="text" name="yerlestirmePuani" inputmode="decimal" placeholder="Örn. 420" />
             </label>
             <label class="qr-form-block" data-accent="gold">
-              <span class="qr-form-label">Hedef Bölüm</span>
-              <input class="qr-input" type="text" name="hedefBolum" placeholder="Örn. Bilgisayar Müh." />
+              <span class="qr-form-label">Sıralama</span>
+              <input class="qr-input" type="text" name="siralama" inputmode="numeric" placeholder="Örn. 45000" />
             </label>
           </div>
+
+          <label class="qr-form-block" data-accent="teal">
+            <span class="qr-form-label">Hedef Bölüm</span>
+            <input class="qr-input" type="text" name="hedefBolum" placeholder="Örn. Bilgisayar Müh." />
+          </label>
 
           <div class="qr-form-block" data-accent="teal">
             <p class="qr-form-label">Alan</p>
@@ -1179,6 +1184,7 @@ const socialLinks = [
             telefon: (form.telefon.value || "").trim(),
             eposta: (form.eposta.value || "").trim(),
             yerlestirmePuani: (form.yerlestirmePuani.value || "").trim(),
+            siralama: (form.siralama.value || "").trim(),
             hedefBolum: (form.hedefBolum.value || "").trim(),
             alan: checkedLabel("alan"),
             liseTuru: checkedLabel("liseTuru"),
