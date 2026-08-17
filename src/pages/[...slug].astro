@@ -65,12 +65,11 @@ const articleEntries = await getCollection("articles");
 const mdEntry = articleEntries.find((e) => e.id === pathSlug);
 
 let Content: Awaited<ReturnType<typeof render>>["Content"] | undefined;
-if (mdEntry && cmsArticle?.source !== "sanity") {
+if (mdEntry) {
   const rendered = await render(mdEntry);
   Content = rendered.Content;
 }
 
-const d = cmsArticle ?? (mdEntry ? { ...mdEntry.data, slug: mdEntry.id } : null);
 const displayTitle = cmsArticle?.title ?? mdEntry?.data.title ?? titleFromSlug(pathSlug);
 const canonicalPath = `/${pathSlug}`;
 const leadFormPrefill = resolveLeadFormPrefillFromPath(canonicalPath);
@@ -90,7 +89,6 @@ const readingMinutes = cmsArticle?.readingMinutes ?? mdEntry?.data.readingMinute
 const toc = cmsArticle?.toc?.length ? cmsArticle.toc : mdEntry?.data.toc?.length ? mdEntry.data.toc : undefined;
 const faq = cmsArticle?.faq?.length ? cmsArticle.faq : mdEntry?.data.faq?.length ? mdEntry.data.faq : undefined;
 const breadcrumb = buildBreadcrumb(pathSlug, siteNav.megaNav);
-const bodyHtml = cmsArticle?.source === "sanity" ? cmsArticle.bodyHtml : undefined;
 ---
 
 <ArticleLayout
@@ -109,9 +107,7 @@ const bodyHtml = cmsArticle?.source === "sanity" ? cmsArticle.bodyHtml : undefin
   leadFormPrefill={leadFormPrefill}
 >
   {
-    bodyHtml ? (
-      <div class="article-cms-body" set:html={bodyHtml} />
-    ) : mdEntry && Content ? (
+    mdEntry && Content ? (
       <Content />
     ) : (
       <>

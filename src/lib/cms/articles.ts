@@ -1,17 +1,21 @@
 import { getCollection } from "astro:content";
-import { fetchSanityArticles } from "@/lib/sanity/queries";
-import { isSanityConfigured } from "@/lib/sanity/client";
-import type { CmsArticle } from "@/lib/sanity/types";
 
-export type CmsArticleWithNav = CmsArticle & {
-  showInNav?: boolean;
-  navMegaId?: string;
-  navColumnHeading?: string;
-  navLabel?: string;
-  navOrder?: number;
+export type CmsArticle = {
+  source: "markdown";
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string;
+  publishedISO: string;
+  modifiedISO: string;
+  eyebrow?: string;
+  section?: string;
+  readingMinutes?: number;
+  toc?: { id: string; label: string; depth?: 2 | 3 }[];
+  faq?: { question: string; answer: string }[];
 };
 
-function mdToCms(entry: Awaited<ReturnType<typeof getCollection<"articles">>>[number]): CmsArticleWithNav {
+function mdToCms(entry: Awaited<ReturnType<typeof getCollection<"articles">>>[number]): CmsArticle {
   const d = entry.data;
   return {
     source: "markdown",
@@ -33,10 +37,10 @@ function mdToCms(entry: Awaited<ReturnType<typeof getCollection<"articles">>>[nu
   };
 }
 
-let cachedArticles: CmsArticleWithNav[] | null = null;
-let articlesInflight: Promise<CmsArticleWithNav[]> | null = null;
+let cachedArticles: CmsArticle[] | null = null;
+let articlesInflight: Promise<CmsArticle[]> | null = null;
 
-export async function getAllCmsArticles(): Promise<CmsArticleWithNav[]> {
+export async function getAllCmsArticles(): Promise<CmsArticle[]> {
   if (cachedArticles) return cachedArticles;
   if (articlesInflight) return articlesInflight;
 
@@ -49,42 +53,12 @@ export async function getAllCmsArticles(): Promise<CmsArticleWithNav[]> {
   }
 }
 
-async function loadAllCmsArticles(): Promise<CmsArticleWithNav[]> {
+async function loadAllCmsArticles(): Promise<CmsArticle[]> {
   const mdEntries = await getCollection("articles");
-  const mdMap = new Map(mdEntries.map((e) => [e.id, mdToCms(e)]));
-  const sanityArticles = isSanityConfigured() ? await fetchSanityArticles() : [];
-
-  for (const s of sanityArticles) {
-    mdMap.set(s.slug, {
-      source: "sanity",
-      slug: s.slug,
-      title: s.title,
-      description: s.description,
-      keywords: s.keywords,
-      publishedISO: s.publishedISO,
-      modifiedISO: s.modifiedISO ?? s.publishedISO,
-      eyebrow: s.eyebrow,
-      section: s.section,
-      readingMinutes: s.readingMinutes,
-      toc: s.toc?.map((t) => ({
-        id: t.id,
-        label: t.label,
-        depth: (t.depth === 3 ? 3 : 2) as 2 | 3,
-      })),
-      faq: s.faq,
-      bodyHtml: s.bodyHtml,
-      showInNav: s.showInNav,
-      navMegaId: s.navMegaId,
-      navColumnHeading: s.navColumnHeading,
-      navLabel: s.navLabel,
-      navOrder: s.navOrder,
-    });
-  }
-
-  return [...mdMap.values()].sort((a, b) => a.slug.localeCompare(b.slug, "tr"));
+  return mdEntries.map(mdToCms).sort((a, b) => a.slug.localeCompare(b.slug, "tr"));
 }
 
-export async function getCmsArticleBySlug(slug: string): Promise<CmsArticleWithNav | null> {
+export async function getCmsArticleBySlug(slug: string): Promise<CmsArticle | null> {
   const all = await getAllCmsArticles();
   return all.find((a) => a.slug === slug) ?? null;
 }

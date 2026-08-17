@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, ExternalLink, Menu, Phone, Sparkles, X } from "lucide-react";
 import { megaNav as defaultMegaNav, megaNavRowLeft as defaultRowLeft, megaNavRowRight as defaultRowRight, type MegaNavItem } from "@/data/site-nav";
 import { generatedSiteNav } from "@/data/generated-site-nav";
-import { footerIletisim } from "@/data/home-ia";
+import { footerIletisim, telHrefFromDisplay } from "@/data/home-ia";
 import { navPanelHeading } from "@/styles/typography";
 
 /** ELT tarzı düzen: sol 4 ana başlık, sağ 5 (logo ortada) */
@@ -18,8 +18,7 @@ function navLinkClass(active: boolean) {
 }
 
 function TopBarActions({ className = "" }: { className?: string }) {
-  const telHref =
-    footerIletisim.tel.includes("_") ? "#site-footer" : `tel:${footerIletisim.tel.replace(/[^\d+]/g, "")}`;
+  const telHref = telHrefFromDisplay(footerIletisim.tel);
 
   return (
     <div className={`flex shrink-0 flex-wrap items-center justify-end gap-1.5 sm:gap-2 ${className}`}>

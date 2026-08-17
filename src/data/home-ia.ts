@@ -379,10 +379,20 @@ export const preFooterSubeler = [
 export const footerIletisim = {
   adres:
     "📍 Barbaros, Tunalı Hilmi Cad. No:81 Yavuz İş Merkezi 5. Kat D:9 06660 Çankaya/Ankara",
-  tel: "+90 312 911 96 63",
+  tel: "0212 909 20 34",
   email: "info@campusglobal.com.tr",
   mesai: "Hafta içi 09:00 — 18:30",
 };
+
+/** Görünen numaradan `tel:+90…` üretir (0212… ve +90 212… formatlarını destekler). */
+export function telHrefFromDisplay(tel: string): string {
+  if (tel.includes("_")) return "#site-footer";
+  let digits = tel.replace(/\D/g, "");
+  if (digits.startsWith("00")) digits = digits.slice(2);
+  if (digits.startsWith("0")) digits = digits.slice(1);
+  if (digits.length === 10 && !digits.startsWith("90")) digits = `90${digits}`;
+  return digits.length >= 11 ? `tel:+${digits}` : "#site-footer";
+}
 
 /** ICEF Agency Status (IAS) — rozet scripti `Layout.astro` ile bir kez yüklenir */
 export const icefIas = {

@@ -1,13 +1,12 @@
 import React from "react";
 import { ArrowUp, Mail, MapPin, Phone, Sparkles } from "lucide-react";
-import { footerIletisim, icefIas, preFooterPrograms, preFooterSubeler } from "@/data/home-ia";
+import { footerIletisim, icefIas, preFooterPrograms, preFooterSubeler, telHrefFromDisplay } from "@/data/home-ia";
 import { titleDarkOnBand } from "@/styles/typography";
 
 const inner = "relative mx-auto w-full max-w-7xl px-5 md:px-10 lg:px-14";
 
 export function SiteFooter() {
-  const telHref =
-    footerIletisim.tel.includes("_") ? "#site-footer" : `tel:${footerIletisim.tel.replace(/[^\d+]/g, "")}`;
+  const telHref = telHrefFromDisplay(footerIletisim.tel);
 
   return (
     <footer id="site-footer" className="relative mt-auto scroll-mt-24 overflow-hidden border-t-4 border-zap-ink bg-zap-night text-white">

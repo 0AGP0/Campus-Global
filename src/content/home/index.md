@@ -472,7 +472,7 @@ preFooterSubeler:
     href: /iletisim
 footerIletisim:
   adres: 📍 Barbaros, Tunalı Hilmi Cad. No:81 Yavuz İş Merkezi 5. Kat D:9 06660 Çankaya/Ankara
-  tel: +90 312 911 96 63
+  tel: 0212 909 20 34
   email: info@campusglobal.com.tr
   mesai: Hafta içi 09:00 — 18:30
 icefIas:

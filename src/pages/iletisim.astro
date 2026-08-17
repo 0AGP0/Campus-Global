@@ -1,17 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getSiteOrigin } from "@/data/site-origin";
-import { footerIletisim, preFooterSubeler } from "@/data/home-ia";
+import { footerIletisim, preFooterSubeler, telHrefFromDisplay } from "@/data/home-ia";
 
 const title = "İletişim | Campus Global";
 const description =
   "Campus Global ile telefon, e-posta ve şube bilgileri üzerinden yurtdışı eğitim danışmanlığı için iletişime geçin.";
 const canonicalUrl = `${getSiteOrigin()}/iletisim`;
-const telDigits = footerIletisim.tel.replace(/\D/g, "");
-const telHref =
-  telDigits.length >= 10
-    ? `tel:+${telDigits.startsWith("90") ? telDigits : `90${telDigits}`}`
-    : "#site-footer";
+const telHref = telHrefFromDisplay(footerIletisim.tel);
 ---
 
 <Layout
