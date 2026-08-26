@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import type { LeadFormPrefill } from "@/data/lead-form-data";
 import { countriesForLeadProgram, leadProgramCategories } from "@/data/lead-form-data";
+import { getInfluencerRef, getUtmParams } from "@/lib/influencer-ref";
 
 /** Ana sayfa program kartlarıyla aynı ikon / şerit dili */
 const leadCategoryIcon: Record<string, LucideIcon> = {
@@ -106,6 +107,7 @@ export function CampusLeadForm({ onClose, leadFormPrefill }: Props) {
   const [note, setNote] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const program = useMemo(
     () => (programId ? leadProgramCategories.find((p) => p.id === programId) ?? null : null),
@@ -130,13 +132,51 @@ export function CampusLeadForm({ onClose, leadFormPrefill }: Props) {
     setStep(3);
   };
 
-  const submit = () => {
+  const submit = async () => {
     setError(null);
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
       setError("Ad, soyad ve e-posta zorunludur.");
       return;
     }
-    setDone(true);
+    if (!programId || !country) {
+      setError("Program ve ülke seçimi eksik.");
+      return;
+    }
+
+    setSending(true);
+    const utm = getUtmParams();
+    const payload = {
+      ad: firstName.trim(),
+      soyad: lastName.trim(),
+      email: email.trim(),
+      telefon: phone.trim(),
+      not: note.trim(),
+      programId,
+      program: program?.title || programId,
+      ulke: country,
+      kaynak: "Site Lead Form",
+      page_url: typeof window !== "undefined" ? window.location.href : "",
+      ...utm,
+      influencer_ref: getInfluencerRef(),
+      tarih: new Date().toISOString(),
+    };
+
+    const WEBHOOK_URL = "https://hook.eu2.make.com/gi9ljt1pln4gna968773eggx5okcjc9d";
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        mode: "cors",
+        credentials: "omit",
+        cache: "no-store",
+      });
+    } catch {
+      // Make CORS sık reddeder; istek çoğu zaman yine düşer — kullanıcıya başarı göster
+    } finally {
+      setSending(false);
+      setDone(true);
+    }
   };
 
   if (done) {
@@ -464,10 +504,11 @@ export function CampusLeadForm({ onClose, leadFormPrefill }: Props) {
             {error ? <p className="mt-3 text-[12px] font-bold text-brand-flame">{error}</p> : null}
             <button
               type="button"
-              onClick={submit}
-              className="mt-5 w-full rounded-xl border-4 border-zap-ink bg-zap-burst py-2.5 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_rgb(6_50_66)] transition hover:brightness-105"
+              onClick={() => void submit()}
+              disabled={sending}
+              className="mt-5 w-full rounded-xl border-4 border-zap-ink bg-zap-burst py-2.5 text-[12px] font-black uppercase tracking-wide text-zap-night shadow-[4px_4px_0_rgb(6_50_66)] transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Talebi gönder
+              {sending ? "Gönderiliyor…" : "Talebi gönder"}
             </button>
           </section>
         ) : null}

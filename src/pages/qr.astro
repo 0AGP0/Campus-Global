@@ -1176,7 +1176,23 @@ const socialLinks = [
           el.hidden = !show;
         }
 
+        function influencerRef() {
+          try {
+            if (typeof window.cgGetInfluencerRef === "function") {
+              return window.cgGetInfluencerRef() || "";
+            }
+            return (
+              sessionStorage.getItem("cg_influencer_ref") ||
+              localStorage.getItem("cg_influencer_ref") ||
+              ""
+            );
+          } catch (e) {
+            return "";
+          }
+        }
+
         function buildPayload() {
+          var urlParams = new URLSearchParams(window.location.search || "");
           return {
             rol: checkedLabel("rol"),
             adSoyad: (form.adSoyad.value || "").trim(),
@@ -1193,6 +1209,13 @@ const socialLinks = [
             pasaport: checkedLabel("pasaport"),
             eklemekIstedigin: (form.eklemekIstedigin.value || "").trim(),
             kaynak: "QR Sayfa",
+            page_url: window.location.href,
+            utm_source: urlParams.get("utm_source") || "",
+            utm_medium: urlParams.get("utm_medium") || "",
+            utm_campaign: urlParams.get("utm_campaign") || "",
+            utm_term: urlParams.get("utm_term") || "",
+            utm_content: urlParams.get("utm_content") || "",
+            influencer_ref: influencerRef(),
             tarih: new Date().toISOString(),
           };
         }

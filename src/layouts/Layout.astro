@@ -67,6 +67,8 @@ const resolvedOgDesc = ogDescription ?? description ?? "";
     {articlePublishedTime ? <meta property="article:published_time" content={articlePublishedTime} /> : null}
     {articleModifiedTime ? <meta property="article:modified_time" content={articleModifiedTime} /> : null}
     <slot name="head-extra" />
+    <!-- Influencer ref: diğer sayfa script’lerinden önce -->
+    <script is:inline src="/cg-ref-persist.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
