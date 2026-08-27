@@ -1178,6 +1178,19 @@ const socialLinks = [
 
         function influencerRef() {
           try {
+            var u = new URL(window.location.href);
+            var fromUrl = (u.searchParams.get("ref") || u.searchParams.get("influencer") || u.searchParams.get("utm_ref") || "")
+              .trim()
+              .slice(0, 80);
+            if (fromUrl && /^[a-zA-Z0-9\u00C0-\u024F._-]+$/.test(fromUrl)) {
+              try {
+                sessionStorage.setItem("cg_influencer_ref", fromUrl);
+              } catch (e1) {}
+              try {
+                localStorage.setItem("cg_influencer_ref", fromUrl);
+              } catch (e2) {}
+              return fromUrl;
+            }
             if (typeof window.cgGetInfluencerRef === "function") {
               return window.cgGetInfluencerRef() || "";
             }
@@ -1193,6 +1206,8 @@ const socialLinks = [
 
         function buildPayload() {
           var urlParams = new URLSearchParams(window.location.search || "");
+          var kaynak = "QR Sayfa";
+          var ref = influencerRef();
           return {
             rol: checkedLabel("rol"),
             adSoyad: (form.adSoyad.value || "").trim(),
@@ -1208,14 +1223,15 @@ const socialLinks = [
             universiteHedefi: checkedLabel("universiteHedefi"),
             pasaport: checkedLabel("pasaport"),
             eklemekIstedigin: (form.eklemekIstedigin.value || "").trim(),
-            kaynak: "QR Sayfa",
+            kaynak: kaynak,
             page_url: window.location.href,
             utm_source: urlParams.get("utm_source") || "",
             utm_medium: urlParams.get("utm_medium") || "",
             utm_campaign: urlParams.get("utm_campaign") || "",
             utm_term: urlParams.get("utm_term") || "",
             utm_content: urlParams.get("utm_content") || "",
-            influencer_ref: influencerRef(),
+            influencer_ref: ref,
+            referrer: ref ? kaynak + " - influencer: " + ref : kaynak,
             tarih: new Date().toISOString(),
           };
         }

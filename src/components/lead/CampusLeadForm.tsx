@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import type { LeadFormPrefill } from "@/data/lead-form-data";
 import { countriesForLeadProgram, leadProgramCategories } from "@/data/lead-form-data";
-import { getInfluencerRef, getUtmParams } from "@/lib/influencer-ref";
+import { buildReferrerLabel, getInfluencerRef, getUtmParams } from "@/lib/influencer-ref";
 
 /** Ana sayfa program kartlarıyla aynı ikon / şerit dili */
 const leadCategoryIcon: Record<string, LucideIcon> = {
@@ -145,19 +145,31 @@ export function CampusLeadForm({ onClose, leadFormPrefill }: Props) {
 
     setSending(true);
     const utm = getUtmParams();
+    const ref = getInfluencerRef();
+    const kaynak = "Site Lead Form";
+    const ad = firstName.trim();
+    const soyad = lastName.trim();
     const payload = {
-      ad: firstName.trim(),
-      soyad: lastName.trim(),
-      email: email.trim(),
+      // QR ile uyumlu alanlar (Make tek mapping kullanabilsin)
+      adSoyad: `${ad} ${soyad}`.trim(),
+      eposta: email.trim(),
+      sehir: "",
       telefon: phone.trim(),
+      // Site Lead’e özgü
+      ad,
+      soyad,
+      email: email.trim(),
       not: note.trim(),
       programId,
       program: program?.title || programId,
       ulke: country,
-      kaynak: "Site Lead Form",
+      liseTuru: program?.title || programId || "",
+      hedefBolum: country || "",
+      kaynak,
       page_url: typeof window !== "undefined" ? window.location.href : "",
       ...utm,
-      influencer_ref: getInfluencerRef(),
+      influencer_ref: ref,
+      referrer: buildReferrerLabel(kaynak),
       tarih: new Date().toISOString(),
     };
 
