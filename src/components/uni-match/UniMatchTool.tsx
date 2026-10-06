@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown, X } from "lucide-react";
 import { getInfluencerRef, getUtmParams } from "@/lib/influencer-ref";
-import { postLeadWebhook } from "@/lib/leads/webhook";
+import { postLeadWebhook, UNI_MATCH_WEBHOOK_URL } from "@/lib/leads/webhook";
 import { buildUniMatchLeadPayload, type UniMatchLeadSource } from "@/lib/uni-match/lead";
 import {
   BUDGET_OPTIONS,
@@ -41,17 +41,17 @@ function RichText({ text }: { text: string }) {
 }
 
 function ChoiceGroup<T extends string>({
+  step,
   label,
   hint,
   value,
   options,
-  onChange,
 }: {
+  step: string;
   label: string;
   hint?: string;
   value: T | "";
   options: { value: T; label: string; hint?: string }[];
-  onChange: (value: T) => void;
 }) {
   return (
     <fieldset className="min-w-0">
@@ -66,7 +66,8 @@ function ChoiceGroup<T extends string>({
               type="button"
               role="radio"
               aria-checked={selected}
-              onClick={() => onChange(option.value)}
+              data-step={step}
+              data-choice={option.value}
               className={`flex min-h-11 w-full items-start gap-3 rounded-xl border-[3px] px-3 py-3 text-left transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 ${
                 selected
                   ? "border-zap-ink bg-brand-aqua/20 shadow-[3px_3px_0_rgb(6_50_66)]"
@@ -158,28 +159,28 @@ function CountryCard({ country }: { country: CountryMatch }) {
 
 function LeadFields({
   idPrefix,
+  formId,
   values,
   error,
   sending,
   onChange,
   onActivity,
-  onSubmit,
 }: {
   idPrefix: string;
+  formId: "main" | "popup";
   values: LeadValues;
   error: string | null;
   sending: boolean;
   onChange: (next: LeadValues) => void;
   onActivity?: () => void;
-  onSubmit: () => void;
 }) {
   const field =
     "mt-1 w-full rounded-xl border-[3px] border-zap-ink/20 bg-white px-3 py-3 text-base font-semibold text-zap-night outline-none focus:border-brand-teal";
   return (
     <form
+      data-lead-form={formId}
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
       }}
       className="space-y-3"
     >
@@ -188,6 +189,7 @@ function LeadFields({
           Ad Soyad
           <input
             id={`${idPrefix}-name`}
+            name="fullName"
             value={values.fullName}
             onChange={(e) => onChange({ ...values, fullName: e.target.value })}
             onFocus={onActivity}
@@ -200,6 +202,7 @@ function LeadFields({
         <label className="block text-[12px] font-black uppercase tracking-wide text-zap-ink/80">
           Şehir
           <input
+            name="city"
             value={values.city}
             onChange={(e) => onChange({ ...values, city: e.target.value })}
             onFocus={onActivity}
@@ -212,6 +215,7 @@ function LeadFields({
         <label className="block text-[12px] font-black uppercase tracking-wide text-zap-ink/80">
           WhatsApp / Telefon
           <input
+            name="phone"
             value={values.phone}
             onChange={(e) => onChange({ ...values, phone: e.target.value })}
             onFocus={onActivity}
@@ -226,6 +230,7 @@ function LeadFields({
         <label className="block text-[12px] font-black uppercase tracking-wide text-zap-ink/80">
           E-posta
           <input
+            name="email"
             value={values.email}
             onChange={(e) => onChange({ ...values, email: e.target.value })}
             onFocus={onActivity}
@@ -239,6 +244,7 @@ function LeadFields({
       </div>
       <label className="flex items-start gap-2 text-[13px] font-semibold leading-snug text-zap-ink/80">
         <input
+          name="privacy"
           type="checkbox"
           checked={values.privacy}
           onChange={(e) => onChange({ ...values, privacy: e.target.checked })}
@@ -271,7 +277,6 @@ function LeadCard({
   done,
   onChange,
   onActivity,
-  onSubmit,
   idPrefix,
 }: {
   values: LeadValues;
@@ -280,7 +285,6 @@ function LeadCard({
   done: boolean;
   onChange: (next: LeadValues) => void;
   onActivity?: () => void;
-  onSubmit: () => void;
   idPrefix: string;
 }) {
   return (
@@ -309,12 +313,12 @@ function LeadCard({
           </p>
           <LeadFields
             idPrefix={idPrefix}
+            formId="main"
             values={values}
             error={error}
             sending={sending}
             onChange={onChange}
             onActivity={onActivity}
-            onSubmit={onSubmit}
           />
         </>
       )}
@@ -384,6 +388,11 @@ export function UniMatchTool() {
   const popupTimer = useRef<number | null>(null);
   const idleTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const chooseRef = useRef<(step: string, value: string) => void>(() => {});
+  const calculateRef = useRef<() => void>(() => {});
+  const submitRef = useRef<(source: UniMatchLeadSource, values: LeadValues) => void>(() => {});
+  const patchLeadRef = useRef<(source: "main" | "popup", field: string, value: string | boolean) => void>(() => {});
 
   const steps = visibleSteps(answers);
   const score = scoreQuestion(answers.education);
@@ -408,9 +417,62 @@ export function UniMatchTool() {
     }, delay);
   }
 
-  useEffect(() => () => {
-    clearTimers();
-    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const onClick = (event: MouseEvent) => {
+      const el = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-choice], [data-action]");
+      if (!el || !root.contains(el)) return;
+      const choice = el.dataset.choice;
+      const step = el.dataset.step;
+      if (choice && step) {
+        chooseRef.current(step, choice);
+        return;
+      }
+      if (el.dataset.action === "edit" && step) setOpenStep(step as typeof openStep);
+      if (el.dataset.action === "calculate") calculateRef.current();
+      if (el.dataset.action === "close-popup") setPopupOpen(false);
+    };
+    const onFormSubmit = (event: Event) => {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement) || !root.contains(form)) return;
+      const source = form.dataset.leadForm;
+      if (source !== "main" && source !== "popup") return;
+      event.preventDefault();
+      const privacy = form.elements.namedItem("privacy");
+      submitRef.current(source === "main" ? "form" : "popup", {
+        fullName: String(new FormData(form).get("fullName") ?? ""),
+        city: String(new FormData(form).get("city") ?? ""),
+        phone: String(new FormData(form).get("phone") ?? ""),
+        email: String(new FormData(form).get("email") ?? ""),
+        privacy: privacy instanceof HTMLInputElement && privacy.checked,
+      });
+    };
+    const onField = (event: Event) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement)) return;
+      const source = input.form?.dataset.leadForm;
+      if ((source !== "main" && source !== "popup") || !input.name) return;
+      patchLeadRef.current(source, input.name, input.type === "checkbox" ? input.checked : input.value);
+    };
+    root.addEventListener("click", onClick);
+    root.addEventListener("submit", onFormSubmit);
+    root.addEventListener("input", onField);
+    root.addEventListener("change", onField);
+    return () => {
+      root.removeEventListener("click", onClick);
+      root.removeEventListener("submit", onFormSubmit);
+      root.removeEventListener("input", onField);
+      root.removeEventListener("change", onField);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (popupTimer.current) window.clearTimeout(popupTimer.current);
+      if (idleTimer.current) window.clearTimeout(idleTimer.current);
+      if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -454,6 +516,62 @@ export function UniMatchTool() {
     }, 50);
   }
 
+  chooseRef.current = (step, value) => {
+    if (step === "education") {
+      resetFrom(() => ({ ...EMPTY_ANSWERS, education: value as UniMatchAnswers["education"] }));
+      return;
+    }
+    if (step === "yks") {
+      resetFrom((prev) => ({
+        ...prev,
+        yks: value as UniMatchAnswers["yks"],
+        dept: "",
+        lang: "",
+        level: "",
+        budget: "",
+      }));
+      return;
+    }
+    if (step === "gpa") {
+      resetFrom((prev) => ({
+        ...prev,
+        gpa: value as UniMatchAnswers["gpa"],
+        dept: "",
+        lang: "",
+        level: "",
+        budget: "",
+      }));
+      return;
+    }
+    if (step === "dept") {
+      resetFrom((prev) => ({ ...prev, dept: value as UniMatchAnswers["dept"], lang: "", level: "", budget: "" }));
+      return;
+    }
+    if (step === "lang") {
+      resetFrom((prev) => ({ ...prev, lang: value as UniMatchAnswers["lang"], level: "", budget: "" }));
+      return;
+    }
+    if (step === "level") {
+      resetFrom((prev) => ({ ...prev, level: value as UniMatchAnswers["level"], budget: "" }));
+      return;
+    }
+    if (step === "budget") {
+      setOpenStep(null);
+      setAnswers((prev) => ({ ...prev, budget: value as UniMatchAnswers["budget"] }));
+      setResult(null);
+      setPopupOpen(false);
+      clearTimers();
+    }
+  };
+  calculateRef.current = calculate;
+  submitRef.current = (source, values) => {
+    void send(source, values);
+  };
+  patchLeadRef.current = (source, field, value) => {
+    const setLead = source === "main" ? setMainLead : setPopupLead;
+    setLead((prev) => ({ ...prev, [field]: value }));
+  };
+
   async function send(source: UniMatchLeadSource, values: LeadValues) {
     const invalid = validateLead(values);
     if (source === "form") setMainError(invalid);
@@ -475,7 +593,7 @@ export function UniMatchTool() {
       result,
       influencerRef: getInfluencerRef(),
     });
-    await postLeadWebhook(payload);
+    await postLeadWebhook(payload, UNI_MATCH_WEBHOOK_URL);
     submittedRef.current = true;
     clearTimers();
 
@@ -497,7 +615,7 @@ export function UniMatchTool() {
   }
 
   return (
-    <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
+    <div ref={rootRef} className="uni-match-root mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
       <section className="rounded-2xl border-4 border-zap-ink bg-white p-4 shadow-brutal sm:p-6" aria-labelledby={titleId}>
         <h1 id={titleId} className="text-[clamp(1.6rem,4vw,2.2rem)] font-black uppercase leading-[1.05] tracking-tight text-zap-night">
           Hangi üniversite bana uygun?
@@ -515,7 +633,8 @@ export function UniMatchTool() {
                   <button
                     key={step}
                     type="button"
-                    onClick={() => setOpenStep(step)}
+                    data-action="edit"
+                    data-step={step}
                     className="flex w-full items-center justify-between gap-3 rounded-xl border-[3px] border-zap-ink/15 bg-brand-aqua/10 px-3 py-3 text-left"
                   >
                     <span className="min-w-0">
@@ -531,12 +650,10 @@ export function UniMatchTool() {
                 return (
                   <ChoiceGroup
                     key={step}
+                    step="education"
                     label="1. Eğitim durumunuz nedir?"
                     value={answers.education}
                     options={EDUCATION_OPTIONS}
-                    onChange={(education) => {
-                      resetFrom(() => ({ ...EMPTY_ANSWERS, education }));
-                    }}
                   />
                 );
               }
@@ -546,21 +663,17 @@ export function UniMatchTool() {
                     {score.askYks ? <p className="text-[15px] font-black leading-snug text-zap-night">2. {score.label}</p> : null}
                     {score.askYks ? (
                       <ChoiceGroup
+                        step="yks"
                         label="YKS durumunuz"
                         value={answers.yks}
                         options={YKS_OPTIONS}
-                        onChange={(yks) => {
-                          resetFrom((prev) => ({ ...prev, yks, dept: "", lang: "", level: "", budget: "" }));
-                        }}
                       />
                     ) : null}
                     <ChoiceGroup
+                      step="gpa"
                       label={score.askYks ? "Lise ortalamanız" : `2. ${score.label}`}
                       value={answers.gpa}
                       options={score.gpaOptions}
-                      onChange={(gpa) => {
-                        resetFrom((prev) => ({ ...prev, gpa, dept: "", lang: "", level: "", budget: "" }));
-                      }}
                     />
                   </div>
                 );
@@ -569,12 +682,10 @@ export function UniMatchTool() {
                 return (
                   <ChoiceGroup
                     key={step}
+                    step="dept"
                     label="3. Hangi alanda okumak istiyorsunuz?"
                     value={answers.dept}
                     options={DEPT_OPTIONS}
-                    onChange={(dept) => {
-                      resetFrom((prev) => ({ ...prev, dept, lang: "", level: "", budget: "" }));
-                    }}
                   />
                 );
               }
@@ -582,13 +693,11 @@ export function UniMatchTool() {
                 return (
                   <ChoiceGroup
                     key={step}
+                    step="lang"
                     label="4. Yabancı dil bilginiz nedir?"
                     hint="En iyi bildiğiniz dil"
                     value={answers.lang}
                     options={LANG_OPTIONS}
-                    onChange={(lang) => {
-                      resetFrom((prev) => ({ ...prev, lang, level: "", budget: "" }));
-                    }}
                   />
                 );
               }
@@ -596,29 +705,21 @@ export function UniMatchTool() {
                 return (
                   <ChoiceGroup
                     key={step}
+                    step="level"
                     label="5. Bu dildeki seviyeniz nedir?"
                     value={answers.level}
                     options={LEVEL_OPTIONS}
-                    onChange={(level) => {
-                      resetFrom((prev) => ({ ...prev, level, budget: "" }));
-                    }}
                   />
                 );
               }
               return (
                 <ChoiceGroup
                   key={step}
+                  step="budget"
                   label="6. İlk sene için tahmini bütçeniz"
                   hint="Her şey dahil"
                   value={answers.budget}
                   options={BUDGET_OPTIONS}
-                  onChange={(budget) => {
-                    setOpenStep(null);
-                    setAnswers((prev) => ({ ...prev, budget }));
-                    setResult(null);
-                    setPopupOpen(false);
-                    clearTimers();
-                  }}
                 />
               );
             })}
@@ -626,7 +727,7 @@ export function UniMatchTool() {
           {steps.includes("calculate") && activeStep === null ? (
             <button
               type="button"
-              onClick={calculate}
+              data-action="calculate"
               className="w-full rounded-xl border-4 border-zap-ink bg-zap-night py-3.5 text-[14px] font-black uppercase tracking-wide text-white shadow-[4px_4px_0_rgb(6_50_66)] transition hover:bg-zap-ink"
             >
               {answers.education === "lise_okuyor" ? "Danışmanla görüş" : "Uygun ülkeleri bul"}
@@ -682,13 +783,12 @@ export function UniMatchTool() {
               if (!submittedRef.current) setPopupOpen(true);
             }, 15000);
           }}
-          onSubmit={() => void send("form", mainLead)}
         />
       </div>
 
       {popupOpen ? (
-        <div className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-4" role="presentation">
-          <button type="button" className="absolute inset-0 bg-zap-night/60" aria-label="Pencereyi kapat" onClick={() => setPopupOpen(false)} />
+        <div className="fixed inset-0 z-[120] flex items-end justify-center sm:items-center sm:p-4" role="presentation">
+          <button type="button" data-action="close-popup" className="absolute inset-0 bg-zap-night/60" aria-label="Pencereyi kapat" />
           <div
             role="dialog"
             aria-modal="true"
@@ -697,7 +797,7 @@ export function UniMatchTool() {
           >
             <button
               type="button"
-              onClick={() => setPopupOpen(false)}
+              data-action="close-popup"
               className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full border-2 border-zap-ink bg-white"
               aria-label="Kapat"
             >
@@ -729,11 +829,11 @@ export function UniMatchTool() {
                 </p>
                 <LeadFields
                   idPrefix="uni-popup"
+                  formId="popup"
                   values={popupLead}
                   error={popupError}
                   sending={popupSending}
                   onChange={setPopupLead}
-                  onSubmit={() => void send("popup", popupLead)}
                 />
               </>
             )}
