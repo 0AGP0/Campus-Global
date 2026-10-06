@@ -275,6 +275,10 @@ export const generatedSiteNav: {
           "heading": "Bilgi bankası",
           "links": [
             {
+              "label": "Hangi üniversite bana uygun?",
+              "href": "/universite/hangi-universite"
+            },
+            {
               "label": "İtalya TOLC & IMAT notları",
               "href": "/universite/italya-sinavlar-genel"
             },
@@ -1168,6 +1172,10 @@ export const generatedSiteNav: {
         {
           "heading": "Bilgi bankası",
           "links": [
+            {
+              "label": "Hangi üniversite bana uygun?",
+              "href": "/universite/hangi-universite"
+            },
             {
               "label": "İtalya TOLC & IMAT notları",
               "href": "/universite/italya-sinavlar-genel"

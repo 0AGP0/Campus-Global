@@ -11,7 +11,8 @@
     "generate:nav": "tsx scripts/generate-site-nav-bundle.mts",
     "sync:home": "tsx scripts/sync-home-runtime.mts",
     "content:export": "tsx scripts/export-editorial-content.mts",
-    "content:import-optimized": "tsx scripts/import-optimized-content.mts"
+    "content:import-optimized": "tsx scripts/import-optimized-content.mts",
+    "test": "tsx --test tests/uni-match.test.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",

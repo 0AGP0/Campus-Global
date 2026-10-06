@@ -19,6 +19,7 @@ import {
 import type { LeadFormPrefill } from "@/data/lead-form-data";
 import { countriesForLeadProgram, leadProgramCategories } from "@/data/lead-form-data";
 import { buildReferrerLabel, getInfluencerRef, getUtmParams } from "@/lib/influencer-ref";
+import { postLeadWebhook } from "@/lib/leads/webhook";
 
 /** Ana sayfa program kartlarıyla aynı ikon / şerit dili */
 const leadCategoryIcon: Record<string, LucideIcon> = {
@@ -173,22 +174,9 @@ export function CampusLeadForm({ onClose, leadFormPrefill }: Props) {
       tarih: new Date().toISOString(),
     };
 
-    const WEBHOOK_URL = "https://hook.eu2.make.com/gi9ljt1pln4gna968773eggx5okcjc9d";
-    try {
-      await fetch(WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        mode: "cors",
-        credentials: "omit",
-        cache: "no-store",
-      });
-    } catch {
-      // Make CORS sık reddeder; istek çoğu zaman yine düşer — kullanıcıya başarı göster
-    } finally {
-      setSending(false);
-      setDone(true);
-    }
+    await postLeadWebhook(payload);
+    setSending(false);
+    setDone(true);
   };
 
   if (done) {

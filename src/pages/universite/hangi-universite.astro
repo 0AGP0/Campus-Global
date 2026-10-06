@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { UniMatchTool } from "@/components/uni-match/UniMatchTool";
+import { getSiteOrigin } from "@/data/site-origin";
+
+const title = "Hangi Üniversite Bana Uygun? | Campus Global";
+const description =
+  "Eğitim durumu, dil seviyesi ve bütçeye göre yurtdışı üniversite ülkelerini karşılaştırın. Ücretsiz ön görüşme formu Campus Global danışmanlarına ulaşır.";
+const canonicalUrl = `${getSiteOrigin()}/universite/hangi-universite`;
+---
+
+<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogTitle="Hangi Üniversite Bana Uygun?" ogDescription={description}>
+  <div class="bg-gradient-to-br from-white via-[#e6faf8] to-brand-aqua/25 px-4 py-8 text-zap-ink sm:px-6 md:py-12">
+    <p class="mx-auto mb-4 max-w-6xl text-[12px] font-semibold text-zap-ink/55">
+      <a href="/" class="hover:text-zap-ink">Ana sayfa</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/universite/hub" class="hover:text-zap-ink">Üniversite</a>
+    </p>
+    <UniMatchTool client:load />
+  </div>
+</Layout>

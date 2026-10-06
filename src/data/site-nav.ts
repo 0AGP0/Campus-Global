@@ -133,6 +133,7 @@ export const megaNavRowLeft: MegaNavItem[] = [
       {
         heading: "Bilgi bankası",
         links: [
+          { label: "Hangi üniversite bana uygun?", href: navBase("universite", "hangi-universite") },
           { label: "İtalya TOLC & IMAT notları", href: navBase("universite", "italya-sinavlar-genel") },
           { label: "İtalyada DSU bursu özeti", href: navBase("universite", "italya-dsu-ozet") },
           { label: "SAT sınav özeti", href: navBase("universite", "sat-ozet") },
@@ -477,7 +478,11 @@ export const STATIC_HUB_SLUGS = new Set<string>([
 ]);
 
 /** Ayrı `pages/*.astro` dosyası olan yollar — dinamik slug listesinden çıkarılır */
-export const RESERVED_NON_ARTICLE_SLUGS = new Set<string>([...STATIC_HUB_SLUGS, "iletisim"]);
+export const RESERVED_NON_ARTICLE_SLUGS = new Set<string>([
+  ...STATIC_HUB_SLUGS,
+  "iletisim",
+  "universite/hangi-universite",
+]);
 
 /** `[...slug]` breadcrumb: ilk path parçası → mega menü başlığı ve hub bağlantısı */
 export function getMegaNavSegmentMeta(

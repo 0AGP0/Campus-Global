@@ -107,6 +107,15 @@ export function ProgramHubPage({ model }: { model: ProgramHubModel }) {
               <p className="mt-4 max-w-2xl text-[15px] leading-snug text-zap-ink/82 line-clamp-3 md:mt-5 md:text-base md:leading-relaxed">
                 {model.heroLead}
               </p>
+              {model.id === "universite" ? (
+                <a
+                  href="/universite/hangi-universite"
+                  className="mt-5 inline-flex max-w-full items-center gap-2 rounded-xl border-4 border-zap-ink bg-zap-burst px-4 py-3 text-left text-[12px] font-black uppercase leading-snug tracking-wide text-zap-night shadow-[4px_4px_0_rgb(6_50_66)] transition hover:brightness-105"
+                >
+                  Hangi üniversite bana uygun?
+                  <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.5} aria-hidden />
+                </a>
+              ) : null}
             </div>
 
             <motion.div
