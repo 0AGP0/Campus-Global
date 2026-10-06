@@ -129,6 +129,8 @@ sections:
         href: /universite/sat-ozet
       - label: GRE rehberi
         href: /yuksek-lisans/gre-rehber
+      - label: GMAT rehberi
+        href: /yuksek-lisans/gmat-rehber
   fiyatlar:
     eyebrow: Bütçe
     title: Yurtdışı dil okulu için örnek fiyat bantları

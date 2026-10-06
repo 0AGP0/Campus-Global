@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "npm run generate:nav && astro dev",
-    "build": "npm run generate:nav && astro build",
+    "dev": "npm run sync:home && npm run generate:nav && astro dev",
+    "build": "npm run sync:home && npm run generate:nav && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate:nav": "tsx scripts/generate-site-nav-bundle.mts",
+    "sync:home": "tsx scripts/sync-home-runtime.mts",
     "content:export": "tsx scripts/export-editorial-content.mts",
     "content:import-optimized": "tsx scripts/import-optimized-content.mts"
   },

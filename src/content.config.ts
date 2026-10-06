@@ -47,6 +47,7 @@ const hubSchema = z.object({
   valueProps: z.array(hubValueProp),
   processTitle: z.string(),
   process: z.array(hubProcessStep),
+  headHtml: z.string().optional(),
 });
 
 const programCategory = z.object({
@@ -130,6 +131,7 @@ const homeSchema = z.object({
     verifyInfoUrl: z.string(),
     fallbackBadgeImage: z.string(),
   }),
+  headHtml: z.string().optional(),
 });
 
 const articles = defineCollection({
@@ -160,6 +162,7 @@ const articles = defineCollection({
         }),
       )
       .default([]),
+    headHtml: z.string().optional(),
   }),
 });
 

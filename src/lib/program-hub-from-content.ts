@@ -14,8 +14,9 @@ const countriesByHub: Record<ProgramHubId, ProgramHubModel["countries"]> = {
 /** Hub MD içeriği + site-nav ülke listesini birleştirir. */
 export function programHubModelFromEntry(entry: HubEntry): ProgramHubModel {
   const id = entry.data.id;
+  const { headHtml: _headHtml, _note: _note, ...editorial } = entry.data;
   return {
-    ...entry.data,
+    ...editorial,
     countries: countriesByHub[id],
   };
 }

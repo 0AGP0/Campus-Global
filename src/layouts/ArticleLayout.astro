@@ -58,6 +58,7 @@ interface Props {
   heroLeadCtaLabel?: string;
   /** Navbar ülke sayfası — program+ülke geçerliyse form doğrudan iletişim adımında açılır */
   leadFormPrefill?: { programId: string; countryLabel: string } | null;
+  headHtml?: string;
 }
 
 const props = Astro.props as Props;
@@ -188,6 +189,7 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
   keywords={props.keywords}
   articlePublishedTime={props.publishedISO}
   articleModifiedTime={props.modifiedISO ?? props.publishedISO}
+  headHtml={props.headHtml}
 >
   <script slot="head-extra" type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
   <script slot="head-extra" type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
