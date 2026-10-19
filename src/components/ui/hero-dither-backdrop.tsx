@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DitheringShader, type DitheringShape } from "@/components/ui/dithering-shader";
+import { HeroPixelWaveFallback } from "@/components/ui/hero-pixel-wave-fallback";
 
 export interface HeroDitherBackdropProps {
   /** Arkaplan (dither koyu tonu) */
@@ -24,6 +25,7 @@ export function HeroDitherBackdrop({
 }: HeroDitherBackdropProps = {}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 1200, h: 520 });
+  const [webglOk, setWebglOk] = useState(false);
   const frameRef = useRef<number>(undefined);
 
   useEffect(() => {
@@ -53,23 +55,30 @@ export function HeroDitherBackdrop({
 
   return (
     <div ref={wrapRef} className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
-      <DitheringShader
-        className="h-full w-full [&>div]:!h-full [&>div]:!w-full"
-        width={dims.w}
-        height={dims.h}
-        shape={shape}
-        type="8x8"
-        colorBack={colorBack}
-        colorFront={colorFront}
-        pxSize={4}
-        speed={0.4}
-        maxFps={22}
-        renderScale={0.62}
-        pauseWhenTabHidden
-        pauseWhenOffscreen={pauseWhenOffscreen}
-        transparentBackground={transparentBackground}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-      />
+      {!webglOk && !transparentBackground ? (
+        <HeroPixelWaveFallback colorBack={colorBack} colorFront={colorFront} />
+      ) : null}
+
+      <div className={webglOk ? "absolute inset-0" : "absolute inset-0 opacity-0"}>
+        <DitheringShader
+          className="h-full w-full [&>div]:!h-full [&>div]:!w-full"
+          width={dims.w}
+          height={dims.h}
+          shape={shape}
+          type="8x8"
+          colorBack={colorBack}
+          colorFront={colorFront}
+          pxSize={4}
+          speed={0.4}
+          maxFps={22}
+          renderScale={0.62}
+          pauseWhenTabHidden
+          pauseWhenOffscreen={pauseWhenOffscreen}
+          transparentBackground={transparentBackground}
+          onInit={setWebglOk}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        />
+      </div>
     </div>
   );
 }

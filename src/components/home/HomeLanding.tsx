@@ -73,9 +73,9 @@ const heroContainerVariants = {
   },
 };
 const heroItemVariants = {
-  hidden: { opacity: 0, y: 22 },
+  /* opacity ile gizleme yok: reduced-motion animasyonu atlayınca içerik görünmez kalıyordu */
+  hidden: { y: 22 },
   visible: {
-    opacity: 1,
     y: 0,
     transition: { duration: 0.52, ease: heroEase },
   },
@@ -159,24 +159,20 @@ export function HomeLanding() {
         id="hero"
         className="relative z-[1] w-full overflow-hidden pb-20 pt-14 text-center md:pb-24 md:pt-16 lg:pb-28"
       >
-        {!reduceMotion ? (
-          <>
-            <HeroDitherBackdrop colorBack="#0f4c75" colorFront="#40c4ff" />
-            <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_95%_70%_at_50%_-8%,rgba(255,255,255,0.16),transparent_52%)]"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-white/8 via-transparent to-transparent"
-              aria-hidden
-            />
-          </>
-        ) : (
-          <>
-            <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#0f4c75]/40 blur-3xl" aria-hidden />
-            <div className="pointer-events-none absolute -right-20 bottom-8 h-64 w-64 rounded-full bg-[#1d8ebf]/35 blur-3xl" aria-hidden />
-          </>
-        )}
+        {/*
+          Hero dither OS “animasyonları kapat” (prefers-reduced-motion) ile
+          kaldırılmıyor: Linux’ta bu tercih sık açık ve marka arka planı tamamen
+          kayboluyordu. UI geçişleri hâlâ reduceMotion’a bağlı.
+        */}
+        <HeroDitherBackdrop colorBack="#0f4c75" colorFront="#40c4ff" />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_95%_70%_at_50%_-8%,rgba(255,255,255,0.16),transparent_52%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-white/8 via-transparent to-transparent"
+          aria-hidden
+        />
 
         <div className={`${inner} relative z-10`}>
           <motion.div
@@ -313,8 +309,8 @@ export function HomeLanding() {
 
           <div className={`${inner} relative`}>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5 }}
               className="relative flex flex-col gap-6 border-b-4 border-dashed border-zap-ink/12 pb-10 md:flex-row md:items-end md:justify-between md:gap-10 md:pb-12"
@@ -367,8 +363,8 @@ export function HomeLanding() {
                     <motion.a
                       key={c.id}
                       href={c.href}
-                      initial={{ opacity: 0, y: 22 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ y: 22 }}
+                      whileInView={{ y: 0 }}
                       viewport={{ once: true, margin: "-40px" }}
                       transition={{ delay: j * 0.06, duration: 0.45 }}
                       className={`group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-zap-night transition sm:min-h-[280px] ${reduceMotion ? "" : "hover:-translate-y-0.5"}`}
@@ -412,8 +408,8 @@ export function HomeLanding() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 16 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45 }}
               className="relative mt-10 flex flex-col gap-5 overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-r from-brand-teal via-brand-aqua to-brand-teal p-6 text-white sm:flex-row sm:items-center sm:justify-between md:mt-12 md:p-8"
@@ -454,8 +450,8 @@ export function HomeLanding() {
         <div className={`${inner} relative py-14 md:py-20 lg:py-24`}>
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-14">
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 22 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5 }}
               className="relative lg:col-span-5"
@@ -485,8 +481,8 @@ export function HomeLanding() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 22 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: 0.08 }}
               className="flex flex-col lg:col-span-7"
@@ -579,8 +575,8 @@ export function HomeLanding() {
         <div className={`${inner} relative`}>
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12 xl:gap-14">
             <motion.header
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
               className="lg:col-span-5"
@@ -608,8 +604,8 @@ export function HomeLanding() {
                 ))}
               </ul>
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 12 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.45 }}
                 className="relative mt-9 w-full overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-gradient-to-b from-white to-[#f4faf7] p-0 ring-1 ring-zap-ink/5"
@@ -656,8 +652,8 @@ export function HomeLanding() {
                 return (
                   <motion.article
                     key={item.t}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ y: 16 }}
+                    whileInView={{ y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
                     transition={{ delay: j * 0.05, duration: 0.4 }}
                     className="group relative flex flex-col overflow-hidden rounded-2xl border-2 border-zap-ink/10 bg-white p-5 ring-1 ring-zap-ink/5 transition hover:border-brand-teal/30 md:p-5"
@@ -706,8 +702,8 @@ export function HomeLanding() {
 
             <div className="relative z-[2] grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 18 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5 }}
                 className="lg:col-span-7"
@@ -751,8 +747,8 @@ export function HomeLanding() {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 14 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: 0.08 }}
                 className="flex min-w-0 flex-col gap-2.5 sm:gap-3 lg:col-span-5"
@@ -803,8 +799,8 @@ export function HomeLanding() {
                 <motion.a
                   key={u.ulke}
                   href={navBase("universite", u.slug)}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 16 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
                   transition={{ delay: j * 0.05, duration: 0.42 }}
                   className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#eef8f6] text-zap-ink transition md:rounded-[1.35rem] ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.4deg]"}`}
@@ -944,8 +940,8 @@ export function HomeLanding() {
                 <motion.a
                   key={s.kod}
                   href={s.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ y: 16 }}
+                  whileInView={{ y: 0 }}
                   viewport={{ once: true, margin: "-24px" }}
                   transition={{ delay: j * 0.07, duration: 0.45 }}
                   className={`group relative block overflow-hidden rounded-[1.35rem] border-4 border-zap-ink bg-gradient-to-b from-white to-[#f0fdf9] text-zap-ink transition md:rounded-2xl ${reduceMotion ? "" : "hover:-translate-y-1 hover:rotate-[0.3deg]"}`}
@@ -1040,9 +1036,9 @@ export function HomeLanding() {
         <div className={`${inner} relative z-10`}>
           <motion.div
             className="mb-10 overflow-hidden rounded-2xl border-4 border-zap-ink md:mb-12"
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-12%" }}
+            initial={reduceMotion ? false : { y: 18 }}
+            whileInView={reduceMotion ? undefined : { y: 0 }}
+            viewport={{ once: true, amount: 0.12 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex flex-col justify-between gap-3 border-b-2 border-zap-ink/20 bg-zap-ink p-5 sm:p-6 md:flex-row md:items-center md:gap-6 lg:px-9 lg:py-6">
@@ -1126,9 +1122,9 @@ export function HomeLanding() {
               return (
                 <motion.li
                   key={f.ulke}
-                  initial={reduceMotion ? false : { opacity: 0, y: 26, rotate: j % 2 ? -0.35 : 0.4 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, rotate: 0 }}
-                  viewport={{ once: true, margin: "-8%", amount: 0.25 }}
+                  initial={reduceMotion ? false : { y: 26, rotate: j % 2 ? -0.35 : 0.4 }}
+                  whileInView={reduceMotion ? undefined : { y: 0, rotate: 0 }}
+                  viewport={{ once: true, amount: 0.12 }}
                   transition={
                     !reduceMotion
                       ? { type: "spring", stiffness: 140, damping: 19, mass: 0.85, delay: j * 0.1 }
@@ -1317,8 +1313,8 @@ export function HomeLanding() {
                       return (
                         <motion.div
                           key={row.t}
-                          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-                          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                          initial={reduceMotion ? false : { y: 14 }}
+                          whileInView={reduceMotion ? undefined : { y: 0 }}
                           viewport={{ once: true, margin: "-24px" }}
                           transition={{ delay: j * 0.07, duration: 0.42, ease: heroEase }}
                           className={`group relative flex gap-0 overflow-hidden rounded-2xl border-2 border-white/20 bg-zap-ink/45 pl-0 pr-0 sm:rounded-2xl ${reduceMotion ? "" : "hover:border-zap-burst/50"}`}
@@ -1527,8 +1523,8 @@ export function HomeLanding() {
 
                 <motion.a
                   href={haberVitrin.href}
-                  initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  initial={reduceMotion ? false : { y: 18 }}
+                  whileInView={reduceMotion ? undefined : { y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.45, ease: heroEase }}
                   className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-white md:min-h-[16rem] md:flex-row ${
@@ -1585,8 +1581,8 @@ export function HomeLanding() {
                     <motion.a
                       key={b.baslik}
                       href={b.href}
-                      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                      initial={reduceMotion ? false : { y: 16 }}
+                      whileInView={reduceMotion ? undefined : { y: 0 }}
                       viewport={{ once: true, margin: "-20px" }}
                       transition={{ delay: j * 0.07, duration: 0.4, ease: heroEase }}
                       className={`group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink bg-gradient-to-b from-white to-[#f1faf7] text-zap-ink ${
@@ -1694,8 +1690,8 @@ export function HomeLanding() {
               {faqItems.map((faq, i) => (
                 <motion.div
                   key={faq.soru}
-                  initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                  initial={reduceMotion ? false : { y: 12 }}
+                  whileInView={reduceMotion ? undefined : { y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
                   transition={{ delay: i * 0.05, duration: 0.4, ease: heroEase }}
                 >
@@ -1779,8 +1775,8 @@ export function HomeLanding() {
 
           <div className="grid gap-6 md:grid-cols-3 md:gap-7 lg:gap-8">
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { y: 18 }}
+              whileInView={reduceMotion ? undefined : { y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ duration: 0.45, ease: heroEase }}
               className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"
@@ -1819,8 +1815,8 @@ export function HomeLanding() {
             </motion.div>
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { y: 18 }}
+              whileInView={reduceMotion ? undefined : { y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ delay: 0.06, duration: 0.45, ease: heroEase }}
               className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"
@@ -1859,8 +1855,8 @@ export function HomeLanding() {
             </motion.div>
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { y: 18 }}
+              whileInView={reduceMotion ? undefined : { y: 0 }}
               viewport={{ once: true, margin: "-36px" }}
               transition={{ delay: 0.12, duration: 0.45, ease: heroEase }}
               className="group relative flex flex-col overflow-hidden rounded-2xl border-4 border-zap-ink/38 bg-white/32 p-6 backdrop-blur-sm sm:p-7"

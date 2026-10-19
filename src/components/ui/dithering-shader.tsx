@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 const declarePI = `
 #define TWO_PI 6.28318530718
@@ -268,6 +268,8 @@ export interface DitheringShaderProps {
   pauseWhenOffscreen?: boolean;
   /** true: boş alanlar şeffaf; alttaki gradient görünür (makale hero vb.) */
   transparentBackground?: boolean;
+  /** WebGL2 kurulumu başarılı/başarısız — CSS yedek için */
+  onInit?: (ok: boolean) => void;
   className?: string;
   style?: CSSProperties;
 }
@@ -340,6 +342,7 @@ export function DitheringShader({
   pauseWhenTabHidden = true,
   pauseWhenOffscreen = true,
   transparentBackground = false,
+  onInit,
   className = "",
   style = {},
 }: DitheringShaderProps) {
@@ -349,8 +352,14 @@ export function DitheringShader({
   const programRef = useRef<WebGLProgram | null>(null);
   const glRef = useRef<WebGL2RenderingContext | null>(null);
   const uniformLocationsRef = useRef<Record<string, WebGLUniformLocation | null>>({});
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef(0);
   const inViewRef = useRef(true);
+  const onInitRef = useRef(onInit);
+  const [contextEpoch, setContextEpoch] = useState(0);
+
+  useEffect(() => {
+    onInitRef.current = onInit;
+  }, [onInit]);
 
   const bufW = Math.max(2, Math.floor(width * renderScale));
   const bufH = Math.max(2, Math.floor(height * renderScale));
@@ -359,14 +368,23 @@ export function DitheringShader({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext("webgl2", {
-      powerPreference: "low-power",
-      antialias: false,
-      alpha: true,
-      premultipliedAlpha: true,
-    } as WebGLContextAttributes);
+    // low-power bazı GPU’larda siyah/boş canvas bırakıyor; default daha güvenilir
+    const gl =
+      canvas.getContext("webgl2", {
+        powerPreference: "default",
+        antialias: false,
+        alpha: true,
+        premultipliedAlpha: true,
+        failIfMajorPerformanceCaveat: false,
+      } as WebGLContextAttributes) ??
+      canvas.getContext("webgl2", {
+        antialias: false,
+        alpha: true,
+        premultipliedAlpha: true,
+      });
     if (!gl) {
       console.error("WebGL2 not supported");
+      onInitRef.current?.(false);
       return;
     }
 
@@ -382,9 +400,13 @@ export function DitheringShader({
     const backRgba = transparentBackground ? ([0, 0, 0, 0] as const) : hexToRgba(colorBack);
 
     const program = createProgram(gl, vertexShaderSource, fragmentShaderSource);
-    if (!program) return;
+    if (!program) {
+      onInitRef.current?.(false);
+      return;
+    }
 
     programRef.current = program;
+    onInitRef.current?.(true);
 
     uniformLocationsRef.current = {
       u_time: gl.getUniformLocation(program, "u_time"),
@@ -411,6 +433,14 @@ export function DitheringShader({
     const minFrameMs = maxFps != null && maxFps > 0 && maxFps < 120 ? 1000 / maxFps : 0;
     let lastFrameTime = 0;
     let alive = true;
+    /*
+      u_time sınırsız büyürse GPU float32 sin/cos hassasiyeti düşer;
+      saatler sonra dalga yavaşlar / bozulur. Wave frekanslarıyla uyumlu periyot.
+    */
+    const TIME_WRAP = Math.PI * 8;
+    const frontRgba = hexToRgba(colorFront);
+    const shapeId = DitheringShapes[shape];
+    const typeId = DitheringTypes[type];
 
     const shouldRunFrame = () =>
       speed !== 0 && alive && (!pauseWhenTabHidden || !document.hidden) && (!pauseWhenOffscreen || inViewRef.current);
@@ -434,7 +464,8 @@ export function DitheringShader({
       }
       lastFrameTime = t;
 
-      const currentTime = (Date.now() - startTimeRef.current) * 0.001 * speed;
+      const elapsed = (Date.now() - startTimeRef.current) * 0.001 * speed;
+      const currentTime = elapsed - Math.floor(elapsed / TIME_WRAP) * TIME_WRAP;
       const context = glRef.current;
       const shaderProgram = programRef.current;
 
@@ -447,9 +478,9 @@ export function DitheringShader({
         if (locations.u_time) context.uniform1f(locations.u_time, currentTime);
         if (locations.u_resolution) context.uniform2f(locations.u_resolution, bufW, bufH);
         if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, backRgba);
-        if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
-        if (locations.u_shape) context.uniform1f(locations.u_shape, DitheringShapes[shape]);
-        if (locations.u_type) context.uniform1f(locations.u_type, DitheringTypes[type]);
+        if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, frontRgba);
+        if (locations.u_shape) context.uniform1f(locations.u_shape, shapeId);
+        if (locations.u_type) context.uniform1f(locations.u_type, typeId);
         if (locations.u_pxSize) context.uniform1f(locations.u_pxSize, pxSize);
 
         context.drawArrays(context.TRIANGLES, 0, 6);
@@ -498,6 +529,18 @@ export function DitheringShader({
       document.addEventListener("visibilitychange", onVisibility);
     }
 
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      alive = false;
+      stopLoop();
+      onInitRef.current?.(false);
+    };
+    const onContextRestored = () => {
+      setContextEpoch((n) => n + 1);
+    };
+    canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
+
     if (speed !== 0) {
       if (shouldRunFrame()) {
         startLoop();
@@ -514,9 +557,9 @@ export function DitheringShader({
         if (locations.u_time) context.uniform1f(locations.u_time, currentTime);
         if (locations.u_resolution) context.uniform2f(locations.u_resolution, bufW, bufH);
         if (locations.u_colorBack) context.uniform4fv(locations.u_colorBack, backRgba);
-        if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, hexToRgba(colorFront));
-        if (locations.u_shape) context.uniform1f(locations.u_shape, DitheringShapes[shape]);
-        if (locations.u_type) context.uniform1f(locations.u_type, DitheringTypes[type]);
+        if (locations.u_colorFront) context.uniform4fv(locations.u_colorFront, frontRgba);
+        if (locations.u_shape) context.uniform1f(locations.u_shape, shapeId);
+        if (locations.u_type) context.uniform1f(locations.u_type, typeId);
         if (locations.u_pxSize) context.uniform1f(locations.u_pxSize, pxSize);
         context.drawArrays(context.TRIANGLES, 0, 6);
       }
@@ -525,6 +568,8 @@ export function DitheringShader({
     return () => {
       alive = false;
       stopLoop();
+      canvas.removeEventListener("webglcontextlost", onContextLost);
+      canvas.removeEventListener("webglcontextrestored", onContextRestored);
       if (pauseWhenTabHidden) {
         document.removeEventListener("visibilitychange", onVisibility);
       }
@@ -550,6 +595,7 @@ export function DitheringShader({
     pauseWhenTabHidden,
     pauseWhenOffscreen,
     transparentBackground,
+    contextEpoch,
   ]);
 
   return (
