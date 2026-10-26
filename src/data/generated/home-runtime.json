@@ -6,7 +6,7 @@
     "layoutDescription": "Campus Global ile yurtdışında dil okulu, üniversite ve yüksek lisans danışmanlığı: IELTS, TOEFL, SAT ve GRE/GMAT planı, ülke rehberleri ve şeffaf başvuru süreci."
   },
   "images": {
-    "heroVisual": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=960&h=1180&q=82",
+    "heroVisual": "/images/home/hero-visual.webp",
     "heroVisualAlt": "Yurtdışında eğitim ve üniversite ortamında öğrenciler — Campus Global danışmanlık vitrin görseli",
     "dilBand": "https://picsum.photos/seed/cg-dil-yurtdisi-2024/1400/1000",
     "nedenCg": "https://picsum.photos/seed/cg-ayni-masada-net-karar-2024/1000/660",

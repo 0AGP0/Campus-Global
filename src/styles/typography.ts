@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
  * + `Aktif Campus/src/components/ui/hero.tsx` `titleStyle` / `titleStyleOnLightPrimary` (Arial Black poster)
  */
 export const fontUi =
-  '"DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  '"DM Sans Variable", "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
 /**
  * Kocaman hero / bant başlıkları — Aktif `titleStyle`: Arial Black, çok katmanlı gölge.

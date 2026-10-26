@@ -13,6 +13,9 @@ const faqJsonLd = JSON.stringify(buildFaqPageJsonLd(`${SITE_CANONICAL_URL}/`));
   description={homePageMeta.layoutDescription}
   headHtml={homeHeadHtml}
 >
+  <Fragment slot="head-extra">
+    <link rel="preload" as="image" href="/images/home/hero-visual.webp" type="image/webp" fetchpriority="high" />
+  </Fragment>
   <div
     class="relative flex min-h-0 flex-1 flex-col overflow-x-hidden bg-gradient-to-br from-brand-aqua from-[-5%] via-brand-teal to-[#008f87] font-sans selection:bg-zap-burst selection:text-zap-night"
   >
@@ -38,7 +41,8 @@ const faqJsonLd = JSON.stringify(buildFaqPageJsonLd(`${SITE_CANONICAL_URL}/`));
     />
 
     <main class="relative z-10 flex-1">
-      <HomeLanding client:load />
+      <!-- idle: LCP/FCP için JS'i ilk boyamadan sonraya kaydır -->
+      <HomeLanding client:idle />
     </main>
 
     <script type="application/ld+json" set:html={faqJsonLd} />

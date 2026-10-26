@@ -1,4 +1,5 @@
 ---
+import "@fontsource-variable/dm-sans/wght.css";
 import "../styles/global.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -73,14 +74,8 @@ const resolvedOgDesc = ogDescription ?? description ?? "";
     {siteHead.globalHeadHtml ? <Fragment set:html={siteHead.globalHeadHtml} /> : null}
     {headHtml ? <Fragment set:html={headHtml} /> : null}
     <slot name="head-extra" />
-    <!-- Influencer ref: diğer sayfa script’lerinden önce -->
-    <script is:inline src="/cg-ref-persist.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Influencer ref: defer — render'ı bloklamasın -->
+    <script is:inline defer src="/cg-ref-persist.js"></script>
   </head>
   <body id="top" class="flex min-h-dvh flex-col font-sans text-zap-ink">
     <SiteHeader client:idle />
@@ -88,6 +83,35 @@ const resolvedOgDesc = ogDescription ?? description ?? "";
       <slot />
     </div>
     <SiteFooter />
-    <script is:inline async defer crossorigin="anonymous" src={icefIas.badgeScriptSrc}></script>
+    <!-- ICEF: sadece rozet görünürken yükle (TBT / 3P) -->
+    <script is:inline define:vars={{ icefSrc: icefIas.badgeScriptSrc }}>
+      (() => {
+        const load = () => {
+          if (document.querySelector('script[data-icef-ias]')) return;
+          const s = document.createElement("script");
+          s.src = icefSrc;
+          s.async = true;
+          s.defer = true;
+          s.crossOrigin = "anonymous";
+          s.dataset.icefIas = "1";
+          document.body.appendChild(s);
+        };
+        const target = document.getElementById("iasBadge");
+        if (!target || !("IntersectionObserver" in window)) {
+          window.addEventListener("load", () => setTimeout(load, 2500), { once: true });
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io.disconnect();
+              load();
+            }
+          },
+          { rootMargin: "200px 0px" },
+        );
+        io.observe(target);
+      })();
+    </script>
   </body>
 </html>

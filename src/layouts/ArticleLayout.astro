@@ -286,7 +286,7 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
                 {props.description}
               </p>
 
-              <ArticleHeroLeadButton client:load label={props.heroLeadCtaLabel} leadFormPrefill={props.leadFormPrefill} />
+              <ArticleHeroLeadButton client:idle label={props.heroLeadCtaLabel} leadFormPrefill={props.leadFormPrefill} />
 
               <div class="mt-7 flex flex-wrap items-center gap-2 border-t border-dashed border-zap-ink/15 pt-6 md:mt-8 md:gap-3">
                 <time
@@ -322,7 +322,7 @@ const ctaImages = { ...defaultSidebarCtaImages, ...(props.sidebarCtaImages ?? {}
             class="relative hidden min-h-[300px] w-full lg:flex lg:min-h-[min(20rem,38vh)] lg:flex-col lg:self-stretch"
           >
             <div class="relative h-full min-h-[300px] w-full flex-1 overflow-hidden">
-              <ArticleHeaderDitherPanel client:load />
+              <ArticleHeaderDitherPanel client:visible />
             </div>
           </div>
         </div>
