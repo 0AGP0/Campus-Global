@@ -1,6 +1,25 @@
-import { useEffect, useRef, useState } from "react";
-import { DitheringShader, type DitheringShape } from "@/components/ui/dithering-shader";
+import { useEffect, useRef, useState, type ComponentType, type CSSProperties } from "react";
 import { HeroPixelWaveFallback } from "@/components/ui/hero-pixel-wave-fallback";
+import type { DitheringShape } from "@/components/ui/dithering-shader";
+
+type ShaderProps = {
+  className?: string;
+  width: number;
+  height: number;
+  shape: DitheringShape;
+  type: "8x8";
+  colorBack: string;
+  colorFront: string;
+  pxSize: number;
+  speed: number;
+  maxFps: number;
+  renderScale: number;
+  pauseWhenTabHidden?: boolean;
+  pauseWhenOffscreen?: boolean;
+  transparentBackground?: boolean;
+  onInit?: (ok: boolean) => void;
+  style?: CSSProperties;
+};
 
 export interface HeroDitherBackdropProps {
   /** Arkaplan (dither koyu tonu) */
@@ -15,7 +34,7 @@ export interface HeroDitherBackdropProps {
   transparentBackground?: boolean;
 }
 
-/** Hero yüksekliği sabit kalır; shader üst üste ölçülür (ResizeObserver, debounce). */
+/** Hero yüksekliği sabit kalır; WebGL idle sonrası dinamik yüklenir (TBT). */
 export function HeroDitherBackdrop({
   colorBack = "#0b4246",
   colorFront = "#f51d00",
@@ -26,6 +45,7 @@ export function HeroDitherBackdrop({
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 1200, h: 520 });
   const [webglOk, setWebglOk] = useState(false);
+  const [Shader, setShader] = useState<ComponentType<ShaderProps> | null>(null);
   const frameRef = useRef<number>(undefined);
 
   useEffect(() => {
@@ -36,7 +56,6 @@ export function HeroDitherBackdrop({
       const r = el.getBoundingClientRect();
       const w = Math.max(360, Math.floor(r.width));
       const h = Math.max(320, Math.floor(r.height));
-      /* Sık boyut güncellemesi WebGL effect’ini sürekli yeniden kurar → animasyon kesilir */
       setDims((prev) => (Math.abs(prev.w - w) > 28 || Math.abs(prev.h - h) > 28 ? { w, h } : prev));
     };
 
@@ -53,32 +72,60 @@ export function HeroDitherBackdrop({
     };
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
+
+    const load = () => {
+      void import("@/components/ui/dithering-shader").then((mod) => {
+        if (!cancelled) setShader(() => mod.DitheringShader as ComponentType<ShaderProps>);
+      });
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(load, { timeout: 2200 });
+    } else {
+      timeoutId = window.setTimeout(load, 1200);
+    }
+
+    return () => {
+      cancelled = true;
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <div ref={wrapRef} className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
       {!webglOk && !transparentBackground ? (
         <HeroPixelWaveFallback colorBack={colorBack} colorFront={colorFront} />
       ) : null}
 
-      <div className={webglOk ? "absolute inset-0" : "absolute inset-0 opacity-0"}>
-        <DitheringShader
-          className="h-full w-full [&>div]:!h-full [&>div]:!w-full"
-          width={dims.w}
-          height={dims.h}
-          shape={shape}
-          type="8x8"
-          colorBack={colorBack}
-          colorFront={colorFront}
-          pxSize={4}
-          speed={0.4}
-          maxFps={22}
-          renderScale={0.62}
-          pauseWhenTabHidden
-          pauseWhenOffscreen={pauseWhenOffscreen}
-          transparentBackground={transparentBackground}
-          onInit={setWebglOk}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-        />
-      </div>
+      {Shader ? (
+        <div className={webglOk ? "absolute inset-0" : "absolute inset-0 opacity-0"}>
+          <Shader
+            className="h-full w-full [&>div]:!h-full [&>div]:!w-full"
+            width={dims.w}
+            height={dims.h}
+            shape={shape}
+            type="8x8"
+            colorBack={colorBack}
+            colorFront={colorFront}
+            pxSize={4}
+            speed={0.4}
+            maxFps={22}
+            renderScale={0.62}
+            pauseWhenTabHidden
+            pauseWhenOffscreen={pauseWhenOffscreen}
+            transparentBackground={transparentBackground}
+            onInit={setWebglOk}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

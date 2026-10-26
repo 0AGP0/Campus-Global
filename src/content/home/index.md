@@ -7,9 +7,9 @@ layout:
 images:
   heroVisual: /images/home/hero-visual.webp
   heroVisualAlt: Yurtdışında eğitim ve üniversite ortamında öğrenciler — Campus Global danışmanlık vitrin görseli
-  dilBand: https://picsum.photos/seed/cg-dil-yurtdisi-2024/1400/1000
-  nedenCg: https://picsum.photos/seed/cg-ayni-masada-net-karar-2024/1000/660
-  yuksekLisans: https://picsum.photos/seed/cg-yuksek-lisans-kulvar-2024/1100/1200
+  dilBand: /images/home/dil-band.webp
+  nedenCg: /images/home/neden-cg.webp
+  yuksekLisans: /images/home/yuksek-lisans.webp
 hero:
   eyebrow: Campus Global · yurtdışı eğitim danışmanlığı
   titleLine1: Yurtdışında eğitim
@@ -200,32 +200,32 @@ programCategories:
     title: Dil okulları
     href: /dil-okullari/hub
     blurb: "Yurtdışında dil okulu: yoğun İngilizce, IELTS/TOEFL ve konaklamalı paketler"
-    image: https://picsum.photos/seed/cg-dil-kurs-2024/1200/800
+    image: /images/home/cat-dil.webp
   - id: universite
     title: Üniversite
     href: /universite/hub
     blurb: Yurtdışında üniversite danışmanlığı, lisans başvuru takvimi ve program eşlemesi
-    image: https://picsum.photos/seed/cg-universite-kampus-2024/1200/800
+    image: /images/home/cat-uni.webp
   - id: yuksek-lisans
     title: Yüksek lisans
     href: /yuksek-lisans/hub
     blurb: MSc, MA ve MBA için hedef ülke, essay ve sınav planı tek dosyada
-    image: https://picsum.photos/seed/cg-msc-mba-2024/1200/800
+    image: /images/home/cat-yl.webp
   - id: diploma
     title: Diploma & sertifika
     href: /sertifika/hub
     blurb: Mesleki diploma ve kısa sertifika programlarıyla kariyerinizi güçlendirin
-    image: https://picsum.photos/seed/cg-diploma-sertifika-2024/1200/800
+    image: /images/home/cat-sertifika.webp
   - id: lise
     title: Lise
     href: /lise/overview
     blurb: IB, A-Level ve yurtdışında yatılı lise seçenekleri danışmanlığı
-    image: https://picsum.photos/seed/cg-lise-okul-2024/1200/800
+    image: /images/home/cat-lise.webp
   - id: teach-usa
     title: Teach in USA
     href: /work-travel/overview
     blurb: Amerika Birleşik Devletleri’nde öğretim ve kültürel değişim programları
-    image: https://picsum.photos/seed/cg-teach-usa-2024/1200/800
+    image: /images/home/cat-work.webp
 dilOkuluUlke:
   - Amerika
   - İngiltere
@@ -407,22 +407,22 @@ haberSpotlight:
   - baslik: "Almanya’da üniversite: harç, blokaj ve Studienkolleg"
     kategori: Üniversite
     ozet: Devlet üniversiteleri, İngilizce bölümler ve vize öncesi mali ispat adımlarını öğrenci profilinize göre özetliyoruz.
-    img: https://picsum.photos/seed/haber-berlin-1/1200/800
+    img: /images/home/haber-1.webp
     href: /universite/almanya
   - baslik: IELTS hedef band nasıl üniversite eşiğiyle eşleşir?
     kategori: Sınav
     ozet: Bölüm ve ülkeye göre dil yeterliliği tablosu, tekrar tarihleri ve kurs + sınav paketini aynı planda değerlendirin.
-    img: https://picsum.photos/seed/haber-seul-1/1200/800
+    img: /images/home/haber-2.webp
     href: /dil-okullari/ielts-kurs
   - baslik: "QS ve THE yerine: doğru programı seçmek"
     kategori: Üniversite
     ozet: Sıralama etiketlerinin ötesinde staj, mezun ağı ve bölüm gücünü yurtdışı eğitim hedefinizle nasıl dengelersiniz?
-    img: https://picsum.photos/seed/haber-siralama-1/1200/800
+    img: /images/home/haber-3.webp
     href: /universite/hub
   - baslik: "Yurtdışında burs: erken başvuru ve portföy"
     kategori: Burs
     ozet: Başvuru pencereleri, motivasyon mektubu ve akademik referansların burs değerlendirmesindeki rolü.
-    img: https://picsum.photos/seed/haber-burs-1/1200/800
+    img: /images/home/haber-4.webp
     href: /universite/burs
 faqItems:
   - soru: Yurtdışında dil okulu fiyatları ülkeye göre neden farklı?
